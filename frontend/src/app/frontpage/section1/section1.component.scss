@@ -1,13 +1,15 @@
 @import '../../../styles.scss';
 
 #section1 {
+    @include section;
     color: white;
-    height: 70vh;
-    padding: 50px 100px;
     background-image: url('../../assets/frontpage/image/bgSection1.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 h1 {
@@ -16,14 +18,16 @@ h1 {
 
 .presentation {
     font-size: 32px;
-    font-weight:lighter;
+    font-weight: 100;
 }
+
 
 .btnHolder {
     display: flex;
     justify-content: space-between;
     margin-top: 100px;
     width: 300px;
+    font-size: 20px;
 
     #createAccount {
         @include yellowButton;

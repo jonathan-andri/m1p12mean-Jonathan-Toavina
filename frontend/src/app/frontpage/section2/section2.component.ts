@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { ServiceCardComponent } from "../../component/service-card/service-card.component";
 
 @Component({
   selector: 'app-section2',
-  imports: [],
+  imports: [ServiceCardComponent],
   templateUrl: './section2.component.html',
   styleUrl: './section2.component.scss'
 })
