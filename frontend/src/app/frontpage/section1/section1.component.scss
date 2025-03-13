@@ -1,4 +1,36 @@
+@import '../../../styles.scss';
+
 #section1 {
-    background-color: blue;
-    height: 50vh;
+    color: white;
+    height: 70vh;
+    padding: 50px 100px;
+    background-image: url('../../assets/frontpage/image/bgSection1.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+.presentation {
+    font-size: 32px;
+    font-weight:lighter;
+}
+
+.btnHolder {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+    width: 300px;
+
+    #createAccount {
+        @include yellowButton;
+        color: white;
+    }
+
+    button {
+        @include btn;
+    }
 }
