@@ -1,12 +1,29 @@
 $mainBlue : #1573B3 ;
 $darkGrey: #2E2E2E;
 $ligthGrey: #D7D7D7;
+$mainYellow: #E9B800;
 
+@mixin centerElements {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin btn {
+    padding: 10px 20px;
+}
+@mixin yellowButton {
+    background-color: $mainYellow ;
+    border-radius: 5px;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
 
 body {
-   // > * {
-   //     padding: 100px;
-   // }
-    margin:0;
-    padding:0;
+    display: block;
+    justify-content: center;
+    align-items: center;
 }
