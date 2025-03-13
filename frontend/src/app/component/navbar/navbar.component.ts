@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -8,4 +8,21 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  //verification si scroll donc changement du 
+  isScrolled = false;
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.isScrolled = window.scrollY > 0 ;
+  }
+
+  ngOnInit(): void {
+    this.onWindowScroll;
+  }
+
+  scrollToSection(sectionId: string) {
+    const element = document.getElementById(sectionId) ;
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' }) ;
+    }
+  }
 }
