@@ -1,0 +1,14 @@
+@import '../../../styles.scss';
+
+#section-3 {
+    @include section;
+    background-color: $lightGrey;
+}
+
+.section-title {
+    @include section-title;
+}
+
+a {
+    color: $mainYellow;
+}
