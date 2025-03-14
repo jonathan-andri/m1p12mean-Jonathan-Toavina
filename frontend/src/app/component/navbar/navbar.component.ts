@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -24,5 +24,11 @@ export class NavbarComponent {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' }) ;
     }
+  }
+
+  @Output() loginClicked = new EventEmitter<void>() ;
+
+  onLoginClick() {
+    this.loginClicked.emit()
   }
 }

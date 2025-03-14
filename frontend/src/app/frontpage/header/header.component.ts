@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { NavbarComponent } from '../../component/navbar/navbar.component';
 
 @Component({
@@ -10,5 +10,9 @@ import { NavbarComponent } from '../../component/navbar/navbar.component';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  @Output() loginClicked = new EventEmitter<void>();
 
+  onLoginClick() {
+    this.loginClicked.emit();
+  }
 }
