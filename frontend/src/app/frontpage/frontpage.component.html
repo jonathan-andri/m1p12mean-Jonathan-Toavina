@@ -1,5 +1,11 @@
 <div>
-    <app-header></app-header>
+    <app-header (loginClicked)="toggleSignUpForm()"></app-header>
     <app-section1></app-section1>
     <app-section2></app-section2>
+    <app-section3></app-section3>
+    <app-footer-customer></app-footer-customer>
+</div>
+
+<div *ngIf="showSignUpForm">
+    <app-sign-up-form (crossClicked)="toggleSignUpForm()"></app-sign-up-form>
 </div>

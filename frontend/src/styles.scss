@@ -1,6 +1,6 @@
 $mainBlue : #1573B3 ;
 $darkGrey: #2E2E2E;
-$ligthGrey: #D7D7D7;
+$lightGrey: #EFEDED;
 $mainYellow: #E9B800;
 
 @mixin centerElements {
@@ -15,7 +15,7 @@ $mainYellow: #E9B800;
 }
 
 @mixin section {
-    height: 70vh;
+    height: 450px;
     padding: 50px 100px;
 }
 
