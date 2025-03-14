@@ -7,7 +7,9 @@ import { Component, Input } from '@angular/core';
   styleUrl: './service-card.component.scss'
 })
 export class ServiceCardComponent {
- @Input() description!: string;
+ @Input() price!: string;
+ @Input() duration!: string;
+ @Input() category!: string;
  @Input() imageUrl!: string;
  @Input() title!: string;
 
