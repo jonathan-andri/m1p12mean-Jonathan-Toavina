@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { routes } from './app.routes'; // Import routes
-import { AppComponent } from './app.component'; // Import AppComponent
-import { FrontpageComponent } from './frontpage/frontpage.component'; // Import FrontpageComponent
+import { routes } from './app.routes';
+import { AppComponent } from './app.component'; 
+import { FrontpageComponent } from './frontpage/frontpage.component'; 
+import { QuestionsComponent } from './component/questions/questions.component';
 
 @NgModule({
   declarations: [
@@ -12,8 +13,9 @@ import { FrontpageComponent } from './frontpage/frontpage.component'; // Import 
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(routes), // Configure the router with the routes
-    FrontpageComponent // Add FrontpageComponent to the imports
+    RouterModule.forRoot(routes), 
+    FrontpageComponent, 
+    QuestionsComponent 
   ],
   providers: [],
   bootstrap: []

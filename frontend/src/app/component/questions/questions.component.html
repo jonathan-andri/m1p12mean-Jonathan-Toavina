@@ -1,0 +1,11 @@
+<div class="question-section">
+    <div class="question" (click)="toggleAnswer()">
+        <p>{{ question }}</p>
+        <div class="tooggle-button">{{ showAnswer ? '-' : '+' }}</div>
+    </div>
+    <div class="answer"
+        *ngIf= "showAnswer ? 'expanded' : 'collapsed'"
+    >
+        <p>{{ answer }}</p>
+    </div>
+</div>
