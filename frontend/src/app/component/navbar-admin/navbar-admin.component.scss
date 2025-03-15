@@ -37,7 +37,7 @@ nav{
     min-height: 250px ;
 }
 
-@media (max-width:500px){
+@media (max-width:655px){
     nav{
         display:none;
     }
@@ -56,6 +56,10 @@ li{
 }
 li:hover{
     background:rgba(255, 255, 255, 0.2);
+    width:130px;
+}
+.active li{
+    background:rgba(255, 255, 255, 0.2);
     border-right: 2px solid rgb(233,184,0);
     width:128px;
 }
@@ -63,7 +67,9 @@ li:hover{
     display: flex;
     height: 30px;
     align-items: center;
+    color: rgb(255, 255, 255);
 }
+
 ul{
     margin:0;
     font-size:10px;
@@ -73,20 +79,5 @@ ul{
     font-size:20px;
     padding:10px 10px 10px 0;
     font-weight:bold;
-}
-
-.setting{
-    font-size:10px;
-    display: flex;
-    overflow: hidden;
-    width: 20px;
-    
-}
-.setting:hover{
-    width:59px;
-}
-
-.Setting{
-  
-    width: 130px;
+    color:white;
 }

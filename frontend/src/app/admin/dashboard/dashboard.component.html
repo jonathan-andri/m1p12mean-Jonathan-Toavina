@@ -1,13 +1,64 @@
 <section class="container">
+
     <div class="top">
         <div class="dash">
-            <img src="Admin/top-icon.png" alt="" class="icon-top">
+            <img src="Admin/dashboard/top-icon.png" alt="" class="icon-top">
             <p>Dashboard</p>
         </div>
+
         <div class="admin">
-            <img src="Admin/custom_blue.png" alt="" class="adminIcon">
+            <img src="Admin/dashboard/custom_blue.png" alt="" class="adminIcon">
             <p style="padding-left: 5px;">Admin</p>
-            <img src="Admin/arrow.png" alt="" class="arrowIcon">
+            <img src="Admin/dashboard/arrow.png" alt="" class="arrowIcon">
         </div>
     </div>
+
+
+
+    <section class="sec-1">
+
+        <div class=" square">
+            <a routerLink="/customer" routerLinkActive="active" ariaCurrentActive="page" class="client">
+                <img src="Admin/dashboard/client.png" alt="">
+                <p style="font-size: 12px;">12</p> 
+                <p>clients</p>
+            </a>
+        </div>
+
+        <div class=" square">
+            <a routerLink="/mechanic" routerLinkActive="active" ariaCurrentActive="page" class="mechanic">
+                <img src="Admin/dashboard/mechanic.png" alt="">
+                <p style="font-size: 12px;">12</p>
+                <p>mechanics</p>
+            </a>
+        </div>
+
+        <div class=" square">
+            <a routerLink="/services" routerLinkActive="active" ariaCurrentActive="page" class="service">
+                <img src="Admin/dashboard/cart.png" alt="">
+                <p style="font-size: 12px;">12</p>  
+                <p>services
+                </p>
+            </a>
+        </div>
+
+        <div class=" square">
+            <a routerLink="/appointment" routerLinkActive="active" ariaCurrentActive="page" class="appointment">
+                <img src="Admin/dashboard/appointment .png" alt="" style="height:20px">
+                <p style="font-size: 12px;">12</p> 
+                <p>appointments</p>
+            </a>
+        </div>
+
+    </section>
+
+    <section class="sec-2">
+        <section class="calendar">
+            <app-calendar></app-calendar>
+        </section>
+        <section class="info">
+            <div class="newcomer"></div>    
+            <div class="employee"></div>
+        </section>
+    </section>
 </section>

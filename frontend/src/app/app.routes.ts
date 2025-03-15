@@ -5,10 +5,11 @@ import { CustomerComponent } from './admin/customer/customer.component';
 import { ServicesComponent } from './admin/services/services.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { MechanicComponent } from './admin/mechanic/mechanic.component';
+import { AppointmentComponent } from './admin/appointment/appointment.component';
 
 export const routes: Routes = [
     //{ path: '', component: FrontpageComponent },
-    /* { path: '', component: AdminComponent}, */
+    
     { path: '', 
         component: AdminComponent,
         children: [
@@ -16,7 +17,8 @@ export const routes: Routes = [
             { path: 'services', component: ServicesComponent },
             { path: 'customer', component: CustomerComponent },
             { path: 'mechanic', component: MechanicComponent },
-            { path: '', redirectTo:'/dashboard', pathMatch: 'full' }
+            { path: 'appointment', component: AppointmentComponent },
+            { path: '', redirectTo:'dashboard', pathMatch: 'full' }
         ]
     },
     
