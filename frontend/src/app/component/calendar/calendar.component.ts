@@ -11,12 +11,20 @@ export class CalendarComponent implements OnInit {
   weeks: (Date | null)[][] = [];
   events: { [key: string]: number } = {}; // Example: { '2023-10-05': 3 }
   daysOfWeek: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  today: Date = new Date();
 
   ngOnInit(): void {
     this.generateCalendar(new Date().getFullYear(), new Date().getMonth());
     this.mockEvents(); // Mock some events for demonstration
   }
 
+  isToday(date: Date): boolean {
+    return (
+      date.getDate() === this.today.getDate() &&
+      date.getMonth() === this.today.getMonth() &&
+      date.getFullYear() === this.today.getFullYear()
+    );
+  }
   // Generate the calendar grid for a given year and month
   generateCalendar(year: number, month: number): void {
     const firstDayOfMonth = new Date(year, month, 1);
@@ -44,9 +52,9 @@ export class CalendarComponent implements OnInit {
 
   // Mock some events for demonstration
   mockEvents(): void {
-    this.events['2025-3-17'] = 3;
-    this.events['2025-3-20'] = 1;
-    this.events['2025-3-22'] = 5;
+    this.events['2025-03-17'] = 3;
+    this.events['2025-03-20'] = 1;
+    this.events['2025-03-23'] = 5;
   }
 
   // Get the number of events for a specific date

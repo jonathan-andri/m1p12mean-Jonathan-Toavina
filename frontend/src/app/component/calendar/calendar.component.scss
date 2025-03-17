@@ -6,6 +6,7 @@
     box-sizing: border-box;
     border-left: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
 }
   
 .week {
@@ -24,7 +25,7 @@ padding: 10px;
 text-align: center;
 border-top: 1px solid #ccc;
 border-right: 1px solid #ccc;
-width:40px;
+width:65px;
 }
 
 .day {
@@ -34,7 +35,8 @@ width:40px;
     border-right: 1px solid #ccc;
     padding: 10px;
     text-align: center;
-    min-height: 20px;
+    min-height: 30px;
+    
 }
   
 .empty-day {
@@ -44,16 +46,29 @@ width:40px;
 .date {
     /* font-weight: bold; */
     position: absolute;
-    top:0;
-    right: 0;
-    padding: 5px
+    top:5px;
+    right: 5px;
+    font-size: 15px;
   }
   
 .events {
     position: absolute;
     font-size: 0.8em;
     color: #666;
-    bottom: 0;
-    left:0;
-    padding:5px;
-  }
+    bottom: 5px;
+    left:5px;
+    padding: 2px;
+    border-radius: 50%;
+    background-color: #1573B3;
+    color: white;
+    font-size: 9px;
+    width: 11px;
+}
+
+.today{
+  background-color: rgba($color:#E9B800 , $alpha: 0.3);
+}
+.no-events{
+  display: none;
+  background-color: #b31515;
+}

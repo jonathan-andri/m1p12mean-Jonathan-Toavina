@@ -54,14 +54,21 @@
 
     <section class="sec-2">
         <section class="calendar">
-            <p style="font-size: small;">Calendar Events</p>
-            <br>
-            <p>{{currentDate}}</p>
+            <p style="font-size: small; padding:4px 0 10px 0; ">Calendar Events</p>
+            <p class="current-date">{{currentDate}}</p>
             <app-calendar></app-calendar>
         </section>
+
         <section class="info">
-            <div class="newcomer">Newcomer</div>    
-            <div class="employee">Employee</div>
+            <div class="newcomer">
+                <p>Newcomer</p>
+            <app-last-user></app-last-user>
+            </div>  
+
+            <div class="employee">
+                <p>Employee</p>
+            <app-top-employee></app-top-employee>
+            </div>
         </section>
     </section>
 </section>

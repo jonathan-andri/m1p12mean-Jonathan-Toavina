@@ -1,0 +1,12 @@
+<div class="top-employee">
+    <h2>Top Employee</h2>
+    <div *ngIf="topEmployee" class="employee-card">
+      <div class="employee-info">
+        <span class="employee-name">{{ topEmployee.name }}</span>
+        <span class="employee-services">Services: {{ topEmployee.serviceCount }}</span>
+      </div>
+    </div>
+    <div *ngIf="!topEmployee" class="no-data">
+      No data available.
+    </div>
+</div>

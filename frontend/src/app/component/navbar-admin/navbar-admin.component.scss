@@ -24,6 +24,9 @@
 }
 
 nav{   
+    position: fixed;
+    top: 0; 
+    left: 0; 
     background-color: #1573B3;
     color:white; 
     width: 130px; 
@@ -36,7 +39,7 @@ nav{
     min-height: 250px ;
 }
 
-@media (max-width:655px){
+@media (max-width:740px){
     nav{
         display:none;
     }

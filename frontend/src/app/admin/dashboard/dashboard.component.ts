@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CalendarComponent } from '../../component/calendar/calendar.component'; 
 import { CommonModule } from '@angular/common';
+import { LastUserComponent } from '../../component/last-user/last-user.component';
+import { TopEmployeeComponent } from '../../component/top-employee/top-employee.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports:[ RouterLink, RouterLinkActive, CalendarComponent,CommonModule ],
+  imports:[ RouterLink, RouterLinkActive, CalendarComponent,CommonModule, LastUserComponent, TopEmployeeComponent ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -15,10 +17,11 @@ export class DashboardComponent implements OnInit{
 
   ngOnInit(): void {
     const today = new Date();
-    const day = today.getDate().toString().padStart(2, '0'); // Ensures two digits
-    const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Get month (0-based)
-    const year = today.getFullYear(); // Get the current year
-
-    this.currentDate = `${day}/${month}/${year}`; // Format date as 'dd/mm/yyyy'
+  
+    this.currentDate = today.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
   }
 }
