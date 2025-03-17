@@ -9,6 +9,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { MechanicComponent } from './admin/mechanic/mechanic.component';
 import { AppointmentComponent } from './admin/appointment/appointment.component';
 import { CustomerAppointmentComponent } from './customer/customer-appointment/appointment.component';
+import { NewAppointmentFormComponent } from './customer/new-appointment-form/new-appointment-form.component';
 
 export const routes: Routes = [
     //{ path: '', component: FrontpageComponent },
@@ -30,7 +31,8 @@ export const routes: Routes = [
         component: CustomerLayoutComponent,
         children:[
             { path: 'appointment', component: CustomerAppointmentComponent },
-            { path: 'intervention', component: InterventionComponent }
+            { path: 'intervention', component: InterventionComponent },
+            { path: 'newAppointment', component: NewAppointmentFormComponent}
             // { path: 'intervention', }
         ]
     }   

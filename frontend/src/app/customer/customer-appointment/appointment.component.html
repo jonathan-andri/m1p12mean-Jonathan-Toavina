@@ -1,7 +1,7 @@
 <div id="customer-appointment">
     <div id="appo-top">
         <h4>My Appointments</h4>
-        <button id="makeAppo">Make an Appointment</button>
+        <button id="makeAppo" (click)="toggleAppoForm()">Make an Appointment</button>
     </div>
     <hr>
     <app-search-bar></app-search-bar>
@@ -35,3 +35,4 @@
         </table>
     </div>
 </div>
+<app-new-appointment-form *ngIf="isNewAppoForm"></app-new-appointment-form>
