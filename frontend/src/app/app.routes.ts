@@ -12,7 +12,7 @@ import { AppointmentComponent } from './admin/appointment/appointment.component'
 export const routes: Routes = [
     //{ path: '', component: FrontpageComponent },
     
-    { path: '', 
+    { path: 'admin', 
         component: AdminComponent,
         children: [
             { path: 'dashboard', component: DashboardComponent },
@@ -23,7 +23,7 @@ export const routes: Routes = [
             { path: '', redirectTo:'dashboard', pathMatch: 'full' }
         ]
     },
-   { path: '', component: FrontpageComponent},
+   { path: 'frontpage', component: FrontpageComponent},
     {
         path:'customer',
         component: CustomerLayoutComponent,

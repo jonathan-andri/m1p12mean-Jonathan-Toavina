@@ -3,6 +3,9 @@
 #section-3 {
     @include section;
     background-color: $lightGrey;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
 }
 
 .section-title {
