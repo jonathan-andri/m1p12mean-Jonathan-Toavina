@@ -1,0 +1,44 @@
+@use '../../../styles.scss' as *;
+
+#customer-appoinment {
+    margin-right: 50px;
+}
+
+#appo-top {
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px;
+    
+    #makeAppo {
+        @include btn;
+        background-color: $mainBlue;
+        color: white;
+        border: none;
+    }
+}
+
+hr {
+    border-color: $lightGrey;
+    margin: 10px 0px;
+}
+
+#cus-appo-table {
+    text-align: right;
+    font-weight: lighter;
+    width: 78vw;
+    
+
+    thead {
+        th {
+            padding: 10px 0px;
+        }
+    }
+    tbody {
+        border: 1px solid #7C7C7C;
+        tr {
+            color: #7C7C7C;
+        }
+    }
+}
