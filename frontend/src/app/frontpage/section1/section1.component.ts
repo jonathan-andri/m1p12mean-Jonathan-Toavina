@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-section1',
@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './section1.component.scss'
 })
 export class Section1Component {
+  @Output() loginClicked = new EventEmitter<void>();
 
+  onLoginClick() {
+    this.loginClicked.emit();
+  }
 }
