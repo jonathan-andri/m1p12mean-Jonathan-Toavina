@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { QuestionsComponent } from "../../component/questions/questions.component";
+import { QuestionsComponent } from "../../component/questions-customer/questions.component";
 
 
 @Component({

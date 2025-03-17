@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AdminComponent } from "./admin/admin.component"
+import { CustomerLayoutComponent } from './customer/customer-layout/customer-layout.component';
+import { InterventionComponent } from './customer/intervention/intervention.component';
 import { CustomerComponent } from './admin/customer/customer.component';
 import { ServicesComponent } from './admin/services/services.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
@@ -21,6 +23,14 @@ export const routes: Routes = [
             { path: '', redirectTo:'dashboard', pathMatch: 'full' }
         ]
     },
-    
-
+   { path: '', component: FrontpageComponent},
+    {
+        path:'customer',
+        component: CustomerLayoutComponent,
+        children:[
+            { path: 'appointment', component: AppointmentComponent },
+            { path: 'intervention', component: InterventionComponent }
+            // { path: 'intervention', }
+        ]
+    }   
 ]; 
