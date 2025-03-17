@@ -1,4 +1,4 @@
-@import '../../../styles.scss';
+@use '../../../styles.scss' as *;
 
 .service-card {
   padding: 16px;
