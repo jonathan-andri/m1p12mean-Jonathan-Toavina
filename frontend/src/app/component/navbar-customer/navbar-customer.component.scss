@@ -1,8 +1,9 @@
 @use '../../../styles.scss' as * ;
+// @import 'tailwindcss';
 
 #customer-navbar {
 
-    width: 150px;
+    width: 175px;
     color: white;
     height: 100vh;
     background-color: $mainBlue;
@@ -12,7 +13,7 @@
     padding: 25px 25px;
     justify-content: space-between;
     transition: 0.6s ease;
-
+    margin-right: 50px;
     a {
         color: white;
         text-decoration: none;

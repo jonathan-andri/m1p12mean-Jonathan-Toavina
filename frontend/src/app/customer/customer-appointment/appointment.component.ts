@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { NavbarCustomerComponent } from '../../component/navbar-customer/navbar-customer.component';
+import { SearchBarComponent } from "../../component/search-bar/search-bar.component";
 
 @Component({
   selector: 'app-appointment',
-  imports: [NavbarCustomerComponent],
+  imports: [SearchBarComponent],
   templateUrl: './appointment.component.html',
   styleUrl: './appointment.component.scss'
 })
-export class AppointmentComponent {
+export class CustomerAppointmentComponent {
 
 }
