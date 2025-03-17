@@ -1,10 +1,15 @@
+// @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 $mainBlue : #1573B3 ;
 $darkGrey: #2E2E2E;
 $lightGrey: #EFEDED;
 
 .blur-background {
   filter: blur(5px);
-  pointer-events: none; /* Optional: Prevent interactions with blurred elements */
+  pointer-events: none;
 }
 
 $mainYellow: #E9B800;
@@ -21,7 +26,7 @@ $mainYellow: #E9B800;
 }
 
 @mixin section {
-    height: 450px;
+    height: 550px;
     padding: 50px 100px;
 }
 

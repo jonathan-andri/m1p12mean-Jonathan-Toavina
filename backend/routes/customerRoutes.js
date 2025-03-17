@@ -1,6 +1,7 @@
 const express = require('express') ;
 const router = express.Router() ;
 const Customer = require("../models/Customer") ;
+const Appointment = require('../models/Appointment');
 
 //create a customer
 router.post('/', async( req, res ) => {
@@ -23,13 +24,22 @@ router.get('/', async ( req, res ) => {
     }
 }) ;
 
+route.get('/:id', async( req, res) => {
+    try {
+        const appoId = req.params.id;
+        await Appointment.findById(appoId);
+    }
+    catch(error) {
+
+    }
+})
 //update customer 
 router.put('/:id', async ( req, res ) => {
     try {
         const customer = await Customer.fintByIdAndUpdate(req.params.id, req.body, { new:true }) ;
         res.json(customer) ;
     } catch (error) {
-        res.status(400).json({ message: error,message }) ;
+        res.status(400).json({ message: error.message }) ;
     }
 }) ;
 
