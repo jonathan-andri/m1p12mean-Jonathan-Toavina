@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -12,5 +13,13 @@ export class SignUpFormComponent {
 
   onCrossClick() {
     this.crossClicked.emit();
+  }
+
+
+
+  constructor(private router: Router) {}
+
+  onSignUpClick() {
+    this.router.navigate(['/signup-page']);
   }
 }

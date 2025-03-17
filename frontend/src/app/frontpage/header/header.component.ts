@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { NavbarComponent } from '../../component/navbar/navbar.component';
+import { NavbarComponent } from '../../component/navbar-frontpage/navbar.component';
 
 @Component({
   selector: 'app-header',
