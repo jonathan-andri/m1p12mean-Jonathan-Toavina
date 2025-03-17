@@ -1,0 +1,81 @@
+.container{
+    color: rgba(0,0,0,0.6);
+    min-width: 500px;
+    background-color: #F7F7F7;
+    margin:15px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); 
+    height:fit-content;
+}
+.top{
+    padding: 4px 0 4px 0;
+    display: flex;
+    justify-content: space-between;
+    height: fit-content;
+    border-bottom: 3px solid #1573B3;
+}
+.icon-top{
+    height:17px ;
+    margin:0 4px 0 5px;
+}
+.adminIcon{
+    background: #1573B3;
+    border-radius: 50%;
+    height: 18px;
+    margin-bottom: 0px;
+}
+.arrowIcon{
+    height: 8px;
+}
+.dash{
+    font-size:small;
+    display: flex;
+}
+.admin{
+    font-size:10px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}
+
+.sec-1{ 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+}
+
+.square{
+    width:90px;
+    height: 80px;
+    text-align: center;
+    align-content: center;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    margin: 10px 0 10px 0;
+}
+
+.square:hover{
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.square img{
+    height:25px;
+}
+
+.square p {
+    font-size: 10px;
+}
+
+.client, .appointment{
+    color:#1573B3;
+}
+
+.mechanic{
+    color: #319F43;
+}
+
+.service{
+    color: #EC756C;
+}
+
