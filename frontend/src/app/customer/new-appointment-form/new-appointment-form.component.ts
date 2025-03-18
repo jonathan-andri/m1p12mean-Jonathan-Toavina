@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AppointmentService } from '../../services/customer-services/customer-appointment-services/appointment.service';
-import { Appointment } from '../customer-appointment/appointment.model';
+import { Appointment } from '../customer-appointment/customer-appointment.model';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -21,10 +21,11 @@ export class NewAppointmentFormComponent {
     private appointmentService: AppointmentService
   ) {
     this.appointmentForm = this.fb.group({
-      appoDesc: [''],
-      appoDate: [''],
-      appoHour: [''],
-      appoNote: ['']
+      appoDesc: ['', Validators.required],
+      appoDate: ['', Validators.required],
+      appoHour: ['', Validators.required],
+      appoNote: ['', Validators.required],
+      appoStatus:['Pending']
     });
   }
 

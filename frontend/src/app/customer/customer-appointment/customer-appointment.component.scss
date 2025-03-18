@@ -39,6 +39,25 @@ hr {
         border: 1px solid #7C7C7C;
         tr {
             color: #7C7C7C;
+            td {
+                padding: 10px 0px;
+                button {
+                    padding: 5px 15px;
+                    margin: 0px 5px;
+                    border-radius: 5px;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                }
+            }
         }
     }
+}
+
+#editAppo {
+    background-color: $mainYellow;
+}
+
+#deleteAppo {
+    background-color: tomato;
 }

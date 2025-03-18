@@ -12,24 +12,24 @@
                     <th><i class="fas fa-hashtag"></i></th>
                     <th><i class="fas fa-file-alt"></i>  Description</th>
                     <th><i class="far fa-calendar-alt"></i>  Date</th>
+                    <th><i class="far fa-clock"></i>  Hour</th>
+                    <th><i class="far fa-sticky-note"></i>  Note</th>
                     <th><i class="fas fa-check-circle"></i>  Status</th>
                     <th><i class="fas fa-cogs"></i>  Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Data 1</td>
-                    <td>Data 2</td>
-                    <td>Data 3</td>
-                    <td>Data 3</td>
-                    <td>Data 3</td>
-                </tr>
-                <tr>
-                    <td>Data 4</td>
-                    <td>Data 5</td>
-                    <td>Data 6</td>
-                    <td>Data 6</td>
-                    <td>Data 6</td>
+                <tr *ngFor="let appointment of appointments; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ appointment.appoDesc }}</td>
+                    <td>{{ appointment.appoDate }}</td>
+                    <td>{{ appointment.appoHour }}</td>
+                    <td>{{ appointment.appoNote }}</td>
+                    <td [ngStyle]="{ color: appointment.appoStatus === 'Pending' ? 'orange' : appointment.appoStatus === 'Confirmed' ? 'lightgreen' : 'red' }">{{ appointment.appoStatus }}</td>
+                    <td>
+                        <button id="editAppo"class="btn btn-primary">Edit</button>
+                        <button id='deleteAppo' class="btn btn-danger">Delete</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
