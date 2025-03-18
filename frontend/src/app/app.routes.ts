@@ -8,7 +8,7 @@ import { ServicesComponent } from './admin/services/services.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { MechanicComponent } from './admin/mechanic/mechanic.component';
 import { AppointmentComponent } from './admin/appointment/appointment.component';
-import { CustomerAppointmentComponent } from './customer/customer-appointment/appointment.component';
+import { CustomerAppointmentComponent } from './customer/customer-appointment/customer-appointment.component';
 import { NewAppointmentFormComponent } from './customer/new-appointment-form/new-appointment-form.component';
 
 export const routes: Routes = [
@@ -25,7 +25,7 @@ export const routes: Routes = [
             { path: '', redirectTo:'dashboard', pathMatch: 'full' }
         ]
     },
-   { path: 'frontpage', component: FrontpageComponent},
+   { path: '', component: FrontpageComponent},
     {
         path:'customer',
         component: CustomerLayoutComponent,
