@@ -10,6 +10,8 @@ import { MechanicComponent } from './admin/mechanic/mechanic.component';
 import { AppointmentComponent } from './admin/appointment/appointment.component';
 import { CustomerAppointmentComponent } from './customer/customer-appointment/appointment.component';
 import { NewAppointmentFormComponent } from './customer/new-appointment-form/new-appointment-form.component';
+import { AddComponent } from './component/add/add.component';
+import { CustomerDataComponent } from './component/customer-data/customer-data.component';
 
 export const routes: Routes = [
     //{ path: '', component: FrontpageComponent },
@@ -19,9 +21,14 @@ export const routes: Routes = [
         children: [
             { path: 'dashboard', component: DashboardComponent },
             { path: 'services', component: ServicesComponent },
-            { path: 'customer', component: CustomerComponent },
+            { path: 'customer', component: CustomerComponent, 
+                children:[ 
+                    { path: 'customer-list', component: CustomerDataComponent },
+                    { path: 'add-customer', component: AddComponent },
+            ]
+             },
             { path: 'mechanic', component: MechanicComponent },
-            { path: 'appointment', component: AppointmentComponent },
+            { path: 'appointments', component: AppointmentComponent },
             { path: '', redirectTo:'dashboard', pathMatch: 'full' }
         ]
     },
