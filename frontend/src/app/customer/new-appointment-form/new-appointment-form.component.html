@@ -1,13 +1,13 @@
 <div id="newAppointment">
-    <form action="">
+    <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
         <h4>New Appointment</h4>
         <div class="form-group">
             <label for="appo-desc">Description</label>
             <div class="input-group">
-                <select id="appo-desc" name="appo-desc" class="form-control">
-                    <option value="option1">Oil Change</option>
-                    <option value="option2">Engine Diagnostics</option>
-                    <option value="option3">Heat system Repair</option>
+                <select id="appo-desc" formControlName="appoDesc" class="form-control">
+                    <option value="Oil Change">Oil Change</option>
+                    <option value="Engine Diagnostics">Engine Diagnostics</option>
+                    <option value="Heat System repair">Heat system Repair</option>
                 </select>
             </div>
             <div class="line"></div>
@@ -16,7 +16,7 @@
         <div class="form-group">
             <label for="appo-date">Date</label>
             <div class="input-group">
-                <input type="date" id="appo-date" name="appo-date" class="form-control">
+                <input type="date" id="appo-date" formControlName="appoDate" class="form-control">
             </div>
             <div class="line"></div>
         </div>
@@ -24,18 +24,18 @@
         <div class="form-group">
             <label for="appo-hour">Hour</label>
             <div class="input-group">
-                <input type="time" id="appo-hour" name="appo-hour" class="form-control">
+                <input type="time" id="appo-hour" formControlName="appoHour" class="form-control">
             </div>
             <div class="line"></div>
         </div>
 
         <div class="form-group">
-            <label for="appo-note">Full Name</label>
+            <label for="appo-note">Note</label>
             <div class="input-group">
-                <textarea id="appo-note" name="appo-note" class="form-control"></textarea>
+                <textarea id="appo-note" formControlName="appoNote" class="form-control"></textarea>
             </div>
         </div>
 
-        <button id="addAppo">Confirm</button>
+        <button id="addAppo" type="submit">Confirm</button>
     </form>
 </div>
