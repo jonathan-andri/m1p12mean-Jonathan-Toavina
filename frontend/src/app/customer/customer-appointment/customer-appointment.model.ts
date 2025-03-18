@@ -3,4 +3,5 @@ export interface Appointment {
     appoDate: string;
     appoHour: string;
     appoNote: string;
+    appoStatus: String;
 } 
