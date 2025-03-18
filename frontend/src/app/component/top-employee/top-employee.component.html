@@ -1,9 +1,13 @@
 <div class="top-employee">
-    <h2>Top Employee</h2>
     <div *ngIf="topEmployee" class="employee-card">
       <div class="employee-info">
-        <span class="employee-name">{{ topEmployee.name }}</span>
-        <span class="employee-services">Services: {{ topEmployee.serviceCount }}</span>
+        <div class="flex">
+          <img src="" alt="">
+          <div class="info">
+            <span class="employee-name">{{ topEmployee.name }}<br></span> <br><br>
+            <span class="employee-services"><p style="color: #1573B3;">{{ topEmployee.serviceCount }} </p>services</span>
+          </div>
+        </div>
       </div>
     </div>
     <div *ngIf="!topEmployee" class="no-data">

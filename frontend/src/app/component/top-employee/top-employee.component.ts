@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-top-employee',
   imports: [ CommonModule ],
   templateUrl: './top-employee.component.html',
-  styleUrls: ['./top-employee.component.css']
+  styleUrls: ['./top-employee.component.scss']
 })
 export class TopEmployeeComponent implements OnInit {
   // Mock data for employees and their service counts

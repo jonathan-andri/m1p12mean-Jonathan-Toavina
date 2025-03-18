@@ -1,15 +1,13 @@
-<div class="latest-users">
-    <ul>
-      <li *ngFor="let user of latestUsers">
-        <div class="user-card">
-          <div class="user-info">
-            <span class="user-name">{{ user.name }}</span>
-            <span class="user-email">{{ user.email }}</span>
-          </div>
-          <div class="user-join-date">
-            Joined: {{ user.joinDate }}
-          </div>
-        </div>
-      </li>
-    </ul>
-</div>
+<ul>
+  <li *ngFor="let user of latestUsers">
+    <div class="user-card">
+      <div class="user-info">
+        <span class="user-name">{{ user.name }}</span>
+        <span class="user-email">{{ user.email }}</span>
+      </div>
+      <div class="user-join-date">
+        {{ user.joinDate }}
+      </div>
+    </div>
+  </li>
+</ul>
