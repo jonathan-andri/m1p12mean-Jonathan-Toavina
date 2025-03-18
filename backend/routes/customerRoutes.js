@@ -24,7 +24,7 @@ router.get('/', async ( req, res ) => {
     }
 }) ;
 
-route.get('/:id', async( req, res) => {
+router.get('/:id', async( req, res) => {
     try {
         const appoId = req.params.id;
         await Appointment.findById(appoId);

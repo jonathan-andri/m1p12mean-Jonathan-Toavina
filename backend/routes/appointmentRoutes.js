@@ -1,7 +1,17 @@
 const express = require('express');
 const Appointment = require('../models/Appointment');
-
 const router = express.Router();
+
+// POST /appointments
+router.post('/', async (req, res) => {
+    try {
+        const appo = new Appointment(req.body);
+        await appo.save();
+        res.status(201).json(appo);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
 
 // GET /appointments
 router.get('/', async (req, res) => {
@@ -9,7 +19,7 @@ router.get('/', async (req, res) => {
         const appointments = await Appointment.find();
         res.json(appointments);
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -25,16 +35,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// POST /appointments
-router.post('/', async (req, res) => {
-    try {
-        const appo = new Appointment(req.body);
-        await Customer.save();
-        res.status(201).json(appo);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+
 
 router.put('/:id', async (req, res) => {
     try {

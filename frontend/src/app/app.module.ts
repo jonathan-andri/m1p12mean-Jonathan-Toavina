@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { FrontpageComponent } from './frontpage/frontpage.component'; 
 import { NavbarCustomerComponent } from './component/navbar-customer/navbar-customer.component';
 import { QuestionsComponent } from './component/questions-customer/questions.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AppointmentService } from './services/customer-services/customer-appointment-services/appointment.service';
+import { NewAppointmentFormComponent } from './customer/new-appointment-form/new-appointment-form.component';
 
 @NgModule({
   declarations: [
@@ -17,9 +20,10 @@ import { QuestionsComponent } from './component/questions-customer/questions.com
     RouterModule.forRoot(routes), 
     FrontpageComponent, 
     QuestionsComponent,
-    NavbarCustomerComponent
+    NavbarCustomerComponent,
+    ReactiveFormsModule
   ],
-  providers: [],
-  bootstrap: []
+  providers: [AppointmentService],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
