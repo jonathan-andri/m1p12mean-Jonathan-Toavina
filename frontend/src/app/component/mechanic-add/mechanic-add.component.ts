@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule,FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule,FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-add',
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './add.component.html',
-  styleUrls: ['./add.component.scss']
+  selector: 'app-mechanic-add',
+  imports: [ CommonModule,ReactiveFormsModule ],
+  templateUrl: './mechanic-add.component.html',
+  styleUrl: './mechanic-add.component.scss'
 })
-export class AddComponent implements OnInit {
+export class MechanicAddComponent {
   userForm!: FormGroup;
   
   constructor(private fb: FormBuilder){};

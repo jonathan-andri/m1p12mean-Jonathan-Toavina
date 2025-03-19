@@ -12,6 +12,11 @@ import { CustomerAppointmentComponent } from './customer/customer-appointment/cu
 import { NewAppointmentFormComponent } from './customer/new-appointment-form/new-appointment-form.component';
 import { AddComponent } from './component/add/add.component';
 import { CustomerDataComponent } from './component/customer-data/customer-data.component';
+import { AppointmentListComponent } from './component/appointment-list/appointment-list.component';
+import { MechanicAddComponent } from './component/mechanic-add/mechanic-add.component';
+import { MechanicsListComponent } from './component/mechanics-list/mechanics-list.component';
+import { ServicesAddComponent } from './component/services-add/services-add.component';
+import { ServicesListComponent } from './component/services-list/services-list.component';
 
 export const routes: Routes = [
     //{ path: '', component: FrontpageComponent },
@@ -20,15 +25,33 @@ export const routes: Routes = [
         component: AdminComponent,
         children: [
             { path: 'dashboard', component: DashboardComponent },
-            { path: 'services', component: ServicesComponent },
-            { path: 'customer', component: CustomerComponent, 
-                children:[ 
-                    { path: 'customer-list', component: CustomerDataComponent },
-                    { path: 'add-customer', component: AddComponent },
-            ]
+            { path: 'services', component: ServicesComponent,
+                    children:[
+                        { path: 'services-list', component: ServicesListComponent },
+                        { path: 'services-add', component: ServicesAddComponent },
+                        { path: '**', redirectTo:'services-list' }
+                    ]
              },
-            { path: 'mechanic', component: MechanicComponent },
-            { path: 'appointments', component: AppointmentComponent },
+            { path: 'customer', component: CustomerComponent, 
+                    children:[ 
+                        { path: 'customer-list', component: CustomerDataComponent },
+                        { path: 'add-customer', component: AddComponent },
+                        { path: '**', redirectTo:'customer-list' }
+                    ]
+            },
+            { path: 'mechanic', component: MechanicComponent,
+                    children:[
+                        { path:'mechanic-add', component:MechanicAddComponent },
+                        { path:'mechanic-list', component:MechanicsListComponent },
+                        { path: '**', redirectTo:'mechanic-list' }
+                    ]
+             },
+            { path: 'appointments', component: AppointmentComponent,
+                    children:[
+                        { path:'appointments-list', component: AppointmentListComponent },
+                        { path: '**', redirectTo:'appointments-list' }
+                    ]
+             },
             { path: '', redirectTo:'dashboard', pathMatch: 'full' }
         ]
     },

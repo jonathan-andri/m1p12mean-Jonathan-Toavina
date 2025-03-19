@@ -2,7 +2,7 @@
     <div class="top">
         <div class="dash">
             <img src="Admin/dashboard/top-icon.png" alt="" class="icon-top">
-            <p>Appointments</p>
+            <p>Customer</p>
         </div>
 
         <div class="admin">
@@ -12,4 +12,14 @@
         </div>
     </div>
 
+    <section class="sec-0">
+        <div class="flex">
+            <a routerLink="/admin/appointments/appointments-list" routerLinkActive="active" ariaCurrentWhenActive="page">
+                <span><img src="Admin/appointment/apptmnt.png" alt="">Appointments</span>
+            </a>
+        </div>
+        <div>
+            <router-outlet/>
+        </div>
+    </section>
 </section>

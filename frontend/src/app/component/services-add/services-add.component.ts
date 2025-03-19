@@ -1,25 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule,FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule,FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-add',
+  selector: 'app-services-add',
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './add.component.html',
-  styleUrls: ['./add.component.scss']
+  templateUrl: './services-add.component.html',
+  styleUrl: './services-add.component.scss'
 })
-export class AddComponent implements OnInit {
+export class ServicesAddComponent {
   userForm!: FormGroup;
   
   constructor(private fb: FormBuilder){};
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', Validators.email],
-      phoneNumber: ['', Validators.pattern(/^\d{3} \d{2} \d{3} \d{2}$/)],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      name: ['', Validators.required],
+      category: ['', Validators.required],
+      vehicle: ['', Validators.required],
+      price: ['', Validators.required],
+      duration: ['', [Validators.required]],
     })
   }
 

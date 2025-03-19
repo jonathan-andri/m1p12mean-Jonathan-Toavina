@@ -2,7 +2,7 @@
     <div class="top">
         <div class="dash">
             <img src="Admin/dashboard/top-icon.png" alt="" class="icon-top">
-            <p>Mechanics</p>
+            <p>Customer</p>
         </div>
 
         <div class="admin">
@@ -12,4 +12,17 @@
         </div>
     </div>
 
+    <section class="sec-0">
+        <div class="flex">
+            <a routerLink="/admin/mechanic/mechanic-list" routerLinkActive="active" ariaCurrentWhenActive="page">
+                <span><img src="Admin/mechanic/mechanic.png" alt="">Mechanics</span>
+            </a>
+            <a routerLink="/admin/mechanic/mechanic-add" routerLinkActive="active">
+                <span><img src="Admin/customer/add.png" alt="">Add</span>            
+            </a>
+        </div>
+        <div>
+            <router-outlet/>
+        </div>
+    </section>
 </section>

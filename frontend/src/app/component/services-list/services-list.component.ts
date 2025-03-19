@@ -3,28 +3,28 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-customer-data',
+  selector: 'app-services-list',
   imports: [CommonModule, FormsModule],
-  templateUrl: './customer-data.component.html',
-  styleUrl: './customer-data.component.scss'
+  templateUrl: './services-list.component.html',
+  styleUrl: './services-list.component.scss'
 })
-export class CustomerDataComponent {
+export class ServicesListComponent {
   users = [
     {
       id: 1,
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@example.com',
-      serviceRequests: 5,
-      startDate: '2021-01-01'
+      name: 'Oil Change',
+      category: 'Routine Maintenance',
+      vehicle: 'Compact',
+      price: '700 000',
+      duration: '2h'
     },
     {
       id: 2,
-      firstName: 'Jane',
-      lastName: 'Smith',
-      email: 'jane.smith@example.com',
-      serviceRequests: 3,
-      startDate: '2022-03-15'
+      name: 'Transmission Repair',
+      category: 'Repair',
+      vehicle: 'All',
+      price: '900 000',
+      duration: '4h'
     }
   ];
 
@@ -69,5 +69,4 @@ export class CustomerDataComponent {
     console.log('deleted')
     this.isDeleteModalOpen = false
   }
-
 }

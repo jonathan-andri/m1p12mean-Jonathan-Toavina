@@ -3,28 +3,26 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-customer-data',
-  imports: [CommonModule, FormsModule],
-  templateUrl: './customer-data.component.html',
-  styleUrl: './customer-data.component.scss'
+  selector: 'app-appointment-list',
+  imports: [FormsModule, CommonModule],
+  templateUrl: './appointment-list.component.html',
+  styleUrl: './appointment-list.component.scss'
 })
-export class CustomerDataComponent {
+export class AppointmentListComponent {
   users = [
     {
       id: 1,
       firstName: 'John',
       lastName: 'Doe',
       email: 'john.doe@example.com',
-      serviceRequests: 5,
-      startDate: '2021-01-01'
+      time: '8:30'
     },
     {
       id: 2,
       firstName: 'Jane',
       lastName: 'Smith',
       email: 'jane.smith@example.com',
-      serviceRequests: 3,
-      startDate: '2022-03-15'
+      time: '16:00'
     }
   ];
 
@@ -69,5 +67,4 @@ export class CustomerDataComponent {
     console.log('deleted')
     this.isDeleteModalOpen = false
   }
-
 }

@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-customer-data',
-  imports: [CommonModule, FormsModule],
-  templateUrl: './customer-data.component.html',
-  styleUrl: './customer-data.component.scss'
+  selector: 'app-mechanics-list',
+  imports: [ CommonModule, FormsModule ],
+  templateUrl: './mechanics-list.component.html',
+  styleUrl: './mechanics-list.component.scss'
 })
-export class CustomerDataComponent {
+export class MechanicsListComponent {
   users = [
     {
       id: 1,
@@ -69,5 +69,4 @@ export class CustomerDataComponent {
     console.log('deleted')
     this.isDeleteModalOpen = false
   }
-
 }

@@ -2,8 +2,10 @@
     color: rgba(0,0,0,0.6);
     background-color: #F7F7F7;
     margin:15px;
+    display:grid;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); 
     height:fit-content;
+    
 }
 
 .top{
@@ -36,4 +38,36 @@
     font-weight: 400;
     display: flex;
     align-items: center;
+}
+
+.sec-0{
+    margin: 0 10px 0 10px
+}
+
+img{
+    height:20px;
+}
+
+.flex{
+    display: flex;
+    width: 500px;
+    margin-top: 10px;
+    margin-left: 0.5%;
+}
+span{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 5px;
+    margin-right: 10px;
+    
+    color: rgba(0, 0, 0, 0.6);
+}
+span:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.active span{
+    box-shadow: 1px -1px 2px rgba(0, 0, 0, 0.3);
+    background-color: white;
 }
