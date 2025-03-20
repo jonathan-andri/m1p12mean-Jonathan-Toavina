@@ -24,6 +24,6 @@ import { NewAppointmentFormComponent } from './customer/new-appointment-form/new
     ReactiveFormsModule
   ],
   providers: [AppointmentService],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
-export class AppModule { }
+export class AppModule {}

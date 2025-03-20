@@ -1,1 +1,28 @@
-<p>services works!</p>
+<section class="container">
+    <div class="top">
+        <div class="dash">
+            <img src="Admin/dashboard/top-icon.png" alt="" class="icon-top">
+            <p>Customer</p>
+        </div>
+
+        <div class="admin">
+            <img src="Admin/dashboard/custom_blue.png" alt="" class="adminIcon">
+            <p style="padding-left: 5px;">Admin</p>
+            <img src="Admin/dashboard/arrow.png" alt="" class="arrowIcon">
+        </div>
+    </div>
+
+    <section class="sec-0">
+        <div class="flex">
+            <a routerLink="/admin/services/services-list" routerLinkActive="active" ariaCurrentWhenActive="page">
+                <span><img src="Admin/service/services.png" alt="">Services</span>
+            </a>
+            <a routerLink="/admin/services/services-add" routerLinkActive="active">
+                <span><img src="Admin/customer/add.png" alt="">Add</span>            
+            </a>
+        </div>
+        <div>
+            <router-outlet/>
+        </div>
+    </section>
+</section>
