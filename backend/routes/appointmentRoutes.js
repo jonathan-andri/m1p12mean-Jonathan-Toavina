@@ -1,60 +1,20 @@
 const express = require('express');
-const Appointment = require('../models/Appointment');
+const appointmentController = require('../controllers/appointmentController') ; 
 const router = express.Router();
 
 // POST /appointments
-router.post('/', async (req, res) => {
-    try {
-        const appo = new Appointment(req.body);
-        await appo.save();
-        res.status(201).json(appo);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-});
+router.post('/', appointmentController.createAppointment);
 
 // GET /appointments
-router.get('/', async (req, res) => {
-    try {
-        const appointments = await Appointment.find();
-        res.json(appointments);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+router.get('/', appointmentController.getAllAppointments);
 
 // GET /appointments/:id
-router.get('/:id', async (req, res) => {
-    try {
-        const appointmentId = req.params.id;
-        const appo = Appointment.findById(appointmentId);
-        res.json(appo);
-    } catch (error) {
-        // Handle the error
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
+router.get('/:id', appointmentController.getAppointment);
 
 
 
-router.put('/:id', async (req, res) => {
-    try {
-        const appointmentId = req.params.id;
-        const appo = await Appointment.findByIdAndUpdate(appointmentId, req.body, { new: true });
-        res.json(appo);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+router.put('/:id', appointmentController.updateAppointment);
 
-router.delete('/:id', async (req, res) => {
-    try {
-        const appointmentId = req.params.id;
-        await Appointment.findByIdAndDelete(appointmentId);
-        res.json({ message: "Appointment Deleted "}) ;
-    } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
+router.delete('/:id', appointmentController.deleteAppointment);
 
 module.exports = router;
