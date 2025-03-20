@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const carSchema = new mongoose.Schema({
-  clientId: {
+  customerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', 
     required: true
