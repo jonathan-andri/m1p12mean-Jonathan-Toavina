@@ -17,6 +17,8 @@ import { MechanicAddComponent } from './component/mechanic-add/mechanic-add.comp
 import { MechanicsListComponent } from './component/mechanics-list/mechanics-list.component';
 import { ServicesAddComponent } from './component/services-add/services-add.component';
 import { ServicesListComponent } from './component/services-list/services-list.component';
+import { LoginComponent } from './component/login/login.component';
+import { SignUpFormComponent } from './customer/sign-up-form/sign-up-form.component';
 
 export const routes: Routes = [
     //{ path: '', component: FrontpageComponent },
@@ -65,5 +67,7 @@ export const routes: Routes = [
             { path: 'newAppointment', component: NewAppointmentFormComponent}
             // { path: 'intervention', }
         ]
-    }   
+    },
+    { path: 'login', component: LoginComponent},
+    { path: 'signUp', component: SignUpFormComponent} 
 ]; 

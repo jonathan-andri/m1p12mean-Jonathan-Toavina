@@ -7,7 +7,7 @@ const paymentController = require('../controllers/paymentController') ;
 router.post('/', paymentController.createPayment);
 
 //lire utilisateur 
-router.get('/', paymentController.getAllPayments);
+router.get('/', paymentController.getPayments);
 
 router.get(':/id', paymentController.getPaymentById);
 
