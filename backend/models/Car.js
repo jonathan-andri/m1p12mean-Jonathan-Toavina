@@ -36,7 +36,6 @@ const carSchema = new mongoose.Schema({
   }
 });
 
-// Set the updatedAt field to the current date before saving the document
 carSchema.pre('save', function(next) {
   this.updatedAt = Date.now();
   next();
