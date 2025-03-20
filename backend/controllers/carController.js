@@ -32,7 +32,7 @@ exports.getCarById = async (req, res) => {
     }
 }
 
-exports.updateCar = async (res, res) => {
+exports.updateCar = async (req, res) => {
     try {
         const car = await Car.findByIdAndUpdate(req.params.id, req.body, {new:true}) ;
         res.json(car) ;

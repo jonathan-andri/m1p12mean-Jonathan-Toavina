@@ -1,4 +1,4 @@
-const Payment = require('../models/paymentModel');
+const Payment = require('../models/Payment');
 
 exports.createPayment = async (req, res) => {
     try {
@@ -30,7 +30,7 @@ exports.getPaymentById = async (req, res) => {
     }
 }
 
-exports.updatePayment = async (req, res) {
+exports.updatePayment = async (req, res) => {
     try {
         const payment = await Payment.findByIdAndUpdate(req.params.id, req.body, {new:true}) ;
         res.json(payment) ;

@@ -6,7 +6,7 @@
         <button type="button" (click)="onCrossClick()">X</button>
     </div>
     <div id="inForm">
-        <form>
+        <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
             <h1>Create your Account</h1>
 
             <button type="button" id="googleLoginBtn">
@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label for="fullName">Full Name</label>
                 <div class="input-group">
-                    <input type="text" id="fullName" name="customerFullName" class="form-control">
+                    <input type="text" id="fullName" formControlName="fullName" class="form-control">
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <img src="customer/signup/fullName.png">
@@ -38,7 +38,7 @@
             <div class="form-group">
                 <label for="email">Email</label>
                 <div class="input-group">
-                    <input type="text" id="email" name="customerEmail" class="form-control">
+                    <input type="text" formControlName="email" id="email" name="customerEmail" class="form-control">
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <img src="customer/signup/email.png">
@@ -52,7 +52,7 @@
             <div class="form-group">
                 <label for="number">Phone Number</label>
                 <div class="input-group">
-                    <input type="number" id="number" name="customerNumber" class="form-control">
+                    <input type="number" formControlName="phone" id="number" name="customerNumber" class="form-control">
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <img src="customer/signup/phoneNumber.png">
@@ -66,7 +66,7 @@
             <div class="form-group">
                 <label for="pwd">Password</label>
                 <div class="input-group">
-                    <input type="password" id="pwd" name="customerPwd" class="form-control">
+                    <input type="password" formControlName="password" id="pwd" name="customerPwd" class="form-control">
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <img src="customer/signup/pwd.png">
@@ -74,11 +74,6 @@
                     </div>
                 </div>
                 <div class="line"></div>
-            </div>
-
-            <div class="form-check">
-                <input type="checkbox" id="agreeTerms" name="agreeTerms" class="form-check-input">
-                <label for="agreeTerms" class="form-check-label">I agree with the terms and conditions</label>
             </div>
 
             <button type="submit" id="signUpBtn">Sign Up</button>

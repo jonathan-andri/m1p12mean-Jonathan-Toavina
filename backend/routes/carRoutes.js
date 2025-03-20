@@ -7,7 +7,7 @@ const carController = require('../controllers/carController') ;
 router.post('/', carController.createCar);
 
 //lire car 
-router.get('/', carController.getAllCars);
+router.get('/', carController.getCars);
 
 //get a car
 router.get("/:id", carController.getCarById) ;
