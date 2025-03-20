@@ -29,7 +29,7 @@ exports.getUserById = async (req, res) => {
     }
 }
 
-exports.updateUser = async (res, res) => {
+exports.updateUser = async (req, res) => {
     try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, {new:true}) ;
         res.json(user) ;

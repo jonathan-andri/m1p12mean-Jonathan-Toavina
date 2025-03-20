@@ -17,9 +17,10 @@ mongoose.connect(process.env.MONGO_URI, {
 }).then(() => console.log("MongoDB connected"))
 .catch(err=>console.log(err)) ;
 
-app.use('/articles' , require('./routes/articleRoutes')) ;
-app.use('/utilisateurs', require('./routes/userRoutes')) ;
-app.use('/customers', require('./routes/customerRoutes')) ;
+app.use('/users', require('./routes/userRoutes')) ;
 app.use('/appointments', require('./routes/appointmentRoutes'));
+app.use('/cars', require('./routes/carRoutes'));
+app.use('/services', require('./routes/serviceRoutes'));
+app.use('/payments', require('./routes/paymentRoutes'));
 
 app.listen(PORT, () => console.log(`Started server on the port ${PORT}`)) ;
