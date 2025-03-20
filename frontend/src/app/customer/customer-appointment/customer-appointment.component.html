@@ -1,13 +1,13 @@
-<div id="customer-appointment">
+<div id="customer-appointment" data-aos="fade-up" data-aos-duration="300">
     <div id="appo-top">
-        <p>My Appointments</p>
-        <button id="makeAppo" (click)="toggleAppoForm()">Make an Appointment</button>
+        <p data-aos="fade-right">My Appointments</p>
+        <button data-aos="fade-left" id="makeAppo" (click)="toggleAppoForm()">Make an Appointment</button>
     </div>
     <hr>
     <app-search-bar></app-search-bar>
     <div class="overflow-x-auto">
         <table id="cus-appo-table" class="min-w-full">
-            <thead>
+            <thead data-aos="fade-down" data-aos-duration="500" data-aos-delay="(00">
                 <tr>
                     <th><i class="fas fa-hashtag"></i></th>
                     <th><i class="fas fa-file-alt"></i>  Description</th>

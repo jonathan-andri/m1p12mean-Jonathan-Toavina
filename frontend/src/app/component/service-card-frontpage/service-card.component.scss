@@ -13,7 +13,7 @@
   &:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease-in-out;
-    border: solid $mainYellow 2px;
+    border: solid $mainBlue 2px;
     width: 257px;
   }
   
@@ -35,7 +35,7 @@
 
 a{
     @include btn;
-    @include yellowButton;
+    background-color: $mainBlue;
     color: white ;
     text-align: center;
 }
