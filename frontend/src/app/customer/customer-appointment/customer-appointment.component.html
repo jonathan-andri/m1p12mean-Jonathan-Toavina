@@ -1,6 +1,6 @@
 <div id="customer-appointment">
     <div id="appo-top">
-        <h4>My Appointments</h4>
+        <p>My Appointments</p>
         <button id="makeAppo" (click)="toggleAppoForm()">Make an Appointment</button>
     </div>
     <hr>
@@ -20,14 +20,14 @@
             </thead>
             <tbody>
                 <tr *ngFor="let appointment of appointments; let i = index">
-                    <td>{{ i + 1 }}</td>
-                    <td>{{ appointment.appoDesc }}</td>
-                    <td>{{ appointment.appoDate }}</td>
-                    <td>{{ appointment.appoHour }}</td>
-                    <td>{{ appointment.appoNote }}</td>
-                    <td [ngStyle]="{ color: appointment.appoStatus === 'Pending' ? 'orange' : appointment.appoStatus === 'Confirmed' ? 'lightgreen' : 'red' }">{{ appointment.appoStatus }}</td>
-                    <td>
-                        <button id="editAppo"class="btn btn-primary">Edit</button>
+                    <td> {{ i + 1 }}</td>
+                    <td id="num">{{ appointment.appoDesc }}</td>
+                    <td id="date">{{ appointment.appoDate }}</td>
+                    <td id="hour">{{ appointment.appoHour }}</td>
+                    <td id="note">{{ appointment.appoNote }}</td>
+                    <td id='status' [ngStyle]="{ color: appointment.appoStatus === 'Pending' ? 'orange' : appointment.appoStatus === 'Confirmed' ? 'lightgreen' : 'red' }">{{ appointment.appoStatus }}</td>
+                    <td id="action">
+                        <button id="editAppo" class="btn btn-primary">Edit</button>
                         <button id='deleteAppo' class="btn btn-danger">Delete</button>
                     </td>
                 </tr>

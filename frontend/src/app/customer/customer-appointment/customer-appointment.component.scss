@@ -27,20 +27,22 @@ hr {
 #cus-appo-table {
     text-align: right;
     font-weight: lighter;
-    width: 78vw;
+    width: 1200px;
+    border-collapse: collapse;
     
-
     thead {
         th {
             padding: 10px 0px;
         }
     }
     tbody {
-        border: 1px solid #7C7C7C;
+        border: solid 1px $lightGrey;
+        border-radius: 10px;
         tr {
+
             color: #7C7C7C;
             td {
-                padding: 10px 0px;
+                padding: 10px 5px;
                 button {
                     padding: 5px 15px;
                     margin: 0px 5px;
@@ -61,3 +63,40 @@ hr {
 #deleteAppo {
     background-color: tomato;
 }
+
+@media screen and (max-width: 1000px) {
+
+    #cus-appo-table {
+        width: 700px;
+    }
+
+    #cus-appo-table th,
+    #cus-appo-table td{
+        font-size: 10px;
+        padding: 5px 5px;
+    }
+
+    #editAppo {
+        font-size: 10px;
+        width: 50px;
+        height: 20px;
+    }
+
+    #deleteAppo {
+        font-size: 10px;
+        height: 20px;
+        width: 50px;
+    }
+
+    #appo-top {
+        p {
+            font-size: 10px;
+        }
+    }
+}
+
+
+#note {
+    width: 150px;
+}
+

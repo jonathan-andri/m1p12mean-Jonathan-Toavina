@@ -21,7 +21,7 @@
 
     li {
         list-style: none;
-        padding: 25px 20px;
+        padding: 10px 0px;
         &:hover {
             background: rgba(255, 255, 255, 0.2);
             width: calc(100% + 50px);
@@ -47,15 +47,19 @@
 .profile {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    // justify-content: space-between;
     i {
         font-size: 25px;
+        margin-right: 10px;
     }
 }
 
 .bottom {
     display: flex;
     flex-direction: column;
+    a{
+        padding: 10px 0px;
+    }
     
 }
 

@@ -2,8 +2,9 @@
 
 #section-1 {
     @include section;
-    color: white;
-    background-image: url('../../assets/frontpage/image/bgSection1.png');
+    color:black;
+    background: linear-gradient(to right, rgb(255, 255, 255),rgba(255, 255, 255, 0.829), rgba(32, 32, 32, 0)), url('../../../../public/frontpage/beautifulBG.webp') center/cover no-repeat;
+    // background-image: url('../../../../public/frontpage/beautifulBG.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

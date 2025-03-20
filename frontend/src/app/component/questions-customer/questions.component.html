@@ -1,4 +1,12 @@
-<div class="question-section">
+<div 
+    class="question-section"
+    data-aos="fade-up" 
+    data-aos-delay="300" 
+    data-aos-duration="500" 
+    data-aos-easing="ease-in-out" 
+    data-aos-offset="200" 
+    data-aos-anchor-placement="top-bottom"
+>
     <div class="question" (click)="toggleAnswer()">
         <p>{{ question }}</p>
         <div class="tooggle-button">{{ showAnswer ? '-' : '+' }}</div>
