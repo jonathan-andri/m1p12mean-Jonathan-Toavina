@@ -9,7 +9,17 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  &:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+    border: solid $mainYellow 2px;
+    width: 257px;
+  }
+  
 }
+
+
 
 .service-card img {
   max-width: 100%;

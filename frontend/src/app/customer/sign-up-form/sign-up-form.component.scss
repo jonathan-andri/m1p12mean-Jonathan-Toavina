@@ -4,9 +4,9 @@
     height: 822px;
     width: 1200px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top:0%;
+    left: 10%;
+    // transform: translate(-50%, -50%);
     display: block;
     justify-content: center;
     align-items: center;
@@ -14,6 +14,7 @@
     background-image: url('../../../../public/customer/signup/bg.png');
     background-color: white;
     border-radius: 5px;
+    transform: scale(0.8);
 }
 
 form {
@@ -136,3 +137,5 @@ label {
     width: 100%;
     font-size: larger;
 }
+
+

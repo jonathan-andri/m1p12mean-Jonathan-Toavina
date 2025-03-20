@@ -12,5 +12,4 @@ export class ServiceCardComponent {
  @Input() category!: string;
  @Input() imageUrl!: string;
  @Input() title!: string;
-
 }
