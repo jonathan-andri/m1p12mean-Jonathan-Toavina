@@ -1,35 +1,35 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
         <label for="name">Name:</label>
-        <input id="name" formControlName="name" type="text" placeholder="Oil change">
+        <input id="name" formControlName="name" type="text" placeholder="Oil change" [(ngModel)]="newService.name">
         <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
             First Name is required.</div>
     </div>
   
     <div class="form-group">
         <label for="category">Category</label>
-        <input id="category" formControlName="category" type="text" placeholder="routine/repair/diagnostic">
+        <input id="category" formControlName="category" type="text" placeholder="routine/repair/diagnostic" [(ngModel)]="newService.type">
         <div *ngIf="userForm.get('category')?.invalid && userForm.get('category')?.touched">
             Last Name is required.</div>
     </div>
   
     <div class="form-group">
-      <label for="vehicle">Vehicle Type</label>
-      <input id="vehicle" formControlName="vehicle" type="text" placeholder="example@gmail.com">
-      <div *ngIf="userForm.get('vehicle')?.invalid && userForm.get('vehicle')?.touched">
+      <label for="description">description</label>
+      <textarea id="description" formControlName="description" [(ngModel)]="newService.description"></textarea>
+      <div *ngIf="userForm.get('description')?.invalid && userForm.get('description')?.touched">
           Email is required.</div>
     </div>
   
     <div class="form-group">
       <label for="price">Estimated Price(Ar):</label>
-      <input id="price" formControlName="price" type="text" placeholder="700 000">
+      <input id="price" formControlName="price" type="text" placeholder="700 000" [(ngModel)]="newService.price">
       <div *ngIf="userForm.get('price')?.invalid && userForm.get('price')?.touched">
           Phone is required.</div>
     </div>
   
     <div class="form-group">
       <label for="duration">Estimated Duration:</label>
-      <input id="duration" formControlName="duration" type="text" placeholder="4h">
+      <input id="duration" formControlName="duration" type="text" placeholder="4h" [(ngModel)]="newService.duration">
       <div *ngIf="userForm.get('duration')?.invalid && userForm.get('duration')?.touched">
           Must be numbers  .</div>
     </div>
