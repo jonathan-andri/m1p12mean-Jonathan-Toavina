@@ -13,11 +13,11 @@ import { Service } from '../../models/Service';
 export class ServicesAddComponent {
   userForm!: FormGroup;
   newService: Service = {
-    name: '',
-    type: '',
-    description: '',
-    duration: '',
-    price: 0
+    serviceName: '',
+    serviceType: '',
+    serviceDescription: '',
+    serviceEstimatedPrice: 0,
+    serviceEstimatedDuration: ''
   };
   constructor(private fb: FormBuilder, private servicesService: ServicesService){};
 
@@ -33,16 +33,20 @@ export class ServicesAddComponent {
 
   onSubmit(): void{
     if (this.userForm.valid){
-      const newService: Service={
+      /* const newService: Service={
         name: this.userForm.value.name,
         type: this.userForm.value.category,
         description: this.userForm.value.description,
         price: this.userForm.value.price,
         duration: this.userForm.value.duration
-      }
+      } */
 
       //Add the new service to the db
-      this.createService(newService)
+      this.servicesService.createService(this.newService).subscribe({
+        next: () => console.log('Sent'),
+        error: (err) =>console.error('Error while sending the data', err)
+      })
+
       console.log('Ok', this.userForm.value);
       this.userForm.reset();
       this.showNotification();
@@ -77,10 +81,4 @@ export class ServicesAddComponent {
     });
   }
   
-  createService(service: Service): void{
-    this.servicesService.createService(service).subscribe({
-      next: () => console.log('Sent'),
-      error: () =>console.error('Error while sending the data')
-    })
-  }
 }

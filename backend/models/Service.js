@@ -5,7 +5,7 @@ const serviceSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  servType: {
+  serviceType: {
     type: String,
     enum: ['Routine Maintenance', 'Repair', 'Diagnostic' ],
   },

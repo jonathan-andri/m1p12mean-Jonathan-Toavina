@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ServicesService } from '../../services/create-services/services.service';
+import { Service } from '../../models/Service';
 
 @Component({
   selector: 'app-services-list',
@@ -8,65 +10,62 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './services-list.component.html',
   styleUrl: './services-list.component.scss'
 })
-export class ServicesListComponent {
-  users = [
-    {
-      id: 1,
-      name: 'Oil Change',
-      category: 'Routine Maintenance',
-      vehicle: 'Compact',
-      price: '700 000',
-      duration: '2h'
-    },
-    {
-      id: 2,
-      name: 'Transmission Repair',
-      category: 'Repair',
-      vehicle: 'All',
-      price: '900 000',
-      duration: '4h'
-    }
-  ];
+export class ServicesListComponent implements OnInit{
+
+  constructor( private serviceService: ServicesService){}
 
   isEditModalOpen = false;
   isDeleteModalOpen = false;
-  selectedUser: any = null;
+  selectedService: any = null;
+  services: Service[] = [] ;
+  id!: string;
 
-  
-  openEditModal(user: any) {
-    this.selectedUser = { ...user }; // Create a copy of the user object
+  ngOnInit(): void {
+    this.loadServices()  ;
+  }
+  openEditModal(service: Service) {
+    this.selectedService = { ...service }; // Create a copy of the Service object
     this.isEditModalOpen = true;
   }
 
   
   closeEditModal() {
     this.isEditModalOpen = false;
-    this.selectedUser = null;
+    this.selectedService = null;
   }
 
   onSubmit() {
-    const index = this.users.findIndex(u => u.id === this.selectedUser.id);
-    if (index !== -1) {
-      this.users[index] = { ...this.selectedUser };
-    }
-
+    
     // Send the updated data to your backend/database here
-    console.log('Updated User:', this.selectedUser);
+    console.log('Updated Service:', this.selectedService);
     this.closeEditModal();
   }
 
-  openDeleteModal(user: any) {
-    this.selectedUser = { ...user }
+  openDeleteModal(service: Service) {
+    this.selectedService = { ...service }
     this.isDeleteModalOpen = true
+    this.id = this.selectedService.id
+    console.log(this.id)
   }
 
   closeDeleteModal(){
     this.isDeleteModalOpen = false
-    this.selectedUser = null
+    this.selectedService = null
   }
 
-  delete(){
-    console.log('deleted')
-    this.isDeleteModalOpen = false
+  deleteService(){
+    this.serviceService.deleteService(this.id).subscribe({
+      next: () => {
+        console.log('deleted')
+        this.isDeleteModalOpen = false;
+        this.loadServices();
+      },
+      error: (err) => console.log('Error while deleting', err)
+    })
+    
+  }
+
+  loadServices(): void{
+    this.serviceService.getAllServices().subscribe(data => this.services = data)
   }
 }

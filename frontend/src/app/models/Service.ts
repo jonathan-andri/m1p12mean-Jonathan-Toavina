@@ -1,7 +1,7 @@
 export interface Service{
-    name: string,
-    type: string,
-    description: string,
-    price: number,
-    duration: string,
+    serviceName: string,
+    serviceType: string,
+    serviceDescription: string,
+    serviceEstimatedPrice: number,
+    serviceEstimatedDuration: string,
 }
