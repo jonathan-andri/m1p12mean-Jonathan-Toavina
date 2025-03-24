@@ -1,8 +1,8 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
-exports.loginController = async (req, res) => {
+exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -20,9 +20,18 @@ exports.loginController = async (req, res) => {
             { expiresIn: '2h'}
         );
 
-        res.status(200).jaon({ token, role: user.role});
+        res.status(200).json({ token, role: user.role });
     
     } catch( er ) {
-        res.status(500).json({ message: 'server error'});
+        res.status(500).json({ message: er.message });
+    }
+}
+
+exports.getCurrentUser = async ( req, res ) => {
+    try {
+        const user = await User.findById(req.userId).select('-password');
+        res.json(user);
+    } catch ( er ) {
+        res.status(500).json({ message: er.message }) ;
     }
 }
