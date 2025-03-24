@@ -6,7 +6,7 @@
         <button type="button">X</button>
     </div>
     <div id="inForm">
-        <form>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <h1>LogIn into your Account</h1>
 
             <button type="button" id="googleLoginBtn">
@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label for="email">Email</label>
                 <div class="input-group">
-                    <input type="text" id="email" name="customerEmail" class="form-control">
+                    <input type="text" id="email" formControlName="email" name="email" class="form-control">
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <img src="customer/signup/email.png">
@@ -38,7 +38,7 @@
             <div class="form-group">
                 <label for="pwd">Password</label>
                 <div class="input-group">
-                    <input type="password" id="pwd" name="customerPwd" class="form-control">
+                    <input type="password" id="pwd" formControlName="password" name="customerPwd" class="form-control">
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <img src="customer/signup/pwd.png">
