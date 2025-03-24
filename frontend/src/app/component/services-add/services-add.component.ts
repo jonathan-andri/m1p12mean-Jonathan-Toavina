@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule,FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ServicesService } from '../../services/create-services/services.service';
 import { Service } from '../../models/Service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-services-add',
@@ -10,7 +11,9 @@ import { Service } from '../../models/Service';
   templateUrl: './services-add.component.html',
   styleUrl: './services-add.component.scss'
 })
+
 export class ServicesAddComponent {
+
   userForm!: FormGroup;
   newService: Service = {
     serviceName: '',
@@ -19,7 +22,7 @@ export class ServicesAddComponent {
     serviceEstimatedPrice: 0,
     serviceEstimatedDuration: ''
   };
-  constructor(private fb: FormBuilder, private servicesService: ServicesService){};
+  constructor(private fb: FormBuilder, private servicesService: ServicesService, private cdr: ChangeDetectorRef){};
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -33,25 +36,18 @@ export class ServicesAddComponent {
 
   onSubmit(): void{
     if (this.userForm.valid){
-      /* const newService: Service={
-        name: this.userForm.value.name,
-        type: this.userForm.value.category,
-        description: this.userForm.value.description,
-        price: this.userForm.value.price,
-        duration: this.userForm.value.duration
-      } */
-
       //Add the new service to the db
       this.servicesService.createService(this.newService).subscribe({
-        next: () => console.log('Sent'),
+        next: () => {
+          
+          this.userForm.reset();
+          this.showNotification();
+          this.cdr.detectChanges();
+          console.log('Saved');
+        },
         error: (err) =>console.error('Error while sending the data', err)
       })
-
-      console.log('Ok', this.userForm.value);
-      this.userForm.reset();
-      this.showNotification();
-    }else {
-      console.log('Not ok');
+      
     }
   }
 

@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component,ChangeDetectorRef, OnInit } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MechanicService } from '../../services/add-mechanic/mechanic.service';
+import { Mechanic } from '../../models/mechanic';
 
 @Component({
   selector: 'app-mechanics-list',
@@ -8,65 +10,71 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './mechanics-list.component.html',
   styleUrl: './mechanics-list.component.scss'
 })
-export class MechanicsListComponent {
-  users = [
-    {
-      id: 1,
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@example.com',
-      serviceRequests: 5,
-      startDate: '2021-01-01'
-    },
-    {
-      id: 2,
-      firstName: 'Jane',
-      lastName: 'Smith',
-      email: 'jane.smith@example.com',
-      serviceRequests: 3,
-      startDate: '2022-03-15'
-    }
-  ];
+export class MechanicsListComponent implements OnInit {
+  
+  constructor(private mechanicService: MechanicService, private cdr: ChangeDetectorRef){}
 
   isEditModalOpen = false;
   isDeleteModalOpen = false;
-  selectedUser: any = null;
+  selectedMechanic: any = null;
+  mechanics: Mechanic[] = [] 
+  id!: string
 
-  
-  openEditModal(user: any) {
-    this.selectedUser = { ...user }; // Create a copy of the user object
+  ngOnInit(): void {
+    this.loadMechanics();
+  }
+  openEditModal(mechanic: Mechanic) {
+    this.selectedMechanic = { ...mechanic }; // Create a copy of the user object
     this.isEditModalOpen = true;
+    this.id = this.selectedMechanic.id || this.selectedMechanic._id
+   
   }
 
   
   closeEditModal() {
     this.isEditModalOpen = false;
-    this.selectedUser = null;
+    this.selectedMechanic = null;
+    this.cdr.detectChanges();
   }
 
   onSubmit() {
-    const index = this.users.findIndex(u => u.id === this.selectedUser.id);
-    if (index !== -1) {
-      this.users[index] = { ...this.selectedUser };
-    }
-
     // Send the updated data to your backend/database here
-    console.log('Updated User:', this.selectedUser);
+    this.editMechanic();
+    console.log('Updated Mechanic:', this.selectedMechanic);
+    this.cdr.detectChanges()
     this.closeEditModal();
   }
 
-  openDeleteModal(user: any) {
-    this.selectedUser = { ...user }
+  editMechanic(){
+    this.mechanicService.updateMechanic(this.selectedMechanic,this.id).subscribe({
+      next: () =>{
+        this.loadMechanics()
+      },
+      error: (err) => console.error('While editing mechanic', err)
+    })
+  }
+  openDeleteModal(mechanic: Mechanic) {
+    this.selectedMechanic = { ...mechanic }
     this.isDeleteModalOpen = true
   }
 
   closeDeleteModal(){
     this.isDeleteModalOpen = false
-    this.selectedUser = null
+    this.selectedMechanic = null
   }
 
-  delete(){
-    console.log('deleted')
-    this.isDeleteModalOpen = false
+  deleteMechanic(){
+    this.mechanicService.deleteMechanic(this.id).subscribe({
+      next: () =>{
+        this.isDeleteModalOpen = false;
+        this.loadMechanics();
+        console.log('Mechanic deleted');
+      },
+      error: (err) => console.error('Error while editing', err)
+    })
+  }
+
+  loadMechanics(){
+    this.mechanicService.getAllMechanics().subscribe(data => this.mechanics = data)
   }
 }

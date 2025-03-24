@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule,FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MechanicService } from '../../services/add-mechanic/mechanic.service';
 import { Mechanic } from '../../models/mechanic';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
   selector: 'app-mechanic-add',
   imports: [ CommonModule,ReactiveFormsModule ],
@@ -11,9 +13,18 @@ import { Mechanic } from '../../models/mechanic';
 })
 export class MechanicAddComponent {
   userForm!: FormGroup;
-  newMechanic!: Mechanic
+  newMechanic: Mechanic ={
+    FirstName: '',
+    LastName: '',
+    email: '',
+    phone: '',
+    role:'mechanic',
+    password: '',
+    createdAt: new Date ,
+    updatedAt: new Date,
+  }
 
-  constructor(private fb: FormBuilder, private mechanicService: MechanicService){};
+  constructor(private fb: FormBuilder, private mechanicService: MechanicService, private cdr: ChangeDetectorRef){};
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -27,29 +38,22 @@ export class MechanicAddComponent {
 
   onSubmit(): void{
     if (this.userForm.valid){
-      this.newMechanic ={
-        FirstName: this.userForm.value.firstName,
-        LastName: this.userForm.value.lastName,
-        email: this.userForm.value.email,
-        phone: this.userForm.value.phoneNumber,
-        role: 'mechanic',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        password: this.userForm.value.password,
-      }
       //add the new mechanic in the db
+      this.newMechanic.role = 'mechanic';
+      this.newMechanic.createdAt = new Date();
+      this.newMechanic.updatedAt = new Date();
       this.mechanicService.addMechanic(this.newMechanic).subscribe({
         next:() =>{
-          console.log('Ok', this.userForm.value);
+          console.log('Saved');
           this.userForm.reset();
+          this.cdr.detectChanges()
           this.showNotification();
+          this.cdr.detectChanges()
         },
         error: err => console.error('Error here:', err)
       });
 
       
-    }else {
-      console.log('Not ok');
     }
   }
 
@@ -78,4 +82,6 @@ export class MechanicAddComponent {
       body: 'Customer added successfully!',
     });
   }
+
+  
 }

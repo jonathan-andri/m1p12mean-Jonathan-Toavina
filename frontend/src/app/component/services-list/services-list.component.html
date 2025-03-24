@@ -31,7 +31,7 @@
 <div *ngIf="isEditModalOpen" class="modal">
   <div class="modal-content">
     <h1>Edit Service</h1> <br>
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onEdit()">
       <label for="Name">Name:</label>
       <input id="Name" [(ngModel)]="selectedService.serviceName" name="name" required>
 
