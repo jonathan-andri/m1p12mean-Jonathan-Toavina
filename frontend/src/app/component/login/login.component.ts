@@ -45,6 +45,7 @@ export class LoginComponent {
               this.router.navigate(['/mechanic']);
             } else {
               this.router.navigate(['/login']);
+              console.log('this is an unknown profile')
             }
         },
         error: (error: any) => {

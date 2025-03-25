@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import AuthService from '../../services/auth-services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar-customer',
@@ -8,6 +10,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './navbar-customer.component.scss'
 })
 export class NavbarCustomerComponent {
+
+  constructor(
+    private authservice: AuthService,
+    private router: Router
+  ){}
+
   isDropdownVisible: boolean = false;
   isMenuVisible: boolean = false;
 
@@ -30,5 +38,10 @@ export class NavbarCustomerComponent {
       }
     }
    
+  }
+
+  onLogout() {
+    this.authservice.logout();
+    this.router.navigate(['/']);
   }
 }

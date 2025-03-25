@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import AOS from "aos";
 
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
@@ -23,4 +24,5 @@ export class AppComponent implements OnInit {
       });
     }
   }
+
 }
