@@ -33,6 +33,9 @@ export default class AuthService {
     this.currentUserSubject.next(null);
   }
 
+  hasRole(role: string): boolean {
+    return localStorage.getItem('role') === role;
+  }
   // getCurrentUser(): Observable<any> {
   //   return this.http.get(`${this.apiUrl}/auth/me`, {
   //     headers: this.getAuthHeaders()

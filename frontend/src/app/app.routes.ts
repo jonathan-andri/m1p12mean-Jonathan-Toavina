@@ -19,6 +19,7 @@ import { ServicesAddComponent } from './component/services-add/services-add.comp
 import { ServicesListComponent } from './component/services-list/services-list.component';
 import { LoginComponent } from './component/login/login.component';
 import { SignUpFormComponent } from './customer/sign-up-form/sign-up-form.component';
+import { AuthGuard } from './guards/authGuard';
 
 export const routes: Routes = [
     //{ path: '', component: FrontpageComponent },
@@ -61,6 +62,7 @@ export const routes: Routes = [
     {
         path:'customer',
         component: CustomerLayoutComponent,
+        canActivate: [AuthGuard],
         children:[
             { path: 'appointment', component: CustomerAppointmentComponent },
             { path: 'intervention', component: InterventionComponent },
