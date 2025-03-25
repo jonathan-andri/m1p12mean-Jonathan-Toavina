@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule,FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MechanicService } from '../../services/add-mechanic/mechanic.service';
-import { Mechanic } from '../../models/mechanic';
+import { User } from '../../models/User';
 import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
@@ -13,11 +13,11 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class MechanicAddComponent {
   userForm!: FormGroup;
-  newMechanic: Mechanic ={
-    FirstName: '',
-    LastName: '',
+  newMechanic: User ={
+    firstName: '',
+    lastName: '',
     email: '',
-    phone: '',
+    phone: 0,
     role:'mechanic',
     password: '',
     createdAt: new Date ,
@@ -39,9 +39,11 @@ export class MechanicAddComponent {
   onSubmit(): void{
     if (this.userForm.valid){
       //add the new mechanic in the db
+      const formattedPhone = Number(this.userForm.value.phoneNumber.replace(/\s/g, ''));
       this.newMechanic.role = 'mechanic';
       this.newMechanic.createdAt = new Date();
       this.newMechanic.updatedAt = new Date();
+      this.newMechanic.phone = formattedPhone;
       this.mechanicService.addMechanic(this.newMechanic).subscribe({
         next:() =>{
           console.log('Saved');
@@ -83,5 +85,4 @@ export class MechanicAddComponent {
     });
   }
 
-  
 }

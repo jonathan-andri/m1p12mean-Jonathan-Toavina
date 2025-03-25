@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,ChangeDetectorRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { User } from '../../models/User';
+import { MechanicService } from '../../services/add-mechanic/mechanic.service';
 
 @Component({
   selector: 'app-customer-data',
@@ -8,54 +10,52 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './customer-data.component.html',
   styleUrl: './customer-data.component.scss'
 })
-export class CustomerDataComponent {
-  users = [
-    {
-      id: 1,
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@example.com',
-      serviceRequests: 5,
-      startDate: '2021-01-01'
-    },
-    {
-      id: 2,
-      firstName: 'Jane',
-      lastName: 'Smith',
-      email: 'jane.smith@example.com',
-      serviceRequests: 3,
-      startDate: '2022-03-15'
-    }
-  ];
+export class CustomerDataComponent implements OnInit{
 
+  constructor(private userService: MechanicService, private cdr: ChangeDetectorRef){}
+  
   isEditModalOpen = false;
   isDeleteModalOpen = false;
   selectedUser: any = null;
-
+  users: User[] = [];
+  id!: string;
   
-  openEditModal(user: any) {
-    this.selectedUser = { ...user }; // Create a copy of the user object
+  ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  openEditModal(user: User) {
+    this.selectedUser = { ...user };
     this.isEditModalOpen = true;
+    this.id = this.selectedUser.id || this.selectedUser._id
   }
 
   
   closeEditModal() {
     this.isEditModalOpen = false;
     this.selectedUser = null;
+    this.cdr.detectChanges()
   }
 
   onSubmit() {
-    const index = this.users.findIndex(u => u.id === this.selectedUser.id);
-    if (index !== -1) {
-      this.users[index] = { ...this.selectedUser };
-    }
-
-    // Send the updated data to your backend/database here
+    // Send the updated data to the backend/database here
+    this.selectedUser.updatedAt = new Date()
+    this.editUser();
     console.log('Updated User:', this.selectedUser);
     this.closeEditModal();
+    this.cdr.detectChanges()
   }
 
-  openDeleteModal(user: any) {
+  editUser(){
+    this.userService.updateMechanic(this.selectedUser,this.id).subscribe({
+      next: () =>{
+        this.loadUsers()
+      },
+      error: (err) => console.error('While editing user', err)
+    })
+  }
+
+  openDeleteModal(user: User) {
     this.selectedUser = { ...user }
     this.isDeleteModalOpen = true
   }
@@ -66,8 +66,25 @@ export class CustomerDataComponent {
   }
 
   delete(){
-    console.log('deleted')
-    this.isDeleteModalOpen = false
+    this.userService.deleteMechanic(this.id).subscribe({
+      next: () =>{
+        this.isDeleteModalOpen = false;
+        this.loadUsers();
+        console.log('User deleted');
+      },
+      error: (err) => console.error('Error while editing', err)
+    })
   }
 
+  loadUsers(){
+    this.userService.getAllMechanics().subscribe(data =>{ 
+      this.users = data;
+      this.users = this.users.filter(mechanic => mechanic.role === 'user');
+    })
+  }
+
+  phoneNumberInput(phone: any): string {
+    const phoneStr = phone.toString().replace(/\D/g, '');  
+    return phoneStr.replace(/(\d{2})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4'); 
+  }
 }

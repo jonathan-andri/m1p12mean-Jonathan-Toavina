@@ -1,14 +1,14 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
       <label for="firstName">First Name:</label>
-      <input id="firstName" formControlName="firstName" type="text" placeholder="John" [(ngModel)]="newMechanic.FirstName">
+      <input id="firstName" formControlName="firstName" type="text" placeholder="John" [(ngModel)]="newMechanic.firstName">
       <div *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched">
           First Name is required.</div>
   </div>
 
   <div class="form-group">
       <label for="lastName">Last Name:</label>
-      <input id="lastName" formControlName="lastName" type="text" placeholder="Doe" [(ngModel)]="newMechanic.LastName">
+      <input id="lastName" formControlName="lastName" type="text" placeholder="Doe" [(ngModel)]="newMechanic.lastName">
       <div *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched" >
           Last Name is required.</div>
   </div>
@@ -22,7 +22,7 @@
 
   <div class="form-group">
     <label for="phoneNumber">Phone Number:</label>
-    <input id="phoneNumber" formControlName="phoneNumber" type="text" placeholder="012 34 567 89" [(ngModel)]="newMechanic.phone">
+    <input id="phoneNumber" formControlName="phoneNumber" type="text" placeholder="012 34 567 89" [(ngModel)]="newMechanic.phone" >
     <div *ngIf="userForm.get('phoneNumber')?.invalid && userForm.get('phoneNumber')?.touched">
         Phone is required.</div>
   </div>

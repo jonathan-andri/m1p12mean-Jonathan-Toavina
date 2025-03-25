@@ -2,7 +2,7 @@ import { Component,ChangeDetectorRef, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MechanicService } from '../../services/add-mechanic/mechanic.service';
-import { Mechanic } from '../../models/mechanic';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-mechanics-list',
@@ -17,23 +17,23 @@ export class MechanicsListComponent implements OnInit {
   isEditModalOpen = false;
   isDeleteModalOpen = false;
   selectedMechanic: any = null;
-  mechanics: Mechanic[] = [] 
+  mechanics: User[] = [] 
   id!: string
+  mecha: User[] = []
 
   ngOnInit(): void {
     this.loadMechanics();
   }
-  openEditModal(mechanic: Mechanic) {
+  openEditModal(mechanic: User) {
     this.selectedMechanic = { ...mechanic }; // Create a copy of the user object
     this.isEditModalOpen = true;
     this.id = this.selectedMechanic.id || this.selectedMechanic._id
-   
+    console.log(this.selectedMechanic.role)
   }
 
   
   closeEditModal() {
     this.isEditModalOpen = false;
-    this.selectedMechanic = null;
     this.cdr.detectChanges();
   }
 
@@ -46,6 +46,7 @@ export class MechanicsListComponent implements OnInit {
   }
 
   editMechanic(){
+    this.selectedMechanic.updatedAt = new Date(),
     this.mechanicService.updateMechanic(this.selectedMechanic,this.id).subscribe({
       next: () =>{
         this.loadMechanics()
@@ -53,7 +54,7 @@ export class MechanicsListComponent implements OnInit {
       error: (err) => console.error('While editing mechanic', err)
     })
   }
-  openDeleteModal(mechanic: Mechanic) {
+  openDeleteModal(mechanic: User) {
     this.selectedMechanic = { ...mechanic }
     this.isDeleteModalOpen = true
   }
@@ -75,6 +76,16 @@ export class MechanicsListComponent implements OnInit {
   }
 
   loadMechanics(){
-    this.mechanicService.getAllMechanics().subscribe(data => this.mechanics = data)
+    this.mechanicService.getAllMechanics().subscribe(data =>{ 
+      this.mechanics = data;
+      this.mecha = this.mechanics.filter(mechanic => mechanic.role === 'mechanic');
+    })
+  }
+
+
+
+  phoneNumberInput(phone: any): string {
+    const phoneStr = phone.toString().replace(/\D/g, '');
+    return phoneStr.replace(/(\d{2})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4'); 
   }
 }

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule,FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MechanicService } from '../../services/add-mechanic/mechanic.service';
+import { User } from '../../models/User';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-add',
@@ -10,8 +13,17 @@ import { CommonModule } from '@angular/common';
 })
 export class AddComponent implements OnInit {
   userForm!: FormGroup;
-  
-  constructor(private fb: FormBuilder){};
+  newUser: User ={
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: 0,
+    role:'customer',
+    password: '',
+    createdAt: new Date ,
+    updatedAt: new Date,
+  }
+  constructor(private fb: FormBuilder, private userService: MechanicService, private cdr: ChangeDetectorRef){};
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -25,11 +37,22 @@ export class AddComponent implements OnInit {
 
   onSubmit(): void{
     if (this.userForm.valid){
-      console.log('Ok', this.userForm.value);
-      this.userForm.reset();
-      this.showNotification();
-    }else {
-      console.log('Not ok');
+      //add the new mechanic in the db
+      this.newUser.role = 'customer';
+      const formattedPhone = Number(this.userForm.value.phoneNumber.replace(/\s/g, ''));
+      this.newUser.createdAt = new Date();
+      this.newUser.updatedAt = new Date();
+      this.newUser.phone = formattedPhone;
+      this.userService.addMechanic(this.newUser).subscribe({
+        next:() =>{
+          console.log('Saved');
+          this.userForm.reset();
+          this.cdr.detectChanges()
+          this.showNotification();
+          this.cdr.detectChanges()
+        },
+        error: err => console.error('Error here:', err)
+      });
     }
   }
 

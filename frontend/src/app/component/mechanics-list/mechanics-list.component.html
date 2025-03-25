@@ -7,23 +7,23 @@
         <th>Email</th>
         <th>Phone Number</th>
         <th>Joined Date</th>
-        <th>Action</th>
+         <th>Action</th>
       </tr>
     </thead>
 
     <tbody>
-      <tr *ngFor="let mechanic of mechanics; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ mechanic.FirstName }}</td>
-        <td>{{ mechanic.LastName }}</td>
-        <td>{{ mechanic.email }}</td>
-        <td>{{ mechanic.phone }}</td>
-        <td>{{ mechanic.createdAt | date:'yyyy-MM-dd'}}</td>
-        <td>
+      <tr *ngFor="let mechanic of mecha; let i = index" >
+          <td>{{ i + 1 }}</td>
+          <td>{{ mechanic.firstName }}</td>
+          <td>{{ mechanic.lastName }}</td>
+          <td>{{ mechanic.email }}</td>
+          <td>{{ phoneNumberInput(mechanic.phone) }}</td>
+          <td>{{ mechanic.createdAt | date:'yyyy-MM-dd'}}</td>
+          <td>
           <span (click)="openEditModal(mechanic)" class="edit">Edit</span>
           <span (click)="openDeleteModal(mechanic)" class="delete">Delete</span>
         </td>
-      </tr> 
+      </tr>
           
     </tbody>
 </table>
@@ -33,10 +33,10 @@
     <h1>Edit Customer</h1> <br>
     <form (ngSubmit)="onSubmit()">
       <label for="firstName">First Name:</label>
-      <input id="firstName" [(ngModel)]="selectedMechanic.FirstName" name="firstName" required>
+      <input id="firstName" [(ngModel)]="selectedMechanic.firstName" name="firstName" required>
 
       <label for="lastName">Last Name:</label>
-      <input id="lastName" [(ngModel)]="selectedMechanic.LastName" name="lastName" required>
+      <input id="lastName" [(ngModel)]="selectedMechanic.lastName" name="lastName" required>
 
       <label for="email">Email:</label>
       <input id="email" [(ngModel)]="selectedMechanic.email" name="email" required>
