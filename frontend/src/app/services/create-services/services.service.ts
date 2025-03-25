@@ -10,7 +10,7 @@ export class ServicesService {
   private apiUrl = `${environment.apiUrl}/services`;
   constructor(private http: HttpClient) { }
 
-  getServiceById(id:string): Observable<any>{
+  getById(id:string): Observable<any>{
     return this.http.get(`${this.apiUrl}/${id}`);
   }
   getAllServices(): Observable<any> {

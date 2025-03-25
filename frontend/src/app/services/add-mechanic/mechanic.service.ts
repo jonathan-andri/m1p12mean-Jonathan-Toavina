@@ -16,7 +16,7 @@ export class MechanicService {
     return this.http.post(this.apiUrl, mechanic)
   }
 
-  getMechanicByid(id: string): Observable<any>{
+  getById(id: string): Observable<any>{
     return this.http.get(`${this.apiUrl}/${id}`)
   }
 

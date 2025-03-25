@@ -1,10 +1,10 @@
-export interface Appoitment{
+export interface Appointment{
     customerId: string,
     cardId: string,
     mechanicId: string,
     serviceId: string,
     appoDate: Date,
     appoStatus: string,
-    appopriceEstimate: number,
+    appoPriceEstimate: number,
     appoNotes: string,
 }

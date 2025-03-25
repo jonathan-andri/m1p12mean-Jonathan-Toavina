@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Appointment } from '../../models/appointment';
+import { AppointmentService } from '../../services/customer-services/customer-appointment-services/appointment.service';
+import { MechanicService } from '../../services/add-mechanic/mechanic.service';
+import { ServicesService } from '../../services/create-services/services.service';
 
 @Component({
   selector: 'app-appointment-list',
@@ -8,63 +12,110 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './appointment-list.component.html',
   styleUrl: './appointment-list.component.scss'
 })
-export class AppointmentListComponent {
-  users = [
-    {
-      id: 1,
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@example.com',
-      time: '8:30'
-    },
-    {
-      id: 2,
-      firstName: 'Jane',
-      lastName: 'Smith',
-      email: 'jane.smith@example.com',
-      time: '16:00'
-    }
-  ];
+export class AppointmentListComponent implements OnInit{
+
+  constructor(
+    private appointmentService: AppointmentService, 
+    private cdr:ChangeDetectorRef,
+    private userService: MechanicService,
+    private serviceService: ServicesService
+  ){}
 
   isEditModalOpen = false;
   isDeleteModalOpen = false;
-  selectedUser: any = null;
-
+  selectedAppointment: any = null;
+  appointments: any[] = [];
+  id!: string;
   
-  openEditModal(user: any) {
-    this.selectedUser = { ...user }; // Create a copy of the user object
+  ngOnInit(): void {
+    this.loadAppointments();
+  }
+
+  openEditModal(appointment: Appointment) {
+    this.selectedAppointment = { ...appointment }; // Create a copy of the appointment object
     this.isEditModalOpen = true;
+    this.id = this.selectedAppointment.id || this.selectedAppointment._id;
+    if (this.selectedAppointment.customerId) {
+      this.getInfoModal(this.selectedAppointment.customerId, this.selectedAppointment.mechanicId, this.selectedAppointment.serviceId);
+    }
   }
 
   
   closeEditModal() {
     this.isEditModalOpen = false;
-    this.selectedUser = null;
+    this.cdr.detectChanges();
   }
 
   onSubmit() {
-    const index = this.users.findIndex(u => u.id === this.selectedUser.id);
-    if (index !== -1) {
-      this.users[index] = { ...this.selectedUser };
-    }
+        // Send the updated data to your backend/database here       
+        this.cdr.detectChanges()
+        this.closeEditModal();
+      }
+  
 
-    // Send the updated data to your backend/database here
-    console.log('Updated User:', this.selectedUser);
-    this.closeEditModal();
-  }
-
-  openDeleteModal(user: any) {
-    this.selectedUser = { ...user }
+  openDeleteModal(appointment: Appointment) {
+    this.selectedAppointment = { ...appointment }
     this.isDeleteModalOpen = true
   }
 
   closeDeleteModal(){
     this.isDeleteModalOpen = false
-    this.selectedUser = null
+    this.selectedAppointment = null
   }
 
   delete(){
     console.log('deleted')
     this.isDeleteModalOpen = false
   }
+
+  loadAppointments(){
+    this.appointmentService.getAppointments().subscribe(data => {
+      this.appointments = data;
+      for(let appointment of this.appointments){
+        this.userService.getById(appointment.customerId).subscribe(customer =>{
+          appointment.customerName = customer.firstName + ' ' + customer.lastName
+        });
+        
+        this.userService.getById(appointment.mechanicId).subscribe(mechanic =>{
+          appointment.mechanicName = mechanic.firstName + ' ' + mechanic.lastName
+        });
+
+        this.serviceService.getById(appointment.serviceId).subscribe(service =>{
+          appointment.serviceName = service.serviceName 
+        })
+      }
+    })
+  }
+
+  getInfoModal(customerId: string, mechanicId: string, serviceId: string) {
+    this.userService.getById(customerId).subscribe(customer => {
+      this.selectedAppointment.customerName = customer.firstName + ' ' + customer.lastName;
+    });
+
+    this.userService.getById(mechanicId).subscribe(mechanic =>{
+      this.selectedAppointment.mechanicName = mechanic.firstName + ' ' + mechanic.lastName;
+    });
+
+    this.serviceService.getById(serviceId).subscribe(service =>{
+      this.selectedAppointment.service = service.serviceName
+      console.log(service)
+    });
+    this.cdr.detectChanges();
+  }
+
+  formatDate(isoString: string): string {
+    const date = new Date(isoString);
+    
+    // Get month name and day
+    const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric' };
+    const formattedDate = date.toLocaleDateString('en-US', options);
+  
+    // Get time in "7h41" format
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const formattedTime = `${hours}h${minutes.toString().padStart(2, '0')}`;
+  
+    return `${formattedDate}, ${formattedTime}`;
+  }
+  
 }

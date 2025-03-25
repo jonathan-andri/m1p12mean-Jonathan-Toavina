@@ -19,7 +19,6 @@ export class MechanicsListComponent implements OnInit {
   selectedMechanic: any = null;
   mechanics: User[] = [] 
   id!: string
-  mecha: User[] = []
 
   ngOnInit(): void {
     this.loadMechanics();
@@ -78,7 +77,7 @@ export class MechanicsListComponent implements OnInit {
   loadMechanics(){
     this.mechanicService.getAllMechanics().subscribe(data =>{ 
       this.mechanics = data;
-      this.mecha = this.mechanics.filter(mechanic => mechanic.role === 'mechanic');
+      this.mechanics = this.mechanics.filter(mechanic => mechanic.role === 'mechanic');
     })
   }
 

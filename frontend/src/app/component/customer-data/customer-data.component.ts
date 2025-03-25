@@ -79,7 +79,7 @@ export class CustomerDataComponent implements OnInit{
   loadUsers(){
     this.userService.getAllMechanics().subscribe(data =>{ 
       this.users = data;
-      this.users = this.users.filter(mechanic => mechanic.role === 'user');
+      this.users = this.users.filter(user => user.role === 'customer');
     })
   }
 
