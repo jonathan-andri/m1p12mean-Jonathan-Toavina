@@ -1,5 +1,5 @@
 import { Component,ChangeDetectorRef, OnInit } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MechanicService } from '../../services/add-mechanic/mechanic.service';
 import { User } from '../../models/User';
@@ -27,10 +27,8 @@ export class MechanicsListComponent implements OnInit {
     this.selectedMechanic = { ...mechanic }; // Create a copy of the user object
     this.isEditModalOpen = true;
     this.id = this.selectedMechanic.id || this.selectedMechanic._id
-    console.log(this.selectedMechanic.role)
   }
-
-  
+ 
   closeEditModal() {
     this.isEditModalOpen = false;
     this.cdr.detectChanges();
@@ -80,8 +78,6 @@ export class MechanicsListComponent implements OnInit {
       this.mechanics = this.mechanics.filter(mechanic => mechanic.role === 'mechanic');
     })
   }
-
-
 
   phoneNumberInput(phone: any): string {
     const phoneStr = phone.toString().replace(/\D/g, '');

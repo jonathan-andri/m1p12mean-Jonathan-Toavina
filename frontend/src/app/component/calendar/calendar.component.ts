@@ -1,13 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { AppointmentService } from '../../services/customer-services/customer-appointment-services/appointment.service';
+import { Appointment } from '../../models/appointment';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 @Component({
   selector: 'app-calendar',
-  imports : [CommonModule],
+  imports : [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss']
+  styleUrls: ['./calendar.component.scss'],
+  providers: [AppointmentService]
 })
 export class CalendarComponent implements OnInit {
+
+  constructor(private appointmentService: AppointmentService){}
+
+  appointments: any[] = [];
   weeks: (Date | null)[][] = [];
   events: { [key: string]: number } = {}; // Example: { '2023-10-05': 3 }
   daysOfWeek: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -25,11 +32,11 @@ export class CalendarComponent implements OnInit {
       date.getFullYear() === this.today.getFullYear()
     );
   }
-  // Generate the calendar grid for a given year and month
+  
   generateCalendar(year: number, month: number): void {
     const firstDayOfMonth = new Date(year, month, 1);
     const lastDayOfMonth = new Date(year, month + 1, 0);
-    const startDay = firstDayOfMonth.getDay(); // Day of the week (0 = Sunday, 6 = Saturday)
+    const startDay = firstDayOfMonth.getDay(); 
     const daysInMonth = lastDayOfMonth.getDate();
 
     let dayCount = 1;
@@ -46,20 +53,23 @@ export class CalendarComponent implements OnInit {
         }
       }
       this.weeks.push(days);
-      if (dayCount > daysInMonth) break; // Stop if we've added all days
+      if (dayCount > daysInMonth) break; 
     }
   }
 
-  // Mock some events for demonstration
   mockEvents(): void {
-    this.events['2025-03-17'] = 3;
-    this.events['2025-03-20'] = 1;
-    this.events['2025-03-23'] = 5;
+    this.appointmentService.getAppointments().subscribe(data => {
+      this.events = {};
+
+      data.forEach((appointment: Appointment) => {
+        const key = new Date(appointment.appoDate).toISOString().split('T')[0];
+        this.events[key] = (this.events[key] || 0) + 1;      
+      })
+    })
   }
 
-  // Get the number of events for a specific date
   getEventCount(date: Date): number {
-    const key = date.toISOString().split('T')[0]; // Convert date to 'YYYY-MM-DD' format
+    const key = date.toLocaleDateString('en-CA');
     return this.events[key] || 0;
   }
 }

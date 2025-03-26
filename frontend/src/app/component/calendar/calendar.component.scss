@@ -1,12 +1,12 @@
 .calendar {
     display: flex;
     flex-direction: column;
-    font-size: 10px;
+    font-size: 14px;
     border-collapse: collapse;
     box-sizing: border-box;
     border-left: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
-    margin-bottom: 10px;
+    margin: 15px;
 }
   
 .week {
@@ -35,8 +35,8 @@ width:65px;
     border-right: 1px solid #ccc;
     padding: 10px;
     text-align: center;
-    min-height: 30px;
-    
+    min-height: 37px;
+    width: 70px;
 }
   
 .empty-day {
@@ -44,7 +44,7 @@ width:65px;
   }
   
 .date {
-    /* font-weight: bold; */
+    
     position: absolute;
     top:5px;
     right: 5px;
