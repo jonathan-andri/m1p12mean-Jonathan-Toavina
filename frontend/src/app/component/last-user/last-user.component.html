@@ -1,12 +1,12 @@
 <ul>
-  <li *ngFor="let user of latestUsers">
+  <li *ngFor="let user of latestUsers | slice:0:5">
     <div class="user-card">
       <div class="user-info">
-        <span class="user-name">{{ user.name }}</span>
+        <span class="user-name">{{ user.firstName + ' ' + user.lastName }}</span>
         <span class="user-email">{{ user.email }}</span>
       </div>
       <div class="user-join-date">
-        {{ user.joinDate }}
+        {{ user.createdAt | date:'yyyy-MM-dd'}}
       </div>
     </div>
   </li>
