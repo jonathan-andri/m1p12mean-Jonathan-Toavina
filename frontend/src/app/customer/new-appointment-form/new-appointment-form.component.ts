@@ -64,12 +64,13 @@ export class NewAppointmentFormComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    //code to get the user data
     const token = typeof window !== 'undefined' && window.localStorage ? localStorage.getItem('token') : null;
     if (token) {
       this.authService.getUserData(token).subscribe({
         next: (response: any) => {
           this.user = response;
-          console.log('in new appointemnt: ', response._id)
+          console.log('in new appointemnt: ', response.FirstName)
         },
         error: (error: any) => {
           console.error('Error fetching user data', error);
@@ -79,5 +80,6 @@ export class NewAppointmentFormComponent implements OnInit{
     else {
       console.warn('no token found in localstorage');
     }
+
   }
 }

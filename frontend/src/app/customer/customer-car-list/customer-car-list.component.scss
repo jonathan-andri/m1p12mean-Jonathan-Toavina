@@ -1,0 +1,102 @@
+@use '../../../styles.scss' as *;
+
+#customer-intervention {
+    margin-right: 50px;
+    @media screen and (max-width: 1000px) {
+        #customer-intervention {
+            margin-right: 0;
+            // padding-left: 90px;
+        }
+        
+        #inter-top {
+            flex-direction: column;
+            align-items: flex-start;
+            margin: 0;
+            
+            #makeAppo {
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+        
+        #cus-inter-table {
+            width: 90vw;
+        }
+        
+        #optionsBar {
+            flex-direction: column;
+            align-items: flex-start;
+            
+            #filterButton {
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+    }
+}
+
+#inter-top {
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px;
+    
+    #makeAppo {
+        @include btn;
+        background-color: $mainBlue;
+        color: white;
+        border: none;
+    }
+}
+
+hr {
+    border-color: $lightGrey;
+    margin: 10px 0px;
+}
+
+#cus-inter-table {
+    text-align: right;
+    font-weight: lighter;
+    width: 78vw;
+    
+
+    thead {
+        th {
+            padding: 10px 0px;
+            color: #3D3C3C;
+        }
+    }
+    tbody {
+        border: 1px solid #7C7C7C;
+        tr {
+            color: #7C7C7C;
+        }
+    }
+}
+
+#optionsBar {
+    display: flex;  
+    justify-content: space-between;
+}
+
+#filterButton {
+    border: solid $lightGrey 1px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:10px;
+    button {
+        border: none;
+        background: none;
+        padding-left: 5px;
+        color: $darkGrey;
+    }
+}
+
+#addCar{
+    @include btn;
+    color:white;
+    background-color: $mainBlue;
+}

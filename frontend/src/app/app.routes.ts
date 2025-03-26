@@ -22,6 +22,8 @@ import { SignUpFormComponent } from './customer/sign-up-form/sign-up-form.compon
 import { customerGuard } from './guards/customerGuard';
 import { adminGuard } from './guards/adminGuard';
 import { mechanicGuard } from './guards/mechanicGuard';
+import { CustomerCarListComponent } from './customer/customer-car-list/customer-car-list.component';
+import { NewCarFormComponent } from './customer/customer-car-list/new-car-form/new-car-form.component';
 
 export const routes: Routes = [
     //{ path: '', component: FrontpageComponent },
@@ -67,9 +69,21 @@ export const routes: Routes = [
         component: CustomerLayoutComponent,
         canActivate: [customerGuard],
         children:[
-            { path: 'appointment', component: CustomerAppointmentComponent },
-            { path: 'intervention', component: InterventionComponent },
-            { path: 'newAppointment', component: NewAppointmentFormComponent}
+            { path: 'appointment', 
+                component: CustomerAppointmentComponent ,
+                children:[
+                    { path: 'newAppointment', component: NewAppointmentFormComponent}
+                ]
+            },
+            { path: 'intervention', 
+                component: InterventionComponent
+            },
+            { path: 'carList', 
+                component: CustomerCarListComponent,
+                children: [
+                    { path: 'AddCar', component: NewCarFormComponent}
+                ]
+            },
             // { path: 'intervention', }
         ]
     },

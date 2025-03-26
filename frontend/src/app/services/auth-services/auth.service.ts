@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { User } from '../../models/User';
-import { error } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +11,13 @@ export default class AuthService {
   private apiUrl = environment.apiUrl + '/auth'; 
   private currentUserSubject = new BehaviorSubject<any>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
+  private isBrowser: boolean;
 
-  constructor(private http: HttpClient) { 
-        // Check if user is already logged in
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) { 
+    this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
   login(credentials: any) {
@@ -23,14 +25,14 @@ export default class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+    return this.isBrowser && !!localStorage.getItem('token');
   }
 
   logout(): void {
-    // Remove token from localStorage
-    localStorage.removeItem('token');
-    // Clear current user
-    this.currentUserSubject.next(null);
+    if (this.isBrowser) {
+      localStorage.removeItem('token');
+      this.currentUserSubject.next(null);
+    }
   }
 
   getUserData(token: string | null) {
@@ -39,11 +41,11 @@ export default class AuthService {
   }
 
   hasRole(role: string): boolean {
-    return localStorage.getItem('role') === role;
+    return this.isBrowser && localStorage.getItem('role') === role;
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return this.isBrowser ? localStorage.getItem('token') : null;
   }
 
   isLoggedIn(): boolean {

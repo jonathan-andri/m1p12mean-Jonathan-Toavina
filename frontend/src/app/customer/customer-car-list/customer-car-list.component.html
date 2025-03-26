@@ -1,0 +1,36 @@
+<div id="customer-intervention">
+    <div id="inter-top">
+        <h4>My Cars</h4>
+        <button data-aos="fade-left" id="addCar" (click)="toggleCarForm()">+ Add a car</button>
+    </div>
+    <hr>
+    <table id="cus-appo-table" class="min-w-full">
+        <thead data-aos="fade-down" data-aos-duration="500" data-aos-delay="(00">
+            <tr>
+                <th><i class="fas fa-hashtag"></i></th>
+                <th><i class="fas fa-file-alt"></i>  Brand</th>
+                <th><i class="far fa-calendar-alt"></i>  Model</th>
+                <th><i class="far fa-clock"></i>  Year</th>
+                <th><i class="far fa-sticky-note"></i>  License Plate</th>
+                <th><i class="fas fa-check-circle"></i>  Vin</th>
+                <th><i class="fas fa-cogs"></i>  Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let car of cars; let i = index">
+                <td> {{ i + 1 }}</td>
+                <td id="num">{{ car.brand }}</td>
+                <td id="date">{{ car.model }}</td>
+                <td id="hour">{{ car.year }}</td>
+                <td id="note">{{ car.licensePlate }}</td>
+                <td id="note">{{ car.vin }}</td>
+                <td id="action">
+                    <button id="editAppo" class="btn btn-primary">Edit</button>
+                    <button id='deleteAppo' class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-new-car-form *ngIf="isCarForm"></app-new-car-form>
