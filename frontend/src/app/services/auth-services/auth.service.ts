@@ -33,6 +33,10 @@ export default class AuthService {
     this.currentUserSubject.next(null);
   }
 
+  getUserData() {
+    return this.http.get(`${this.apiUrl}/me`);
+  }
+
   hasRole(role: string): boolean {
     return localStorage.getItem('role') === role;
   }
