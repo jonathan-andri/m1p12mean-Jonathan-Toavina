@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { User } from '../../models/User';
 import { error } from 'console';
@@ -33,35 +33,14 @@ export default class AuthService {
     this.currentUserSubject.next(null);
   }
 
-  getUserData() {
-    return this.http.get(`${this.apiUrl}/me`);
+  getUserData(token: string | null) {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`${this.apiUrl}/me`, { headers });
   }
 
   hasRole(role: string): boolean {
     return localStorage.getItem('role') === role;
   }
-  // getCurrentUser(): Observable<any> {
-  //   return this.http.get(`${this.apiUrl}/auth/me`, {
-  //     headers: this.getAuthHeaders()
-  //   }).pipe(
-  //     tap(user => {
-  //       this.currentUserSubject.next(user);
-  //     })
-  //   );
-  // }
-
-  // loadCurrentUser(): void {
-  //   const token = this.getToken();
-  //   if (token) {
-  //     this.getCurrentUser().subscribe({
-  //       next: () => {},
-  //       error: () => {
-  //         // If error, token might be invalid
-  //         this.logout();
-  //       }
-  //     });
-  //   }
-  // }
 
   getToken(): string | null {
     return localStorage.getItem('token');

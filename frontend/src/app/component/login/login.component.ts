@@ -36,16 +36,6 @@ export class LoginComponent {
 
     if(this.loginForm.valid) {
       const loginData: User = this.loginForm.value;
-
-      this.authService.getUserData().subscribe({
-        next: (userData: any) => {
-          this.userService.setUser(userData);
-        },
-        error: (error: any) => {
-          console.error('fetching data error', error)
-        }
-      })
-
       this.authService.login(loginData).subscribe({
         next: (response: any) => {
 
@@ -63,6 +53,17 @@ export class LoginComponent {
               this.router.navigate(['/login']);
               console.log('this is an unknown profile')
             }
+
+            this.authService.getUserData(response.token).subscribe({
+              next: (userData: any) => {
+                this.userService.setUser(userData);
+              },
+              error: (error: any) => {
+                console.error('fetching data error', error)
+              }
+            })
+      
+
         },
         error: (error: any) => {
           console.error('Login failed', error);

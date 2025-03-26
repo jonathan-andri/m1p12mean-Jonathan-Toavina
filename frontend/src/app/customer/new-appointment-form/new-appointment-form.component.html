@@ -2,9 +2,9 @@
     <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
         <h4>New Appointment</h4>
         <div class="form-group">
-            <label for="appo-desc">Description</label>
+            <label for="appo-desc">Service</label>
             <div class="input-group">
-                <select id="appo-desc" formControlName="appoDesc" class="form-control">
+                <select id="appo-desc" formControlName="appoServ" class="form-control">
                     <option value="Oil Change">Oil Change</option>
                     <option value="Engine Diagnostics">Engine Diagnostics</option>
                     <option value="Heat System repair">Heat system Repair</option>
@@ -16,15 +16,13 @@
         <div class="form-group">
             <label for="appo-date">Date</label>
             <div class="input-group">
-                <input type="date" id="appo-date" formControlName="appoDate" class="form-control">
-            </div>
-            <div class="line"></div>
-        </div>
-
-        <div class="form-group">
-            <label for="appo-hour">Hour</label>
-            <div class="input-group">
-                <input type="time" id="appo-hour" formControlName="appoHour" class="form-control">
+                <input 
+                    type="datetime-local" 
+                    id="appo-date" 
+                    formControlName="appoDate" 
+                    class="form-control"
+                    [min]="minDate"> 
+                >
             </div>
             <div class="line"></div>
         </div>

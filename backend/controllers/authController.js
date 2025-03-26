@@ -15,7 +15,7 @@ exports.login = async (req, res) => {
         if(!isMatch) return res.status(401).json({ message: 'incorrect password' });
         
         const token = jwt.sign(
-            { userId: user._id, role: user.role},
+            { _id: user._id, role: user.role},
             process.env.JWT_SECRET,
             { expiresIn: '1h'}
         );
@@ -29,9 +29,9 @@ exports.login = async (req, res) => {
 
 exports.getCurrentUser = async ( req, res ) => {
     try {
-        const user = await User.findById(req.userId).select('-password');
+        const user = await User.findById(req.user._id).select('-password');
         res.json(user);
     } catch ( er ) {
         res.status(500).json({ message: er.message }) ;
     }
-}
+} 

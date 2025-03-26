@@ -49,11 +49,20 @@ export class NavbarCustomerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.getUserData().subscribe({
-      next: (userData: any) => {
-        this.user = userData;
-        console.log('response is'+ userData);
-      }
-    })
+    const token = typeof window !== 'undefined' && window.localStorage ? localStorage.getItem('token') : null;
+    if (token) {
+      this.authService.getUserData(token).subscribe({
+        next: (response: any) => {
+          this.user = response;
+          console.log('response in navbar is '+ response);
+        },
+        error: (error: any) => {
+          console.error('Error fetching user data', error);
+        }
+      })
+    }
+    else {
+      console.warn('no token found in localstorage');
+    }
   }
 }
