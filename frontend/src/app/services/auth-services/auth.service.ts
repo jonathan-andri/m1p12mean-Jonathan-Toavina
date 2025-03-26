@@ -50,13 +50,6 @@ export default class AuthService {
     return !!this.getToken();
   }
 
-  // private getAuthHeaders(): HttpHeaders {
-  //   const token = this.getToken();
-  //   return new HttpHeaders({
-  //     'Authorization': `Bearer ${token}`
-  //   });
-  // }
-
   getCurrentUserValue(): any {
     return this.currentUserSubject.value;
   }

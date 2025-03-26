@@ -54,7 +54,6 @@ export class NavbarCustomerComponent implements OnInit {
       this.authService.getUserData(token).subscribe({
         next: (response: any) => {
           this.user = response;
-          console.log('response in navbar is '+ response);
         },
         error: (error: any) => {
           console.error('Error fetching user data', error);
