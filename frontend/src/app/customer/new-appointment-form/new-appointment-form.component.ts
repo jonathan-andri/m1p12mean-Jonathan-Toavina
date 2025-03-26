@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 })
 export class NewAppointmentFormComponent {
   appointmentForm: FormGroup;
-
+  minDate: string ='';
   constructor(
     private fb: FormBuilder,
     private appointmentService: AppointmentService
@@ -23,10 +23,11 @@ export class NewAppointmentFormComponent {
     this.appointmentForm = this.fb.group({
       appoDesc: ['', Validators.required],
       appoDate: ['', Validators.required],
-      appoHour: ['', Validators.required],
       appoNote: ['', Validators.required],
       appoStatus:['Pending']
     });
+
+    this.setMinDate();
   }
 
   onSubmit(): void {
@@ -42,5 +43,11 @@ export class NewAppointmentFormComponent {
         }
       );
     }
+  }
+
+  setMinDate(){
+    const today = new Date();
+    today.setDate(today.getDate() + 1);
+    this.minDate = today.toISOString().slice(0, 16);
   }
 }

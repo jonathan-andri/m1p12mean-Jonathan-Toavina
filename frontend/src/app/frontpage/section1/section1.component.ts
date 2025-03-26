@@ -1,4 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-section1',
@@ -7,9 +8,14 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrl: './section1.component.scss'
 })
 export class Section1Component {
-  @Output() loginClicked = new EventEmitter<void>();
 
-  onLoginClick() {
-    this.loginClicked.emit();
+  constructor(
+    private router: Router
+  ) {
+
+  }
+
+  onCreateClick() {
+    this.router.navigate(['/signUp'])
   }
 }

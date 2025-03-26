@@ -18,7 +18,8 @@ export class SignUpFormComponent {
   signUpForm : FormGroup;
   constructor(
     private fb: FormBuilder,
-    private signupService: SignUpService
+    private signupService: SignUpService,
+    private router: Router
   ) {
     this.signUpForm = this.fb.group({
       FirstName: ['', Validators.required],
@@ -47,6 +48,7 @@ export class SignUpFormComponent {
   @Output() crossClicked = new EventEmitter<void>();
 
   onCrossClick() {
+    this.router.navigate(['/'])
     this.crossClicked.emit();
   }
 

@@ -19,13 +19,16 @@ import { ServicesAddComponent } from './component/services-add/services-add.comp
 import { ServicesListComponent } from './component/services-list/services-list.component';
 import { LoginComponent } from './component/login/login.component';
 import { SignUpFormComponent } from './customer/sign-up-form/sign-up-form.component';
-import { AuthGuard } from './guards/authGuard';
+import { customerGuard } from './guards/customerGuard';
+import { adminGuard } from './guards/adminGuard';
+import { mechanicGuard } from './guards/mechanicGuard';
 
 export const routes: Routes = [
     //{ path: '', component: FrontpageComponent },
     
     { path: 'admin', 
         component: AdminComponent,
+        canActivate: [adminGuard],
         children: [
             { path: 'dashboard', component: DashboardComponent },
             { path: 'services', component: ServicesComponent,
@@ -62,7 +65,7 @@ export const routes: Routes = [
     {
         path:'customer',
         component: CustomerLayoutComponent,
-        canActivate: [AuthGuard],
+        canActivate: [customerGuard],
         children:[
             { path: 'appointment', component: CustomerAppointmentComponent },
             { path: 'intervention', component: InterventionComponent },
