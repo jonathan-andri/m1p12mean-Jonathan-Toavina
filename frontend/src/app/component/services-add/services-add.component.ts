@@ -16,6 +16,7 @@ export class ServicesAddComponent {
 
   userForm!: FormGroup;
   newService: Service = {
+    _id:'',
     serviceName: '',
     serviceType: '',
     serviceDescription: '',

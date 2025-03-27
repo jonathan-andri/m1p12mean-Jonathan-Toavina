@@ -10,9 +10,9 @@
             <thead data-aos="fade-down" data-aos-duration="500" data-aos-delay="(00">
                 <tr>
                     <th><i class="fas fa-hashtag"></i></th>
-                    <th><i class="fas fa-file-alt"></i>  Description</th>
+                    <th><i class="fas fa-file-alt"></i>Name</th>
+                    <th><i class="far fa-car"></i>  Car</th>
                     <th><i class="far fa-calendar-alt"></i>  Date</th>
-                    <th><i class="far fa-clock"></i>  Hour</th>
                     <th><i class="far fa-sticky-note"></i>  Note</th>
                     <th><i class="fas fa-check-circle"></i>  Status</th>
                     <th><i class="fas fa-cogs"></i>  Actions</th>
@@ -21,9 +21,9 @@
             <tbody>
                 <tr *ngFor="let appointment of appointments; let i = index">
                     <td> {{ i + 1 }}</td>
-                    <td id="num">{{ appointment.appoDesc }}</td>
-                    <td id="date">{{ appointment.appoDate }}</td>
-                    <td id="hour">{{ appointment.appoHour }}</td>
+                    <td id="num">{{ appointment.serviceId }}</td>
+                    <td id="car">{{ appointment.carId }}</td>
+                    <td id="date">{{ appointment.appoDate | date:'short'}}</td>
                     <td id="note">{{ appointment.appoNote }}</td>
                     <td id='status' [ngStyle]="{ color: appointment.appoStatus === 'Pending' ? 'orange' : appointment.appoStatus === 'Confirmed' ? 'lightgreen' : 'red' }">{{ appointment.appoStatus }}</td>
                     <td id="action">

@@ -1,5 +1,6 @@
 
 export interface Car {
+    _id: string ,
     customerId: string,
     brand: string;
     model: string;

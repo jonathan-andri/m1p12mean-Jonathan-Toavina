@@ -1,7 +1,13 @@
+
 export interface Appointment {
-    appoDesc: string;
-    appoDate: string;
-    appoHour: string;
-    appoNote: string;
-    appoStatus: String;
+    _id: string,
+    customerId: string,
+    carId: string,
+    mechanicId: string,
+    serviceId: string,
+    appoDate: string,
+    appoStatus: string,
+    appoPriceEstimate: number,
+    appoActualPrice: number,
+    appoNote: String;
 } 

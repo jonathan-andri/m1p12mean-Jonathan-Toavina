@@ -3,7 +3,11 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { AppointmentService } from '../../services/customer-services/customer-appointment-services/appointment.service';
 import { Appointment } from '../customer-appointment/customer-appointment.model';
 import { CommonModule } from '@angular/common';
-import AuthService from '../../services/auth-services/auth.service';
+import { AuthService } from '../../services/auth-services/auth.service';
+import { CarService } from '../../services/car-services/car.service';
+import { Car } from '../../models/Car';
+import { ServicesService } from '../../services/create-services/services.service';
+import { Service } from '../../models/Service';
 
 @Component({
   selector: 'app-new-appointment-form',
@@ -18,16 +22,24 @@ export class NewAppointmentFormComponent implements OnInit{
   appointmentForm: FormGroup;
   minDate: string ='';
   user: any;
+  cars: Car[] = [];
+  selectedCarId: string = '';
+  services: Service[] = [];
+  selectedServiceId: string ='';
 
   constructor(
     private fb: FormBuilder,
     private appointmentService: AppointmentService,
-    private authService: AuthService
+    private authService: AuthService,
+    private carService: CarService,
+    private servicesService: ServicesService
   ) {
     this.appointmentForm = this.fb.group({
-      appoServ: ['', Validators.required],
+      serviceId: ['', Validators.required],
       appoDate: ['', Validators.required],
       appoNote: ['', Validators.required],
+      carId: ['', Validators.required],
+
     });
 
     this.setMinDate();
@@ -39,8 +51,6 @@ export class NewAppointmentFormComponent implements OnInit{
         ...this.appointmentForm.value,
         customerId: this.user?._id,
         mechanicId: '65e4fa10a985851c54cd8500',
-        carId: '65e4fa10a985851c54cd8511',
-        serviceId: '65e4fa10a985851c54cd8522',
         appoPriceEstimate: 10,
         appoActualPrice: 100
       }
@@ -64,13 +74,15 @@ export class NewAppointmentFormComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    //code to get the user data
     const token = typeof window !== 'undefined' && window.localStorage ? localStorage.getItem('token') : null;
     if (token) {
       this.authService.getUserData(token).subscribe({
         next: (response: any) => {
           this.user = response;
-          console.log('in new appointemnt: ', response.FirstName)
+          if(this.user?._id) {
+            this.loadCars();
+          }
+          console.log('car-list', response);
         },
         error: (error: any) => {
           console.error('Error fetching user data', error);
@@ -80,6 +92,32 @@ export class NewAppointmentFormComponent implements OnInit{
     else {
       console.warn('no token found in localstorage');
     }
+    this.loadServices();
+  }
+  
 
+  loadCars(): void {
+    if (!this.user) return;
+    this.carService.getCarsByCustomer(this.user._id).subscribe(
+      (data: Car[] ) => {
+        this.cars = data;
+        console.log('customer cars',this.cars);
+      },
+      (error) => {
+        console.log('error fetching cars', error);
+      }
+    );
+  }
+
+  loadServices(): void {
+    this.servicesService.getAllServices().subscribe(
+      (data: Service[] ) => {
+        this.services = data;
+      }
+    ),
+    (error: any) => {
+      console.error('fecthing services error', error)
+    }
   }
 }
+

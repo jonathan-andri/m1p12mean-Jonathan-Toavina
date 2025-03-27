@@ -3,7 +3,7 @@ import { NewCarFormComponent } from "./new-car-form/new-car-form.component";
 import { CommonModule } from '@angular/common';
 import { CarService } from '../../services/car-services/car.service';
 import { Car } from '../../models/Car';
-import AuthService from '../../services/auth-services/auth.service';
+import {AuthService} from '../../services/auth-services/auth.service';
 
 @Component({
   selector: 'app-customer-car-list',
