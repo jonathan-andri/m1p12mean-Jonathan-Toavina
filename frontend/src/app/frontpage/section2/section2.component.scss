@@ -1,5 +1,5 @@
 @import '../../../styles.scss';
-
+@import "tailwindcss";
 section {
     @include section;   
     display: flex;
