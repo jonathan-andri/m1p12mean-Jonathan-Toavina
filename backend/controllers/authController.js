@@ -34,4 +34,5 @@ exports.getCurrentUser = async ( req, res ) => {
     } catch ( er ) {
         res.status(500).json({ message: er.message }) ;
     }
-} 
+}
+

@@ -40,7 +40,7 @@ export class NewCarFormComponent implements OnInit{
       this.authService.getUserData(token).subscribe({
         next: (response: any) => {
           this.user = response;
-          console.log('in add car: ', response.FirstName);
+          console.log('in add car: ', response.firstName);
           this.carForm = this.fb.group({
             customerId: this.user._id,
             brand: ['',Validators.required],

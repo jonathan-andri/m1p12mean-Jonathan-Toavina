@@ -1,48 +1,17 @@
 @use '../../../styles.scss' as *;
 
-#customer-intervention {
+#customer-appoinment {
     margin-right: 50px;
-    @media screen and (max-width: 1000px) {
-        #customer-intervention {
-            margin-right: 0;
-            // padding-left: 90px;
-        }
-        
-        #inter-top {
-            flex-direction: column;
-            align-items: flex-start;
-            margin: 0;
-            
-            #makeAppo {
-                width: 100%;
-                margin-top: 10px;
-            }
-        }
-        
-        #cus-inter-table {
-            width: 90vw;
-        }
-        
-        #optionsBar {
-            flex-direction: column;
-            align-items: flex-start;
-            
-            #filterButton {
-                width: 100%;
-                margin-top: 10px;
-            }
-        }
-    }
 }
 
-#inter-top {
+#appo-top {
     height: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 10px 0px;
     
-    #makeAppo {
+    #addCar {
         @include btn;
         background-color: $mainBlue;
         color: white;
@@ -55,48 +24,79 @@ hr {
     margin: 10px 0px;
 }
 
-#cus-inter-table {
+#cus-appo-table {
     text-align: right;
     font-weight: lighter;
-    width: 78vw;
+    width: 1200px;
+    border-collapse: collapse;
     
-
     thead {
         th {
             padding: 10px 0px;
-            color: #3D3C3C;
         }
     }
     tbody {
-        border: 1px solid #7C7C7C;
+        border: solid 1px $lightGrey;
+        border-radius: 10px;
         tr {
+
             color: #7C7C7C;
+            td {
+                padding: 10px 5px;
+                button {
+                    padding: 5px 15px;
+                    margin: 0px 5px;
+                    border-radius: 5px;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                }
+            }
         }
     }
 }
 
-#optionsBar {
-    display: flex;  
-    justify-content: space-between;
+#editAppo {
+    background-color: $mainYellow;
 }
 
-#filterButton {
-    border: solid $lightGrey 1px;
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size:10px;
-    button {
-        border: none;
-        background: none;
-        padding-left: 5px;
-        color: $darkGrey;
+#deleteAppo {
+    background-color: tomato;
+}
+
+@media screen and (max-width: 1000px) {
+
+    #cus-appo-table {
+        width: 700px;
+    }
+
+    #cus-appo-table th,
+    #cus-appo-table td{
+        font-size: 10px;
+        padding: 5px 5px;
+    }
+
+    #editAppo {
+        font-size: 10px;
+        width: 50px;
+        height: 20px;
+    }
+
+    #deleteAppo {
+        font-size: 10px;
+        height: 20px;
+        width: 50px;
+    }
+
+    #appo-top {
+        p {
+            font-size: 10px;
+        }
     }
 }
 
-#addCar{
-    @include btn;
-    color:white;
-    background-color: $mainBlue;
+
+#note {
+    width: 150px;
 }
+

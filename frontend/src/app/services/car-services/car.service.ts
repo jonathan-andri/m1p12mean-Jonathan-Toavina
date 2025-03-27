@@ -27,4 +27,7 @@ export class CarService {
   updateCar(id: string, car: Car): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, car);
   }
+  getCarsByCustomer(cusId: string | null): Observable<Car[]> {
+    return this.http.get<Car[]>(`${this.apiUrl}/byCustomer/${cusId}`);
+  }
 }
