@@ -7,4 +7,5 @@ export interface Appointment{
     appoStatus: string,
     appoPriceEstimate: number,
     appoNotes: string,
+    serviceName? : string
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CarService } from '../../../services/car-services/car.service';
 import { Car } from '../../../models/Car';
-import AuthService from '../../../services/auth-services/auth.service';
+import {AuthService} from '../../../services/auth-services/auth.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
