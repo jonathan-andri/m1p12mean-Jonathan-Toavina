@@ -22,8 +22,8 @@ export class SignUpFormComponent {
     private router: Router
   ) {
     this.signUpForm = this.fb.group({
-      FirstName: ['', Validators.required],
-      LastName: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
       phone: ['', Validators.required],
@@ -37,6 +37,7 @@ export class SignUpFormComponent {
         response => {
           console.log('User created successfully:', response);
           this.signUpForm.reset();
+          this.router.navigate(['/customer']);
         },
         error => {
           console.error('Error creating appointement', error);

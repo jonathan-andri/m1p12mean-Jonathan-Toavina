@@ -18,4 +18,6 @@ router.put('/:id', carController.updateCar);
 //supprimer car
 router.delete('/:id', carController.deleteCar);
 
+router.get('/byCustomer/:customerId', carController.getCarByCustomerId);
+
 module.exports = router;

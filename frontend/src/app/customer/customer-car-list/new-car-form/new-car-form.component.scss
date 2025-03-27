@@ -1,0 +1,72 @@
+@use '../../../../styles.scss' as *;
+
+
+#newAppointment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background-color: hsl(0, 0%, 100%);
+    margin:0% 25%;
+    top: 200px;
+    z-index: 1500;
+}
+form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;   
+    background-color: white; 
+    border-radius: 5px;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    & > * {
+        padding: 10px 0px;
+    }
+    cursor: move; 
+}
+
+.form-group {
+    width: 100%;
+}
+
+input {
+    border:none;
+    width: 500px;
+    outline: none;
+}
+
+.input-group {
+    padding: 5px 0px;
+    display: flex;
+    justify-content: space-between;
+    select {
+        outline: none;
+        border: none;
+        width: 100%;
+    }
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+}
+
+.line {
+    height: 1px;
+    background-color: $lightGrey;
+    width: 100%;
+}
+
+label {
+    color: #8c8c8c;
+}
+
+#addAppo {
+    @include btn;
+    width: 100%;
+    border: none;
+    background-color: $mainBlue;
+    color: white;
+}

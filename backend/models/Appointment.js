@@ -38,12 +38,12 @@ const appointmentSchema = new mongoose.Schema({
         type: Number,
         default: null
     },
-    appoNotes: {
+    appoNote: {
         type: String,
         defautl: null
     }
 
     
-}, {timesstamps: true})
+}, {timestamps: true})
 
 module.exports = mongoose.model('Appointment', appointmentSchema);
