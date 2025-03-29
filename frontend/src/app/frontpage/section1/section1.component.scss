@@ -1,5 +1,5 @@
 @import '../../../styles.scss';
-
+@import "tailwindcss";
 #section-1 {
     @include section;
     color:black;

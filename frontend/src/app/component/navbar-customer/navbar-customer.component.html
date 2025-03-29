@@ -11,14 +11,13 @@
         </div>
         
         <ul class="nav-links">
-            <a href="customer/appointment"><li><i class="fas fa-calendar"></i> My Appointments</li></a>
-            <a href="customer/intervention"><li><i class="fas fa-history"></i> Interventions History</li></a>
-            <a href="customer/carList"><li><i class="fas fa-car"></i> My Cars</li></a>
+            <a href="customer/appointment"><li><i class="far fa-calendar"></i> My Appointments</li></a>
+            <a href="customer/intervention"><li><i class="fas fa-history"></i> My repairs</li></a>
+            <a href="customer/carList"><li><i class="fa fa-car"></i> My Cars</li></a>
             <hr>
         </ul>
 
         <div class="dropdown">
-            <i class="fas fa-user"></i>
             <button class="dropbtn" (click)="toggleDropdown()">My Profile <i class="fas fa-chevron-down"></i></button>
             <div class="dropdown-content" *ngIf="isDropdownVisible">
                 <a (click)="onLogout()"><i class="fas fa-sign-out-alt"></i> Log Out</a>

@@ -1,102 +1,367 @@
 @use '../../../styles.scss' as *;
 
-#customer-appoinment {
-    margin-right: 50px;
+#customer-appointment {
+  margin-right: 50px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 1200px) {
+    margin-right: 20px;
+  }
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+    padding: 15px;
+    border-radius: 8px;
+  }
 }
 
 #appo-top {
-    height: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px 0px;
-    
-    #addCar {
-        @include btn;
-        background-color: $mainBlue;
-        color: white;
-        border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+
+  h2 {
+    color: darken($mainBlue, 10%);
+    font-size: 1.5rem;
+    margin: 0;
+    flex-grow: 1;
+    min-width: 200px;
+
+    @media (max-width: 576px) {
+      font-size: 1.3rem;
     }
+  }
+
+  #addCar, #makeAppo {
+    @include btn;
+    background: linear-gradient(135deg, $mainBlue 0%, lighten($mainBlue, 10%) 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba($mainBlue, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba($mainBlue, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 400px) {
+      width: 100%;
+      justify-content: center;
+    }
+  }
 }
 
-hr {
-    border-color: $lightGrey;
-    margin: 10px 0px;
+#cus-appo-table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 10px;
+  margin: 0 -20px;
+  padding: 0 20px;
+  width: calc(100% + 40px);
+
+  @media (max-width: 768px) {
+    margin: 0 -15px;
+    padding: 0 15px;
+    width: calc(100% + 30px);
+  }
 }
 
 #cus-appo-table {
-    text-align: right;
-    font-weight: lighter;
-    width: 1200px;
-    border-collapse: collapse;
-    
-    thead {
-        th {
-            padding: 10px 0px;
-        }
-    }
-    tbody {
-        border: solid 1px $lightGrey;
-        border-radius: 10px;
-        tr {
+    margin-top: 20px;
+  width: 100%;
+  min-width: 1150px; // Minimum width before scrolling kicks in
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+  border-radius: 10px;
 
-            color: #7C7C7C;
-            td {
-                padding: 10px 5px;
-                button {
-                    padding: 5px 15px;
-                    margin: 0px 5px;
-                    border-radius: 5px;
-                    color: white;
-                    border: none;
-                    cursor: pointer;
-                }
-            }
-        }
+  thead {
+    background: linear-gradient(135deg, $mainBlue 0%, lighten($mainBlue, 15%) 100%);
+    color: white;
+    text-align: left;
+    position: sticky;
+    top: 0;
+
+    tr th {
+      padding: 15px 12px;
+      font-weight: 500;
+      text-align: left;
+
+      &:first-child {
+        border-top-left-radius: 10px;
+      }
+
+      &:last-child {
+        border-top-right-radius: 10px;
+      }
+
+      @media (max-width: 992px) {
+        padding: 12px 8px;
+        font-size: 13px;
+      }
     }
+  }
+
+  tbody {
+    tr {
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+      border-bottom: 1px solid rgba($lightGrey, 0.5);
+
+      &:nth-child(even) {
+        background-color: white;
+      }
+
+      &:nth-child(odd) {
+        background-color: #f8fbfe;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      td {
+        padding: 12px;
+        color: #5a5a5a;
+        text-align: left;
+        position: relative;
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          height: 1px;
+          background: rgba($lightGrey, 0.3);
+        }
+
+        @media (max-width: 992px) {
+          padding: 10px 8px;
+          font-size: 13px;
+        }
+
+        button {
+          padding: 8px 16px;
+          margin: 0 4px;
+          border-radius: 6px;
+          color: white;
+          border: none;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-weight: 500;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          white-space: nowrap;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+          }
+
+          &:active {
+            transform: translateY(0);
+          }
+
+          @media (max-width: 992px) {
+            padding: 6px 12px;
+            font-size: 12px;
+            margin: 0 2px;
+          }
+
+          @media (max-width: 576px) {
+            padding: 5px 8px;
+            font-size: 11px;
+            margin: 2px;
+            display: block;
+            width: 100%;
+          }
+        }
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+
+        @media (max-width: 768px) {
+          transform: none;
+          box-shadow: none;
+        }
+      }
+    }
+  }
 }
 
 #editAppo {
-    background-color: $mainYellow;
+  background: linear-gradient(135deg, $mainYellow 0%, #ffb731 100%);
 }
 
 #deleteAppo {
-    background-color: tomato;
+  background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
 }
-
-@media screen and (max-width: 1000px) {
-
-    #cus-appo-table {
-        width: 700px;
-    }
-
-    #cus-appo-table th,
-    #cus-appo-table td{
-        font-size: 10px;
-        padding: 5px 5px;
-    }
-
-    #editAppo {
-        font-size: 10px;
-        width: 50px;
-        height: 20px;
-    }
-
-    #deleteAppo {
-        font-size: 10px;
-        height: 20px;
-        width: 50px;
-    }
-
-    #appo-top {
-        p {
-            font-size: 10px;
-        }
-    }
-}
-
 
 #note {
-    width: 150px;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: 1200px) {
+    max-width: 150px;
+  }
+
+  @media (max-width: 992px) {
+    max-width: 120px;
+  }
 }
 
+@mixin status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+
+  @media (max-width: 992px) {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+}
+
+.pending {
+  color: darken(orange, 10%);
+  background-color: rgba(orange, 0.1);
+  @include status();
+
+  &::before {
+    background-color: orange;
+  }
+}
+
+.confirmed {
+  color: darken(#00c853, 10%);
+  background-color: rgba(#00c853, 0.1);
+  @include status();
+
+  &::before {
+    background-color: #00c853;
+  }
+}
+
+.rejected {
+  color: darken(#ff3d00, 10%);
+  background-color: rgba(#ff3d00, 0.1);
+  @include status();
+
+  &::before {
+    background-color: #ff3d00;
+  }
+}
+
+/* Responsive table fallback for very small screens */
+@media (max-width: 576px) {
+  #cus-appo-table {
+    thead {
+      display: none;
+    }
+
+    tbody tr {
+      display: block;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      position: relative;
+
+      td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 10px;
+        text-align: right;
+        border-bottom: 1px solid rgba($lightGrey, 0.2);
+
+        &::before {
+          content: attr(data-label);
+          font-weight: 600;
+          color: $mainBlue;
+          margin-right: 10px;
+          text-align: left;
+        }
+
+        &::after {
+          display: none;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        button {
+          margin: 5px 0;
+        }
+      }
+    }
+  }
+}
+
+/* Animation for table rows */
+@keyframes fadeInRow {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#cus-appo-table tbody tr {
+  animation: fadeInRow 0.4s ease-out forwards;
+  animation-delay: calc(var(--row-index) * 0.05s);
+  opacity: 0;
+}

@@ -1,17 +1,17 @@
 <div id="customer-appointment" data-aos="fade-up" data-aos-duration="300">
     <div id="appo-top">
-        <p data-aos="fade-right">My Appointments</p>
+        <p data-aos="zoom-in" data-aos-offset="10">My Appointments</p>
         <button data-aos="fade-left" id="makeAppo" (click)="toggleAppoForm()">Make an Appointment</button>
     </div>
     <hr>
-    <app-search-bar></app-search-bar>
+    <app-search-bar (searchEvent)="filterResults($event)"></app-search-bar>
     <div class="overflow-x-auto">
         <table id="cus-appo-table" class="min-w-full">
-            <thead data-aos="fade-down" data-aos-duration="500" data-aos-delay="(00">
-                <tr>
+            <thead>
+            <tr>
                     <th><i class="fas fa-hashtag"></i></th>
-                    <th><i class="fas fa-file-alt"></i>Name</th>
-                    <th><i class="far fa-car"></i>  Car</th>
+                    <th><i class="fas fa-file-alt"></i> Name</th>
+                    <th><i class="fas fa-car"></i>  Car</th>
                     <th><i class="far fa-calendar-alt"></i>  Date</th>
                     <th><i class="far fa-sticky-note"></i>  Note</th>
                     <th><i class="fas fa-check-circle"></i>  Status</th>
@@ -25,10 +25,23 @@
                     <td id="car">{{ appointment.carId }}</td>
                     <td id="date">{{ appointment.appoDate | date:'short'}}</td>
                     <td id="note">{{ appointment.appoNote }}</td>
-                    <td id='status' [ngStyle]="{ color: appointment.appoStatus === 'Pending' ? 'orange' : appointment.appoStatus === 'Confirmed' ? 'lightgreen' : 'red' }">{{ appointment.appoStatus }}</td>
+                    <td 
+                        id='status'
+                      
+                    >
+                        <div
+                        [ngClass]="{
+                            'pending': appointment.appoStatus === 'Pending',
+                            'confirmed': appointment.appoStatus === 'Confirmed',
+                            'rejected': appointment.appoStatus === 'Rejected'
+                        }"
+                        >
+                            {{ appointment.appoStatus }}
+                        </div>
+                   </td>
                     <td id="action">
                         <button id="editAppo" class="btn btn-primary">Edit</button>
-                        <button id='deleteAppo' class="btn btn-danger">Delete</button>
+                        <button id='deleteAppo' class="btn btn-danger" (click)="deleteModal.openModal(appointment._id)">Delete</button>
                     </td>
                 </tr>
             </tbody>
@@ -36,3 +49,5 @@
     </div>
 </div>
 <app-new-appointment-form *ngIf="isNewAppoForm"></app-new-appointment-form>
+<app-delete-modal #deleteModal (confirmDelete)="deleteAppointment($event)"></app-delete-modal>
+<!-- <app-delete-modal></app-delete-modal> -->

@@ -26,6 +26,7 @@ export class NewAppointmentFormComponent implements OnInit{
   selectedCarId: string = '';
   services: Service[] = [];
   selectedServiceId: string ='';
+  newAppoOpen: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -119,5 +120,6 @@ export class NewAppointmentFormComponent implements OnInit{
       console.error('fecthing services error', error)
     }
   }
+
 }
 

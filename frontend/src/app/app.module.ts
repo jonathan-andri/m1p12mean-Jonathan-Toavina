@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,6 +11,7 @@ import { QuestionsComponent } from './component/questions-customer/questions.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppointmentService } from './services/customer-services/customer-appointment-services/appointment.service';
 import { NewAppointmentFormComponent } from './customer/new-appointment-form/new-appointment-form.component';
+import { DeleteModalComponent } from './component/delete-modal/delete-modal.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,10 @@ import { NewAppointmentFormComponent } from './customer/new-appointment-form/new
     FrontpageComponent, 
     QuestionsComponent,
     NavbarCustomerComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    DeleteModalComponent
+
   ],
   providers: [AppointmentService],
   bootstrap: []
