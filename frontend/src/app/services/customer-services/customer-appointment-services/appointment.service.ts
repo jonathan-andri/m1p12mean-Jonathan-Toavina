@@ -19,6 +19,10 @@ export class AppointmentService {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
 
+  getMechanicAppointments(mechanicId: string): Observable<Appointment[]> {
+    return this.http.get<Appointment[]>(`${this.apiUrl}/mechanic/${mechanicId}`);
+  }
+
   createAppointment(appointments: Appointment): Observable<any> {
     return this.http.post(this.apiUrl, appointments);
   }

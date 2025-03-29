@@ -22,14 +22,15 @@ export class TopEmployeeComponent implements OnInit {
   appointments: Appointment[] = []
 
   ngOnInit(): void {
-    
+    this.getData()
+    console.log(this.appointments)
   }
 
   getData(){
     this.countService.get().subscribe(data => this.counts = data);
     this.appointmentService.getAppointments().subscribe(data => {
-      this.appointments = data;
-      this.appointments = this.appointments.filter(data => data.appoStatus == 'completed')
+    this.appointments = data;
+    this.appointments = this.appointments.filter(data => data.appoStatus == 'Completed')
     })
   }
 }
