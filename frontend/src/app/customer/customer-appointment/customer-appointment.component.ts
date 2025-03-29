@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SearchBarComponent } from "../../component/search-bar/search-bar.component";
 import { NewAppointmentFormComponent } from "../new-appointment-form/new-appointment-form.component";
 import { ReactiveFormsModule } from '@angular/forms';
@@ -8,10 +8,12 @@ import { AppointmentService } from '../../services/customer-services/customer-ap
 import { AuthService } from '../../services/auth-services/auth.service';
 import { ServicesService } from '../../services/create-services/services.service';
 import { CarService } from '../../services/car-services/car.service';
+import { DeleteModalComponent } from "../../component/delete-modal/delete-modal.component";
+
 
 @Component({
   selector: 'app-appointment',
-  imports: [SearchBarComponent, NewAppointmentFormComponent, CommonModule, ReactiveFormsModule],
+  imports: [SearchBarComponent, NewAppointmentFormComponent, CommonModule, ReactiveFormsModule, DeleteModalComponent],
   templateUrl: './customer-appointment.component.html',
   styleUrl: './customer-appointment.component.scss'
 })
@@ -22,13 +24,17 @@ export class CustomerAppointmentComponent {
     private serviceService: ServicesService,
     private carservice: CarService
   ) {}
+
   isNewAppoForm : boolean = false;
   user: any ;
+  appointments: Appointment[] = [];
+  filteredItems: Appointment[] = [];
+  deleteModal: boolean = false;
+  selectedAppointmentId: string | null = null;
+
   toggleAppoForm() {
     this.isNewAppoForm = !this.isNewAppoForm;
   }
-
-  appointments: Appointment[] = [];
 
   ngOnInit(): void {
     const token = typeof window !== 'undefined' && window.localStorage ? localStorage.getItem('token') : null;
@@ -49,7 +55,6 @@ export class CustomerAppointmentComponent {
     else {
       console.warn('no token found in localstorage');
     }
-    
   }
 
   loadAppointments(): void {
@@ -86,6 +91,25 @@ export class CustomerAppointmentComponent {
   }
 
   deleteAppointment(id: string): void {
-    this.appointmentService.deleteAppointment(id);
+    if (id) {
+      this.appointmentService.deleteAppointment(id).subscribe({
+        next: () => console.log('Appointment deleted successfully', id),
+        error: (err) => console.error('Error deleting appointment', err)
+      });
+      console.log('appo a effacer', id)
+    }
+    else console.log('id not received')
+
+  }
+
+  toggleDeleteModal():void {
+    this.deleteModal = !this.deleteModal;
+  }
+  
+  filterResults(searchText: string): void {
+      this.filteredItems = this.appointments.filter(item => {
+      item.appoNote.toLowerCase().includes(searchText.toLowerCase())
+    })
+
   }
 }

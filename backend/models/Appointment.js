@@ -27,7 +27,7 @@ const appointmentSchema = new mongoose.Schema({
     },
     appoStatus: {
         type: String,
-        enum: ['pPending', 'Confirmed','Rejected'],
+        enum: ['Pending', 'Confirmed','Rejected'],
         default: 'Pending'
     },
     appoPriceEstimate: {

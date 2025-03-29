@@ -1,8 +1,10 @@
 
 <div id="newAppointment" data-aos="fade-down" data-aos-duration="500">
     <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
-        <h4>Add a car</h4>
-
+        <div class="form-header">
+            <h4>Add a car</h4>
+            <button class="close-btn">X</button>
+        </div>
         <div class="form-group">
             <label for="carBrand">Brand</label>
             <div class="input-group">
