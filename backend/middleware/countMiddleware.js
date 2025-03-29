@@ -20,7 +20,6 @@ countStatsMiddleware = async (req, res, next) => {
         });
         console.log(lastMonthCount)
         
-        // Query for the month before's accepted appointments
         const monthBeforeStart = new Date(monthBeforeYear, monthBefore, 1);
         const monthBeforeEnd = new Date(monthBeforeYear, monthBefore + 1, 0);
         
