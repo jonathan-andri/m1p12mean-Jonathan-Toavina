@@ -4,12 +4,14 @@ import { CommonModule } from '@angular/common';
 import { CarService } from '../../services/car-services/car.service';
 import { Car } from '../../models/Car';
 import {AuthService} from '../../services/auth-services/auth.service';
+import { DeleteModalComponent } from '../../component/delete-modal/delete-modal.component';
 
 @Component({
   selector: 'app-customer-car-list',
   imports: [
     NewCarFormComponent,
-    CommonModule
+    CommonModule,
+    DeleteModalComponent
   ],
   templateUrl: './customer-car-list.component.html',
   styleUrl: './customer-car-list.component.scss'
@@ -62,5 +64,14 @@ export class CustomerCarListComponent {
         console.log('error fetching cars', error);
       }
     );
+  }
+
+  deleteCar(id: string) {
+    if(id) {
+      this.carService.deleteCar(id).subscribe({
+        next: () => console.log('Car successfully deleted'),
+        error: (er) => console.error('Error deleting car', er)
+      })
+    }
   }
 }

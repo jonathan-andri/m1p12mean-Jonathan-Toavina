@@ -1,53 +1,66 @@
 <div id="customer-appointment" data-aos="fade-up" data-aos-duration="300">
     <div id="appo-top">
-        <p data-aos="zoom-in" data-aos-offset="10">My Appointments</p>
-        <button data-aos="fade-left" id="makeAppo" (click)="toggleAppoForm()">Make an Appointment</button>
+      <p data-aos="zoom-in" data-aos-offset="10">My Appointments</p>
+      <button data-aos="fade-left" id="makeAppo" (click)="toggleAppoForm()">
+        <i class="fas fa-plus"></i> New Appointment
+      </button>
     </div>
+    
     <hr>
+    
     <app-search-bar (searchEvent)="filterResults($event)"></app-search-bar>
-    <div class="overflow-x-auto">
-        <table id="cus-appo-table" class="min-w-full">
-            <thead>
-            <tr>
-                    <th><i class="fas fa-hashtag"></i></th>
-                    <th><i class="fas fa-file-alt"></i> Name</th>
-                    <th><i class="fas fa-car"></i>  Car</th>
-                    <th><i class="far fa-calendar-alt"></i>  Date</th>
-                    <th><i class="far fa-sticky-note"></i>  Note</th>
-                    <th><i class="fas fa-check-circle"></i>  Status</th>
-                    <th><i class="fas fa-cogs"></i>  Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let appointment of appointments; let i = index">
-                    <td> {{ i + 1 }}</td>
-                    <td id="num">{{ appointment.serviceId }}</td>
-                    <td id="car">{{ appointment.carId }}</td>
-                    <td id="date">{{ appointment.appoDate | date:'short'}}</td>
-                    <td id="note">{{ appointment.appoNote }}</td>
-                    <td 
-                        id='status'
-                      
-                    >
-                        <div
-                        [ngClass]="{
-                            'pending': appointment.appoStatus === 'Pending',
-                            'confirmed': appointment.appoStatus === 'Confirmed',
-                            'rejected': appointment.appoStatus === 'Rejected'
-                        }"
-                        >
-                            {{ appointment.appoStatus }}
-                        </div>
-                   </td>
-                    <td id="action">
-                        <button id="editAppo" class="btn btn-primary">Edit</button>
-                        <button id='deleteAppo' class="btn btn-danger" (click)="deleteModal.openModal(appointment._id)">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    
+    <div class="appointments-container">
+      <div *ngFor="let appointment of appointments; let i = index" 
+           class="appointment-card"
+           [ngClass]="{
+             'pending': appointment.appoStatus === 'Pending',
+             'confirmed': appointment.appoStatus === 'Confirmed',
+             'rejected': appointment.appoStatus === 'Rejected'
+           }"
+           data-aos="fade-up" 
+           [attr.data-aos-delay]="i*50">
+           
+        <div class="card-header">
+          <div class="appointment-number">{{ i + 1 }}</div>
+          <div class="appointment-title">
+            <h3>{{ appointment.serviceId }}</h3>
+            <div class="status-badge">{{ appointment.appoStatus }}</div>
+          </div>
+          <div class="appointment-date">
+            <i class="far fa-calendar-alt"></i>
+            {{ appointment.appoDate | date:'mediumDate' }}
+            <span class="time">{{ appointment.appoDate | date:'shortTime' }}</span>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="detail-row">
+            <div class="detail-item">
+              <i class="fas fa-car"></i>
+              <span>Car: {{ appointment.carId }}</span>
+            </div>
+          </div>
+          
+          <div class="detail-row" *ngIf="appointment.appoNote">
+            <div class="detail-item note">
+              <i class="far fa-sticky-note"></i>
+              <p>{{ appointment.appoNote }}</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-actions">
+          <button class="action-btn edit" >
+            <i class="fas fa-pencil-alt"></i> Edit
+          </button>
+          <button class="action-btn delete" (click)="deleteModal.openModal(appointment._id)">
+            <i class="fas fa-trash-alt"></i> Delete
+          </button>
+        </div>
+      </div>
     </div>
-</div>
-<app-new-appointment-form *ngIf="isNewAppoForm"></app-new-appointment-form>
-<app-delete-modal #deleteModal (confirmDelete)="deleteAppointment($event)"></app-delete-modal>
-<!-- <app-delete-modal></app-delete-modal> -->
+  </div>
+  
+  <app-new-appointment-form *ngIf="isNewAppoForm"></app-new-appointment-form>
+  <app-delete-modal #deleteModal (confirmDelete)="deleteAppointment($event)" desc="Appointment"></app-delete-modal>

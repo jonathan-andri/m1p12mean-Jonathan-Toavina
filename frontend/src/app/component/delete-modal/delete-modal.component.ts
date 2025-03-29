@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -15,7 +15,7 @@ export class DeleteModalComponent {
 
   constructor(
   ){}
-
+    @Input() desc! : string ;
     @Output() confirmDelete = new EventEmitter<string>();
 
     openModal(id: string): void {
