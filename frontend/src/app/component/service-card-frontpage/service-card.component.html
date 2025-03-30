@@ -9,8 +9,15 @@
 >
     <img [src]='imageUrl' alt="Service image">
     <h2>{{ title }}</h2>
-    <p>{{ duration }} min</p>
-    <p>{{ price }} $</p>
-    <p>{{ category }}</p>
-    <a href="createAccountUrl">Create Account</a> 
+    
+    <div class="service-details">
+        <div class="duration-price">
+            <p>{{ duration }} min</p>
+            <p>{{ price }} $</p>
+        </div>
+        
+        <span class="category">{{ category }}</span>
+    </div>
+    
+    <a href="createAccountUrl">Book This Service</a> 
 </div>
