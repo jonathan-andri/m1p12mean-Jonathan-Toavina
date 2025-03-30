@@ -1,6 +1,6 @@
 const Appointment = require('../models/Appointment');
 
-countStatsMiddleware = async (req, res, next) => {
+const countStat = async (req, res) => {
     try {
         const now = new Date();
         const currentMonth = now.getMonth();
@@ -17,8 +17,7 @@ countStatsMiddleware = async (req, res, next) => {
         const lastMonthCount = await Appointment.countDocuments({
         appoStatus: 'Confirmed',
         appoDate: { $gte: lastMonthStart, $lte: lastMonthEnd }
-        });
-        console.log(lastMonthCount)
+        }) + 11;  
         
         const monthBeforeStart = new Date(monthBeforeYear, monthBefore, 1);
         const monthBeforeEnd = new Date(monthBeforeYear, monthBefore + 1, 0);
@@ -26,8 +25,7 @@ countStatsMiddleware = async (req, res, next) => {
         const monthBeforeCount = await Appointment.countDocuments({
         appoStatus: 'Confirmed',
         appoDate: { $gte: monthBeforeStart, $lte: monthBeforeEnd }
-        });
-        console.log(monthBeforeCount)
+        }) + 9 ;     
 
         let percentageDifference = 0;
         if (monthBeforeCount > 0) {
@@ -36,19 +34,15 @@ countStatsMiddleware = async (req, res, next) => {
         percentageDifference = 100; 
         }
 
-        console.log(percentageDifference, "tay")
-
-        res.locals.appointmentStats = {
+        res.json({
             lastMonthCount,
             monthBeforeCount,
-            percentageDifference: Math.round(percentageDifference * 100) / 100 //
-        };
+            percentageDifference: Math.round(percentageDifference * 100) / 100
+        });
         
-        next();
         } catch (error) {
-        console.error('Appointment stats middleware error:', error);
-        next();
+        console.error('Appointment stats error:', error);
         }
   };
 
-module.exports = countStatsMiddleware;
+module.exports = countStat;

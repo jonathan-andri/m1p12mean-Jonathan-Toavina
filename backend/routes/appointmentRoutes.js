@@ -1,16 +1,18 @@
 const express = require('express');
 const appointmentController = require('../controllers/appointmentController') ; 
 const router = express.Router();
-const countStatsMiddleware = require('../middleware/countMiddleware')
-const mechanicAppointmentsControler = require('../middleware/mechanicAppointment')
+const countStatsController = require('../controllers/statsController')
+const mechanicAppointmentsControler = require('../controllers/mechanicAppointment')
 
 // POST /appointments
 router.post('/', appointmentController.createAppointment);
 
 // GET /appointments
-router.get('/', countStatsMiddleware, appointmentController.getAllAppointments);
+router.get('/', appointmentController.getAllAppointments);
 
 router.get('/mechanic', mechanicAppointmentsControler.getMechanicAppointments)
+
+router.get('/stats', countStatsController)
 
 // GET /appointments/:id
 router.get('/:id', appointmentController.getAppointment);

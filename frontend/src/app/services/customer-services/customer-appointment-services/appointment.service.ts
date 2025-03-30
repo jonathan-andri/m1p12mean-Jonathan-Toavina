@@ -23,6 +23,10 @@ export class AppointmentService {
     return this.http.get<Appointment[]>(`${this.apiUrl}/mechanic/${mechanicId}`);
   }
 
+  getStat(): Observable<any>{
+    return this.http.get(`${this.apiUrl}/stats`);
+  }
+
   createAppointment(appointments: Appointment): Observable<any> {
     return this.http.post(this.apiUrl, appointments);
   }
