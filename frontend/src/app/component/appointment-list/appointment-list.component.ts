@@ -69,8 +69,10 @@ export class AppointmentListComponent implements OnInit{
   }
 
   loadAppointments(){
+    const currentDate = new Date()
     this.appointmentService.getAppointments().subscribe(data => {
       this.appointments = data;
+      this.appointments = this.appointments.filter(appointment => new Date(appointment.appoDate) >= currentDate)
       for(let appointment of this.appointments){
         this.userService.getById(appointment.customerId).subscribe(customer =>{
           appointment.customerName = customer.firstName + ' ' + customer.lastName
@@ -106,11 +108,9 @@ export class AppointmentListComponent implements OnInit{
   formatDate(isoString: string): string {
     const date = new Date(isoString);
     
-    // Get month name and day
     const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric' };
     const formattedDate = date.toLocaleDateString('en-US', options);
   
-    // Get time in "7h41" format
     const hours = date.getHours();
     const minutes = date.getMinutes();
     const formattedTime = `${hours}h${minutes.toString().padStart(2, '0')}`;

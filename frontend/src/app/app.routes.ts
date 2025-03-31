@@ -6,7 +6,7 @@ import { CompletedServicesComponent} from './customer/customer-intervention/inte
 import { CustomerComponent } from './admin/customer/customer.component';
 import { ServicesComponent } from './admin/services/services.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
-import { MechanicComponent } from './admin/mechanic/mechanic.component';
+import { MechanicComponentPage } from './admin/mechanic/mechanic.component';
 import { AppointmentComponent } from './admin/appointment/appointment.component';
 import { CustomerAppointmentComponent } from './customer/customer-appointment/customer-appointment.component';
 import { NewAppointmentFormComponent } from './customer/new-appointment-form/new-appointment-form.component';
@@ -25,7 +25,8 @@ import { mechanicGuard } from './guards/mechanicGuard';
 import { CustomerCarListComponent } from './customer/customer-car-list/customer-car-list.component';
 import { NewCarFormComponent } from './customer/customer-car-list/new-car-form/new-car-form.component';
 import { NotificationComponent } from './component/cutomer-notification/notification.component';
-
+import { NotificationComponent } from './component/notification/notification.component';
+import { MechanicComponent } from './mechanic/mechanic.component';
 export const routes: Routes = [
     //{ path: '', component: FrontpageComponent },
     
@@ -48,7 +49,7 @@ export const routes: Routes = [
                         { path: '**', redirectTo:'customer-list' }
                     ]
             },
-            { path: 'mechanic', component: MechanicComponent,
+            { path: 'mechanic', component: MechanicComponentPage,
                     children:[
                         { path:'mechanic-add', component:MechanicAddComponent },
                         { path:'mechanic-list', component:MechanicsListComponent },
@@ -64,6 +65,10 @@ export const routes: Routes = [
             { path: '', redirectTo:'dashboard', pathMatch: 'full' }
         ]
     },
+    //******************************************/
+    { path: 'mechanic', component: MechanicComponent },
+    //******************************************/
+    
    { path: '', component: FrontpageComponent},
     {
         path:'customer',
