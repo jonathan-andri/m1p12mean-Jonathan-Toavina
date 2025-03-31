@@ -14,6 +14,11 @@
             <a href="customer/appointment"><li><i class="far fa-calendar"></i> My Appointments</li></a>
             <a href="customer/intervention"><li><i class="fas fa-history"></i> My repairs</li></a>
             <a href="customer/carList"><li><i class="fa fa-car"></i> My Cars</li></a>
+            <a href="customer/notification" class="notification-link">
+                <li>
+                    <i class="fa fa-bell"></i> My Notifications
+                    <span class="notification-badge" *ngIf="unreadCount > 0">{{unreadCount}}</span>
+                </li></a>
             <hr>
         </ul>
 

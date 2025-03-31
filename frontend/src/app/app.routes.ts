@@ -24,6 +24,7 @@ import { adminGuard } from './guards/adminGuard';
 import { mechanicGuard } from './guards/mechanicGuard';
 import { CustomerCarListComponent } from './customer/customer-car-list/customer-car-list.component';
 import { NewCarFormComponent } from './customer/customer-car-list/new-car-form/new-car-form.component';
+import { NotificationComponent } from './component/notification/notification.component';
 import { MechanicComponent } from './mechanic/mechanic.component';
 export const routes: Routes = [
     //{ path: '', component: FrontpageComponent },
@@ -88,6 +89,9 @@ export const routes: Routes = [
                     { path: 'AddCar', component: NewCarFormComponent}
                 ]
             },
+            {
+                path: 'notification', component: NotificationComponent
+            }
             // { path: 'intervention', }
         ]
     },
