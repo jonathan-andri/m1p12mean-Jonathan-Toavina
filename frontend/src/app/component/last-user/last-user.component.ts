@@ -22,7 +22,6 @@ export class LastUserComponent implements OnInit {
     this.userService.getAllMechanics().subscribe(data => {
       this.latestUsers = data;
       this.latestUsers = this.latestUsers.filter(data => data.role == 'customer')
-      console.log(this.latestUsers)
     })
   }
 }

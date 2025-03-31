@@ -14,4 +14,11 @@ export class AdminComponent {
   showComponent(componentName: string){
     this.activeComponent = componentName;
   }
+
+  chartData = [
+    { label: 'Q1', value: 45 },
+    { label: 'Q2', value: 68 },
+    { label: 'Q3', value: 72 },
+    { label: 'Q4', value: 55 }
+  ];
 }

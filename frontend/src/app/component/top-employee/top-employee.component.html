@@ -1,16 +1,24 @@
-<div class="top-employee">
-    <div *ngIf="topEmployee" class="employee-card">
-      <div class="employee-info">
-        <div class="flex">
-          <img src="" alt="">
-          <div class="info">
-            <span class="employee-name">{{ topEmployee.name }}<br></span> <br><br>
-            <span class="employee-services"><p style="color: #1573B3;">{{ topEmployee.serviceCount }} </p>services</span>
-          </div>
-        </div>
-      </div>
+<div class="performance-circle">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#e0e0e0" stroke-width="10"/>
+      
+    <circle *ngIf="percentage >= 0" cx="60" cy="60" r="50" fill="none" 
+    [attr.stroke]="color" stroke-width="10" stroke-linecap="round"
+    [attr.stroke-dasharray]="circumference"
+    [attr.stroke-dashoffset]="dashOffset"/>
+
+
+    <circle *ngIf="percentage < 0" cx="60" cy="60" r="50" fill="none" 
+            [attr.stroke]="warningColor" stroke-width="10" stroke-linecap="round"
+            [attr.stroke-dasharray]="circumference"
+            [attr.stroke-dashoffset]="dashOffset"/>
+      
+      <text x="60" y="65" text-anchor="middle" font-size="20" fill="#333">{{percentage}}%</text>
+    </svg>
+    <div >
+        <p style="font-size: 40px; font-weight: bold; color:#1573B3">{{count}}</p>
+        <p>appointments <br>this month</p>
     </div>
-    <div *ngIf="!topEmployee" class="no-data">
-      No data available.
-    </div>
-</div>
+  </div>
+
+<p>Performance last month</p>

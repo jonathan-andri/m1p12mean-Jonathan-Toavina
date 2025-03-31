@@ -1,20 +1,16 @@
-.top-employee{
-    font-size: 13px;
-}
-
-img{
-    border-radius: 50%;
-    border: 2px solid black;
-    height:80px;
-    width: 80px;
-    margin-top:15px
-}
-
-.flex{
+.performance-circle {
     display: flex;
 }
-.info{
-    margin-left: 20px ;
-    margin-top: 15px;
-    text-align: center;
+circle {
+  transition: stroke-dashoffset 0.5s ease-in-out;
+}
+
+p{
+  font-size: 12px;
+}
+
+div div{
+  margin-left:40px;
+  align-self: center;
+  text-align: center;
 }
