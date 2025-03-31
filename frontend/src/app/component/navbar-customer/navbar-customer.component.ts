@@ -63,7 +63,6 @@ export class NavbarCustomerComponent implements OnInit {
         next: (response: any) => {
           this.user = response;
           this.loadUnreadCount();
-          console.log('navbar', response);
         },
         error: (error: any) => {
           console.error('Error fetching user data', error);
@@ -80,7 +79,6 @@ export class NavbarCustomerComponent implements OnInit {
     this.notificationService.getUnreadCount(userId).subscribe({
       next: (response) => {
         this.unreadCount = response.count;
-        console.log('unreadCOunt:', this.unreadCount)
       },
       error: (err) => {
         console.error('failed to load unread count', err)

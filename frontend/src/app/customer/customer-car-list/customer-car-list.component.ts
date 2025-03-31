@@ -41,23 +41,7 @@ export class CustomerCarListComponent {
   }
 
 	ngOnInit(): void {
-		const token =typeof window !== 'undefined' && window.localStorage? localStorage.getItem('token'): null;
-		if (token) {
-			this.authService.getUserData(token).subscribe({
-				next: (response: any) => {
-					this.user = response;
-					if (this.user?._id) {
-						this.loadCars();
-					}
-					console.log('car-list', response);
-				},
-				error: (error: any) => {
-					console.error('Error fetching user data', error);
-				},
-			});
-		} else {
-			console.warn('no token found in localstorage');
-		}
+		this.loadUserData();
 	}
 
 	loadCars(): void {
@@ -98,5 +82,25 @@ export class CustomerCarListComponent {
     this.isEditCarForm = false;
     this.isAddCarForm = false
     this.selectedCar = null;
+  }
+
+  private loadUserData(): void {
+	const token =typeof window !== 'undefined' && window.localStorage? localStorage.getItem('token'): null;
+		if (token) {
+			this.authService.getUserData(token).subscribe({
+				next: (response: any) => {
+					this.user = response;
+					if (this.user?._id) {
+						this.loadCars();
+					}
+					console.log('car-list', response);
+				},
+				error: (error: any) => {
+					console.error('Error fetching user data', error);
+				},
+			});
+		} else {
+			console.warn('no token found in localstorage');
+		}
   }
 }

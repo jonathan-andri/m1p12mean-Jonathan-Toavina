@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AdminComponent } from "./admin/admin.component"
 import { CustomerLayoutComponent } from './customer/customer-layout/customer-layout.component';
-import { InterventionComponent } from './customer/customer-intervention/intervention.component';
+import { CompletedServicesComponent} from './customer/customer-intervention/intervention.component';
 import { CustomerComponent } from './admin/customer/customer.component';
 import { ServicesComponent } from './admin/services/services.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
@@ -24,7 +24,7 @@ import { adminGuard } from './guards/adminGuard';
 import { mechanicGuard } from './guards/mechanicGuard';
 import { CustomerCarListComponent } from './customer/customer-car-list/customer-car-list.component';
 import { NewCarFormComponent } from './customer/customer-car-list/new-car-form/new-car-form.component';
-import { NotificationComponent } from './component/notification/notification.component';
+import { NotificationComponent } from './component/cutomer-notification/notification.component';
 
 export const routes: Routes = [
     //{ path: '', component: FrontpageComponent },
@@ -77,7 +77,7 @@ export const routes: Routes = [
                 ]
             },
             { path: 'intervention', 
-                component: InterventionComponent
+                component: CompletedServicesComponent
             },
             { path: 'carList', 
                 component: CustomerCarListComponent,
