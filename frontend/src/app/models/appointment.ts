@@ -1,11 +1,15 @@
 export interface Appointment{
     customerId: string,
-    cardId: string,
+    carId: string,
     mechanicId: string,
     serviceId: string,
     appoDate: Date,
     appoStatus: string,
     appoPriceEstimate: number,
     appoNotes: string,
-    serviceName? : string
+    serviceName? : string,
+    serviceAmount? : number; 
+    carLicensePlate? : string;
+    serviceDesc? :string;
+    carModel? : string
 }
