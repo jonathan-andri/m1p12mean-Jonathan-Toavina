@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const paymentSchema = new mongoose.Schema({
   appointmentId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Appointment', // Reference to the 'Appointment' collection
+    ref: 'Appointment', 
     required: true
   },
-  clientId: {
+  customerId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Reference to the 'User' collection (Client)
+    ref: 'User', 
     required: true
   },
   amount: {
@@ -18,12 +18,12 @@ const paymentSchema = new mongoose.Schema({
   paymentMethod: {
     type: String,
     enum: ['cash', 'credit_card', 'PayPal'],
-    required: true
+    default: 'cash'
   },
   paymentStatus: {
     type: String,
-    enum: ['pending', 'completed', 'refunded'],
-    default: 'pending' // Default status is 'pending'
+    enum: ['waiting for payment', 'paid'],
+    default: 'waiting for payment'
   }
 }, {
   timestamps: true // Automatically adds createdAt and updatedAt fields
