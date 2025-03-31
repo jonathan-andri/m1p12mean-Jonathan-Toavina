@@ -19,23 +19,6 @@ export class AuthService {
   ) { 
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
-
-  getMechanicId(): string | null {
-    if (!this.isBrowser) return null;
-    
-    if (this.currentUserSubject.value?.role === 'mechanic') {
-      return this.currentUserSubject.value._id;
-    }
-    
-    const userData = localStorage.getItem('userData');
-    if (userData) {
-      const user = JSON.parse(userData);
-      if (user?.role === 'mechanic') {
-        return user._id;
-      }
-    }
-    return null;
-  }
   
   login(credentials: any) {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials);

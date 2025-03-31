@@ -25,6 +25,9 @@ import { mechanicGuard } from './guards/mechanicGuard';
 import { CustomerCarListComponent } from './customer/customer-car-list/customer-car-list.component';
 import { NewCarFormComponent } from './customer/customer-car-list/new-car-form/new-car-form.component';
 import { MechanicComponent } from './mechanic/mechanic.component';
+import { AppoMechaComponent } from './component/appo-mecha/appo-mecha.component';
+import { HistoryMechaComponent } from './component/history-mecha/history-mecha.component';
+
 export const routes: Routes = [
     //{ path: '', component: FrontpageComponent },
     
@@ -63,8 +66,17 @@ export const routes: Routes = [
             { path: '', redirectTo:'dashboard', pathMatch: 'full' }
         ]
     },
+
     //******************************************/
-    { path: 'mechanic', component: MechanicComponent },
+    { path: 'mechanic', 
+        canActivate: [mechanicGuard],
+        component: MechanicComponent,
+        children:[
+            { path: 'appointments', component: AppoMechaComponent },
+            { path: 'history', component: HistoryMechaComponent },
+            { path: '**', redirectTo: 'appointments' }
+        ]
+    },
     //******************************************/
     
    { path: '', component: FrontpageComponent},

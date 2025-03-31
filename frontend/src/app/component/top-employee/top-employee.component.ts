@@ -14,6 +14,8 @@ import { firstValueFrom, Observable } from 'rxjs';
 })
 export class TopEmployeeComponent implements OnInit {
 
+  isExpanded = false;
+
   constructor( 
     private countService: CountService, 
     private appointmentService: AppointmentService

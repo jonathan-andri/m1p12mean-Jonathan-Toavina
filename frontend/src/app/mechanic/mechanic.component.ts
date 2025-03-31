@@ -1,34 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AppointmentService } from '../services/customer-services/customer-appointment-services/appointment.service';
-import { AuthService } from '../services/auth-services/auth.service';
 import { CommonModule } from '@angular/common';
+import { NavbarMechaComponent } from '../component/navbar-mecha/navbar-mecha.component';
+import { RouterOutlet , RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-mechanic',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterOutlet, NavbarMechaComponent],
   templateUrl: './mechanic.component.html',
   styleUrl: './mechanic.component.scss'
 })
-export class MechanicComponent implements OnInit{
+export class MechanicComponent {
 
-  constructor(
-    private appointmentService: AppointmentService,
-    private authService: AuthService
-  ){}
 
-  appointments: any[] = [];
-
-  ngOnInit(): void {
-    this.getMechanicAppointment()
-  }
-
-  getMechanicAppointment(){
-    const mechanicId = this.authService.getMechanicId();
-    console.log(mechanicId)
-    if (typeof mechanicId === 'string')
-      this.appointmentService.getMechanicAppointments(mechanicId).subscribe(data => this.appointments = data)
-    else{
-      console.log('Errrrrrooooooorrrr')
-    }
-  }
 }

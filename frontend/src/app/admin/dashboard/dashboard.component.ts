@@ -7,6 +7,7 @@ import { TopEmployeeComponent } from '../../component/top-employee/top-employee.
 import { MechanicService } from '../../services/add-mechanic/mechanic.service';
 import { AppointmentService } from '../../services/customer-services/customer-appointment-services/appointment.service';
 import { ServicesService } from '../../services/create-services/services.service';
+import { AuthService } from '../../services/auth-services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,17 +19,20 @@ import { ServicesService } from '../../services/create-services/services.service
 export class DashboardComponent implements OnInit{
   
   constructor(
+    private authService: AuthService,
     private serviceService: ServicesService,
     private userService: MechanicService,
     private appointmentService: AppointmentService
   ){}
 
+  isExpanded = false
   currentDate: string = '';
   services: any[] = [];
   mechanics: any[] = [];
   customers: any[] = [];
   appoitments: any[] = [];
-
+  user: any;
+  
   getCount(){
     this.serviceService.getAllServices().subscribe(data => this.services = data)
 
@@ -45,14 +49,33 @@ export class DashboardComponent implements OnInit{
     })  
   }
 
-
   ngOnInit(): void {
-    const today = new Date();
+    this.initialize()
     this.getCount()
+  }
+
+  initialize(): void{
+    const today = new Date();
+    
     this.currentDate = today.toLocaleDateString('en-US', { 
       year: 'numeric', 
       month: 'long', 
       day: 'numeric' 
     });
+
+    const token = typeof window !== 'undefined' && window.localStorage ? localStorage.getItem('token') : null;
+    if (token) {
+      this.authService.getUserData(token).subscribe({
+        next: (response: any) => {
+          this.user = response;
+        },
+        error: (error: any) => {
+          console.error('Error fetching user data', error);
+        }
+      })
+    }
+    else {
+      console.warn('no token found in localstorage');
+    }
   }
 }

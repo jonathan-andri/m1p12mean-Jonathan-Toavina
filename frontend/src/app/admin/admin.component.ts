@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet,RouterLinkActive, RouterLink } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
+import { AuthService } from '../services/auth-services/auth.service';
 
 @Component({
   selector: 'app-admin',
@@ -10,6 +11,8 @@ import { HeaderComponent } from './header/header.component';
 })
 export class AdminComponent {
   activeComponent: string = 'dashboard';
+  
+  constructor(private authService: AuthService){}
 
   showComponent(componentName: string){
     this.activeComponent = componentName;
