@@ -1,4 +1,5 @@
 const Notification = require('../models/Notification');
+const mongoose = require('mongoose')
 
 // ✅ Create a new notification
 exports.createNotification = async (req, res) => {
@@ -69,5 +70,35 @@ exports.deleteNotification = async (req, res) => {
     res.status(200).json({ success: true, message: "Notification deleted" });
   } catch (error) {
     res.status(500).json({ success: false, message: "Error deleting notification", error });
+  }
+};
+
+exports.getUnreadCount = async (req, res) => {
+  try {
+      const userId = req.params.userId;
+      
+      // Validate userId format
+      if (!mongoose.Types.ObjectId.isValid(userId)) {
+          return res.status(400).json({
+              success: false,
+              message: 'Invalid user ID format'
+          });
+      }
+
+      const count = await Notification.countDocuments({
+          userId: userId,
+          isRead: false
+      });
+      res.status(200).json({
+          success: true,
+          count: count
+      });
+  } catch (error) {
+      console.error('Error getting unread count:', error);
+      res.status(500).json({
+          success: false,
+          message: 'Server error',
+          error: error.message
+      });
   }
 };

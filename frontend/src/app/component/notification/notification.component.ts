@@ -32,13 +32,7 @@ export class NotificationComponent implements OnInit {
     console.log('load notif userId', this.currentUserId)
     this.notificationService.getUserNotifications(this.currentUserId).subscribe({
       next: (notifications) => {
-        console.log('2. Raw API response:', notifications);
-        console.log('3. Is array?', Array.isArray(notifications));
-        console.log('4. Type of:', typeof notifications);
-        console.log('5. Constructor:', notifications?.constructor?.name);
-        
         this.notifications = notifications;
-        console.log('6. After assignment:', this.notifications);
       },
       error: (err) => console.error('Failed to load notifications', err)
     });
