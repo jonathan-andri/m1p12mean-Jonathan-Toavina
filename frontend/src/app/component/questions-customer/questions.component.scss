@@ -6,7 +6,7 @@
   background-color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-  overflow: hidden;
+  // overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.03);
 
   &:hover {
@@ -28,6 +28,7 @@
   cursor: pointer;
   padding: 24px;
   position: relative;
+  height: 20px;
 
   &::after {
     content: '';
@@ -80,15 +81,16 @@
 }
 
 .answer {
-  max-height: 0;
-  overflow: hidden;
-  padding: 0 24px;
+  display: block;
+  // max-height: 50px;
+  // overflow: hidden;
+  padding: 10px 24px;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
   color: #4a5568;
   line-height: 1.6;
   font-size: 16px;
   border-left: none;
-  opacity: 0;
+  // opacity: 0;
 
   .active & {
     max-height: 300px;
