@@ -58,6 +58,7 @@ export class NavbarMechaComponent {
           },
           error: (error: any) => {
             console.error('Error fetching user data', error);
+            this.router.navigate(['/login']);
           }
         })
       }

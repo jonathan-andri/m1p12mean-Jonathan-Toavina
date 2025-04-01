@@ -18,7 +18,7 @@ const serviceSchema = new mongoose.Schema({
     required: true
   },
   serviceEstimatedDuration: {
-    type: String,
+    type: Date,
     required: true, 
   }
 }, {

@@ -25,7 +25,6 @@ import { mechanicGuard } from './guards/mechanicGuard';
 import { CustomerCarListComponent } from './customer/customer-car-list/customer-car-list.component';
 import { NewCarFormComponent } from './customer/customer-car-list/new-car-form/new-car-form.component';
 import { NotificationComponent } from './component/cutomer-notification/notification.component';
-import { NotificationComponent } from './component/notification/notification.component';
 import { MechanicComponent } from './mechanic/mechanic.component';
 import { AppoMechaComponent } from './component/appo-mecha/appo-mecha.component';
 import { HistoryMechaComponent } from './component/history-mecha/history-mecha.component';

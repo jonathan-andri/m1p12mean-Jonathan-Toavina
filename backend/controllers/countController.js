@@ -18,10 +18,9 @@ exports.getCount = async (req, res) => {
         const monthEnd = new Date(now.getFullYear(), now.getMonth() +1 , 0)        
 
         const count = await Appointment.countDocuments({
-            
+            appoStatus: 'Completed',
             appoDate: { $gte: monthStart, $lte: monthEnd }
         });
-        console.log(count)
         res.json(count);
     } catch (error) {
         res.status(500).json({ message: error.message })

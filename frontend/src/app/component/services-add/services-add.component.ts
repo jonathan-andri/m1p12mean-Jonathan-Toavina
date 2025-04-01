@@ -15,13 +15,12 @@ import { ChangeDetectorRef } from '@angular/core';
 export class ServicesAddComponent {
 
   userForm!: FormGroup;
-  newService: Service = {
-    _id:'',
+  newService: any = {
     serviceName: '',
     serviceType: '',
     serviceDescription: '',
     serviceEstimatedPrice: 0,
-    serviceEstimatedDuration: ''
+    serviceEstimatedDuration: new Date()
   };
   constructor(private fb: FormBuilder, private servicesService: ServicesService, private cdr: ChangeDetectorRef){};
 
@@ -31,13 +30,22 @@ export class ServicesAddComponent {
       category: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', Validators.required],
-      duration: ['', [Validators.required]],
+      duration: ['00:00', [Validators.required]],
+      durationHours: [, [Validators.required, Validators.min(0), Validators.max(23)]],
+      durationMinutes: [, [Validators.required, Validators.min(0), Validators.max(59)]],
     })
   }
 
   onSubmit(): void{
     if (this.userForm.valid){
       //Add the new service to the db
+      const hours = this.userForm.get('durationHours')?.value
+      const minutes = this.userForm.get('durationMinutes')?.value
+      
+      const estimatedDuration = new Date()
+      estimatedDuration.setHours(hours,minutes,0,0);
+
+      this.newService.serviceEstimatedDuration = estimatedDuration; 
       this.servicesService.createService(this.newService).subscribe({
         next: () => {
           

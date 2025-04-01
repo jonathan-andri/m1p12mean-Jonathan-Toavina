@@ -4,5 +4,5 @@ export interface Service{
     serviceType: string,
     serviceDescription: string,
     serviceEstimatedPrice: number,
-    serviceEstimatedDuration: string
+    serviceEstimatedDuration: Date
 }
