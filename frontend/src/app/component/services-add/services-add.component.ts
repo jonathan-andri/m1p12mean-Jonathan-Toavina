@@ -44,7 +44,7 @@ export class ServicesAddComponent {
       
       const estimatedDuration = new Date()
       estimatedDuration.setHours(hours,minutes,0,0);
-
+      
       this.newService.serviceEstimatedDuration = estimatedDuration; 
       this.servicesService.createService(this.newService).subscribe({
         next: () => {

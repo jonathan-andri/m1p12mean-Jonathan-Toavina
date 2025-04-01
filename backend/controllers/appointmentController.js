@@ -42,7 +42,7 @@ exports.createAppointment = async (req, res) => {
             }    
         }
 
-        if(availableMechanic){
+        if(!availableMechanic){
             const now = new Date()
             const mechanicAvailability = await Promise.all(
                 mechanics.map(async (mechanic) => {
