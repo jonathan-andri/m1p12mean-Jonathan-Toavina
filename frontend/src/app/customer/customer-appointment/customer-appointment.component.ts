@@ -25,6 +25,8 @@ export class CustomerAppointmentComponent {
     private carservice: CarService
   ) {}
 
+  selectedAppo: Appointment | null = null;
+  isEditAppoForm: boolean = false;
   isNewAppoForm : boolean = false;
   user: any ;
   appointments: Appointment[] = [];
@@ -32,11 +34,45 @@ export class CustomerAppointmentComponent {
   deleteModal: boolean = false;
   selectedAppointmentId: string | null = null;
 
-  toggleAppoForm() {
-    this.isNewAppoForm = !this.isNewAppoForm;
-  }
 
   ngOnInit(): void {
+    this.loadUserData();
+  }
+
+  showEditAppoForm(): void {
+    this.isEditAppoForm = true;
+  }
+
+  hideEditAppoForm(): void {
+    this.isEditAppoForm = false;
+  }
+
+  showNewAppoForm(): void {
+    this.isNewAppoForm = true;
+  }
+
+  hideNewAppoForm(): void {
+    this.isNewAppoForm = false;
+  }
+
+  onEditAppo(appo: Appointment): void {
+    this.selectedAppo = {...appo};
+    this.isEditAppoForm = true;
+  }
+
+  onAppoUpdated(updatedAppo: Appointment): void {
+    this.selectedAppo = null;
+    this.isEditAppoForm = false;
+    this.loadAppointments();
+  }
+
+  onFormCancel() {
+    this.isEditAppoForm = false;
+    this.isNewAppoForm = false;
+    this.selectedAppo = null;
+  }
+
+  private loadUserData(): void {
     const token = typeof window !== 'undefined' && window.localStorage ? localStorage.getItem('token') : null;
     if (token) {
       this.authService.getUserData(token).subscribe({
@@ -45,7 +81,6 @@ export class CustomerAppointmentComponent {
           if(this.user?._id) {
             this.loadAppointments();
           }
-          console.log('car-list', response);
         },
         error: (error: any) => {
           console.error('Error fetching user data', error);

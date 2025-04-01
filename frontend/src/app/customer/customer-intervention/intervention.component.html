@@ -42,7 +42,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let filterService of filterServices; let i = index">
+                <tr *ngFor="let filterService of filteredServices; let i = index">
                     <td class="serial">{{i + 1}}</td>
                     <td class="car-info">
                         <div class="car-make-model">{{filterService.carLicensePlate}}</div>
@@ -85,7 +85,7 @@
     
     <div class="table-footer">
         <div class="showing-entries">
-            Showing {{filteredServices.length}} of {{completedServices.length}} entries
+            Showing {{filteredServices.length}} of {{filteredServices.length}} entries
         </div>
         <div class="pagination-controls" *ngIf="filteredServices.length > 0">
             <button [disabled]="currentPage === 1" (click)="previousPage()">

@@ -1,7 +1,7 @@
 <div id="customer-appointment" data-aos="fade-up" data-aos-duration="300">
     <div id="appo-top">
       <p data-aos="zoom-in" data-aos-offset="10">My Appointments</p>
-      <button data-aos="fade-left" id="makeAppo" (click)="toggleAppoForm()">
+      <button data-aos="fade-left" id="makeAppo" (click)="showNewAppoForm()">
         <i class="fas fa-plus"></i> New Appointment
       </button>
     </div>
@@ -51,7 +51,9 @@
         </div>
         
         <div class="card-actions">
-          <button class="action-btn edit" >
+          <button class="action-btn edit" 
+            (click)="onEditAppo(appointment)"
+          >
             <i class="fas fa-pencil-alt"></i> Edit
           </button>
           <button class="action-btn delete" (click)="deleteModal.openModal(appointment._id)">
@@ -59,8 +61,24 @@
           </button>
         </div>
       </div>
+      <div class="empty-state" *ngIf="appointments.length === 0">
+        <i class="far fa-calendar-alt"></i>
+        <p>No appointments created yet</p>
+      </div>
     </div>
   </div>
   
-  <app-new-appointment-form *ngIf="isNewAppoForm"></app-new-appointment-form>
+  <app-new-appointment-form 
+    *ngIf="isNewAppoForm"
+    [isEditMode]="false"
+    (Cancel)="onFormCancel()"
+  ></app-new-appointment-form>
+  
+  <app-new-appointment-form 
+    *ngIf="isEditAppoForm"
+    [isEditMode]="true"
+    [appoData]="selectedAppo"
+    (submit)="onAppoUpdated($event)"
+    (Cancel)="onFormCancel()"
+  ></app-new-appointment-form>
   <app-delete-modal #deleteModal (confirmDelete)="deleteAppointment($event)" desc="Appointment"></app-delete-modal>

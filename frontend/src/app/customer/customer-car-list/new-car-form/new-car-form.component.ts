@@ -43,7 +43,6 @@ export class NewCarFormComponent implements OnInit{
     this.loadUserData();
     if (this.isEditMode && this.carData) {
       this.selectedCar = this.carData;
-      console.log('selected car from ngoninit', this.selectedCar)
       this.patchFormWithCarData();
     }
   }

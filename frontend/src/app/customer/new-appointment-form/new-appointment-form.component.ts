@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AppointmentService } from '../../services/customer-services/customer-appointment-services/appointment.service';
 import { Appointment } from '../customer-appointment/customer-appointment.model';
@@ -18,6 +18,7 @@ import { Service } from '../../models/Service';
   templateUrl: './new-appointment-form.component.html',
   styleUrl: './new-appointment-form.component.scss'
 })
+
 export class NewAppointmentFormComponent implements OnInit{
   appointmentForm: FormGroup;
   minDate: string ='';
@@ -27,6 +28,12 @@ export class NewAppointmentFormComponent implements OnInit{
   services: Service[] = [];
   selectedServiceId: string ='';
   newAppoOpen: boolean = false;
+  selecteAppo: Appointment | null = null;
+
+  @Input() isEditMode: boolean = false;
+  @Input() appoData: any = {};
+  @Output() submit = new EventEmitter<Appointment>();
+  @Output() Cancel = new EventEmitter<void>();
 
   constructor(
     private fb: FormBuilder,
@@ -40,10 +47,18 @@ export class NewAppointmentFormComponent implements OnInit{
       appoDate: ['', Validators.required],
       appoNote: ['', Validators.required],
       carId: ['', Validators.required],
-
     });
 
     this.setMinDate();
+  }
+
+  ngOnInit(): void {
+    this.loadUserData();
+    this.loadServices();
+    if(this.isEditMode && this.appoData) {
+      this.selecteAppo = this.appoData;
+      console.log(this.selecteAppo);
+    }
   }
 
   onSubmit(): void {
@@ -56,15 +71,28 @@ export class NewAppointmentFormComponent implements OnInit{
         appoActualPrice: 100
       }
 
-      this.appointmentService.createAppointment(newAppointment).subscribe(
-        response => {
-          console.log('Appointment created successfully:', response);
-          this.appointmentForm.reset();
-        },
-        error => {
-          console.error('Error creating appointement', error);
-        }
-      );
+      if(this.isEditMode) {
+        this.appointmentService.updateAppointment(this.appoData._id, newAppointment).subscribe({
+          next: (response) => {
+            this.submit.emit(response);
+            this.resetForm();
+          },
+          error: (error) => {
+            console.error('Error updating appointment', error);
+          }
+        });
+      }
+      else {
+        this.appointmentService.createAppointment(newAppointment).subscribe(
+          response => {
+            console.log('Appointment created successfully:', response);
+            this.appointmentForm.reset();
+          },
+          error => {
+            console.error('Error creating appointement', error);
+          }
+        );
+      }
     }
   }
 
@@ -74,16 +102,40 @@ export class NewAppointmentFormComponent implements OnInit{
     this.minDate = today.toISOString().slice(0, 16);
   }
 
-  ngOnInit(): void {
+  private resetForm(): void {
+    if(!this.isEditMode) {
+      this.appointmentForm.reset();
+      this.selecteAppo = null;
+      this.isEditMode = false;
+      this.patchFormWithappoData();
+    }
+  }
+  
+  onCancel(): void {
+    this.Cancel.emit();
+    this.resetForm();
+  }
+
+  private loadUserData(): void {
+    //code to get the user data
     const token = typeof window !== 'undefined' && window.localStorage ? localStorage.getItem('token') : null;
     if (token) {
       this.authService.getUserData(token).subscribe({
         next: (response: any) => {
           this.user = response;
-          if(this.user?._id) {
-            this.loadCars();
-          }
-          console.log('car-list', response);
+          this.loadCars();
+          this.appointmentForm.patchValue({ customerId: this.user._id});
+          // this.appointmentForm = this.fb.group({
+          //   customerId: this.user._id,
+          //   serviceId: ['',Validators.required],
+          //   carId: ['',Validators.required],
+          //   mechanicId: ['',Validators.required],
+          //   appoDate: ['',Validators.required],
+          //   appoNote: ['',Validators.required],
+          //   appoStatus: ['',Validators.required],
+          //   appoPriceEstimate: ['',Validators.required],
+          //   appoActualPrice:['', Validators.required]
+          // })
         },
         error: (error: any) => {
           console.error('Error fetching user data', error);
@@ -93,16 +145,13 @@ export class NewAppointmentFormComponent implements OnInit{
     else {
       console.warn('no token found in localstorage');
     }
-    this.loadServices();
   }
-  
 
   loadCars(): void {
     if (!this.user) return;
     this.carService.getCarsByCustomer(this.user._id).subscribe(
       (data: Car[] ) => {
         this.cars = data;
-        console.log('customer cars',this.cars);
       },
       (error) => {
         console.log('error fetching cars', error);
@@ -120,6 +169,22 @@ export class NewAppointmentFormComponent implements OnInit{
       console.error('fecthing services error', error)
     }
   }
+
+  private patchFormWithappoData(): void {
+    if(this.appoData) {
+      this.appointmentForm.patchValue({
+        _id: this.appoData._id,
+        customerId: this.appoData.customerId,
+        carId: this.appoData.carId,
+        serviceId: this.appoData.serviceId,
+        appoDate: this.appoData.appoDate
+      });
+      console.log('selected car data', this.appoData);
+    } else {
+      console.log('appoData not received in edit form')
+    }
+  }
+
 
 }
 
