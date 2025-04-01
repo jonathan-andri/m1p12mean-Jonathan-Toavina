@@ -104,8 +104,8 @@ exports.createAppointment = async (req, res) => {
             appoPriceEstimate
           });
         
-       /*  await appo.save();
-        res.status(201).json(appo); */
+        await appo.save();
+        res.status(201).json(appo);
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
