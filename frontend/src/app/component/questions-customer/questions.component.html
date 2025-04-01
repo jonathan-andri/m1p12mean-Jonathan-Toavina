@@ -1,4 +1,4 @@
-<div 
+<div (click)="toggleAnswer()"
     class="question-section"
     data-aos="fade-up" 
     data-aos-delay="300" 
@@ -7,12 +7,12 @@
     data-aos-offset="200" 
     data-aos-anchor-placement="top-bottom"
 >
-    <div class="question" (click)="toggleAnswer()">
+    <div class="question" >
         <p>{{ question }}</p>
         <div class="tooggle-button">{{ showAnswer ? '-' : '+' }}</div>
     </div>
-    <div class="answer"
-        *ngIf= "showAnswer ? 'expanded' : 'collapsed'"
+    <div class="answer"  [@expandCollapse]="showAnswer ? 'expanded' : 'collapsed'"
+        *ngIf= "showAnswer"
     >
         <p>{{ answer }}</p>
     </div>

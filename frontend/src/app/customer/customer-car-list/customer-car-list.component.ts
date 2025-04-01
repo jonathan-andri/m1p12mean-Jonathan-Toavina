@@ -14,7 +14,7 @@ import { DeleteModalComponent } from '../../component/delete-modal/delete-modal.
 })
 export class CustomerCarListComponent {
 	isAddCarForm: boolean = false;
-  isEditCarForm: boolean = false;
+  	isEditCarForm: boolean = false;
 	cars: Car[] = [];
 	user: any;
 	selectedCar: Car | null = null;
@@ -28,17 +28,17 @@ export class CustomerCarListComponent {
 		this.isEditCarForm = true;
 	}
 
-  hideEditCarForm(): void {
+  	hideEditCarForm(): void {
 		this.isEditCarForm = false;
 	}
 
-  showAddCarForm(): void {
-    this.isAddCarForm = true;
-  }
+  	showAddCarForm(): void {
+    	this.isAddCarForm = true;
+  	}
 
-  hideAddCarForm(): void {
-    this.isAddCarForm = false;
-  }
+ 	hideAddCarForm(): void {
+    	this.isAddCarForm = false;
+  	}
 
 	ngOnInit(): void {
 		this.loadUserData();
