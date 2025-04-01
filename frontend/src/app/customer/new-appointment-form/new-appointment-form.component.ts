@@ -8,6 +8,7 @@ import { CarService } from '../../services/car-services/car.service';
 import { Car } from '../../models/Car';
 import { ServicesService } from '../../services/create-services/services.service';
 import { Service } from '../../models/Service';
+import { generate } from 'rxjs';
 
 @Component({
   selector: 'app-new-appointment-form',
@@ -29,6 +30,8 @@ export class NewAppointmentFormComponent implements OnInit{
   selectedServiceId: string ='';
   newAppoOpen: boolean = false;
   selecteAppo: Appointment | null = null;
+  maxDateTime: string ='';
+  minDateTime: string ='';
 
   @Input() isEditMode: boolean = false;
   @Input() appoData: any = {};
@@ -50,7 +53,7 @@ export class NewAppointmentFormComponent implements OnInit{
     });
 
     this.setMinDate();
-  }
+    }
 
   ngOnInit(): void {
     this.loadUserData();
@@ -99,7 +102,24 @@ export class NewAppointmentFormComponent implements OnInit{
   setMinDate(){
     const today = new Date();
     today.setDate(today.getDate() + 1);
+    today.setHours(8, 0, 0, 0);
+
+    const maxDate = new Date(today);
+    maxDate.setHours(17, 0, 0, 0);
+
+    this.maxDateTime= maxDate.toISOString().slice(0, 16);
+    this.minDateTime = today.toISOString().slice(0, 16);
     this.minDate = today.toISOString().slice(0, 16);
+  }
+
+  validateDateTime(event: any): void {
+    const selectedDate = new Date(event.target.value);
+    const hour = selectedDate.getHours();
+
+    if (hour < 8 || hour > 17) {
+      alert("Veuillez sélectionner une heure entre 08:00 et 17:00.");
+      event.target.value = '';
+    }
   }
 
   private resetForm(): void {
@@ -125,17 +145,6 @@ export class NewAppointmentFormComponent implements OnInit{
           this.user = response;
           this.loadCars();
           this.appointmentForm.patchValue({ customerId: this.user._id});
-          // this.appointmentForm = this.fb.group({
-          //   customerId: this.user._id,
-          //   serviceId: ['',Validators.required],
-          //   carId: ['',Validators.required],
-          //   mechanicId: ['',Validators.required],
-          //   appoDate: ['',Validators.required],
-          //   appoNote: ['',Validators.required],
-          //   appoStatus: ['',Validators.required],
-          //   appoPriceEstimate: ['',Validators.required],
-          //   appoActualPrice:['', Validators.required]
-          // })
         },
         error: (error: any) => {
           console.error('Error fetching user data', error);

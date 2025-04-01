@@ -33,8 +33,10 @@
                     id="appo-date" 
                     formControlName="appoDate" 
                     class="form-control"
-                    [min]="minDate"> 
+                    [min]="minDateTime"
                 
+                    (change)='validateDateTime($event)'
+                > 
             </div>
             <div class="line"></div>
         </div>
