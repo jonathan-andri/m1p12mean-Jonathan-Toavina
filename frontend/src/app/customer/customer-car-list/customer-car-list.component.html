@@ -39,6 +39,10 @@
           </button>
         </div>
       </div>
+      <div class="empty-state" *ngIf="cars.length === 0">
+        <i class="fas fa-car"></i>
+        <p>No car added yet</p>
+      </div>
     </div>
   </div>
   

@@ -1,10 +1,13 @@
 <div id="newAppointment" data-aos="fade-down" data-aos-duration="500">
     <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
-        <h4>New Appointment</h4>
+        <div class="form-header">
+            <h4>{{ isEditMode ? 'Edit Appointment' : 'New Appointment'}}</h4>
+            <button class="close-btn" (click)="onCancel()">X</button>
+        </div>
         <div class="form-group">
             <label for="appo-desc">Service</label>
             <div class="input-group">
-                <select id="appo-desc" formControlName="serviceId" class="form-control" [(ngModel)]="selectedServiceId">
+                <select id="appo-desc" formControlName="serviceId" class="form-control" >
                     <option *ngFor='let ser of services' [value]="ser._id">{{ser.serviceName}}</option>
                     
                 </select>
@@ -15,7 +18,7 @@
         <div class="form-group">
             <label for="appo-car">Car</label>
             <div class="input-group">
-                <select id="appo-car" formControlName="carId" class="form-control" [(ngModel)]="selectedCarId">
+                <select id="appo-car" formControlName="carId" class="form-control">
                     <option *ngFor="let car of cars" [value]="car._id">{{car.licensePlate}}</option>
                 </select>
             </div>
