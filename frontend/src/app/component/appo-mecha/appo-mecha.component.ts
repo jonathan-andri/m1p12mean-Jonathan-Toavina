@@ -8,6 +8,7 @@ import { Notification } from '../../models/Notification';
 import { NotificationService } from '../../services/notif-services/notification.service';
 import { PaymentService } from '../../services/payment-services/payment.service';
 
+
 @Component({
   selector: 'app-appo-mecha',
   imports: [CommonModule],
@@ -23,6 +24,8 @@ export class AppoMechaComponent implements OnInit {
     private serviceService: ServicesService,
     private notifService: NotificationService,
     private paymentService: PaymentService
+    private notifService: NotificationService
+
   ){}
   
   appointments: any[] = [];
@@ -101,6 +104,7 @@ export class AppoMechaComponent implements OnInit {
         this.customerId = response.customerId;
         this.sendCustomerNotif(appoId);
         this.createPayment(appoId);
+
       },
       error: (err) => console.error('Error updating appointment', err)
     });
@@ -129,6 +133,7 @@ export class AppoMechaComponent implements OnInit {
       }
     })
   }
+
 
   createPayment(appoId: string): void {
     this.appointmentService.getAppointment(appoId).subscribe((appointment: any) => {
