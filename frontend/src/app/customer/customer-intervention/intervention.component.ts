@@ -6,15 +6,14 @@ import { AuthService } from '../../services/auth-services/auth.service';
 import { AppointmentService } from '../../services/customer-services/customer-appointment-services/appointment.service';
 import { Payment } from '../../models/Payment';
 import { CarService } from '../../services/car-services/car.service';
+import { PaymentService } from '../../services/payment-services/payment.service';
 
 
 @Component({
   selector: 'app-completed-services',
-  imports:[
-    CommonModule
-  ],
+  imports: [CommonModule],
   templateUrl: './intervention.component.html',
-  styleUrls: ['./intervention.component.scss']
+  styleUrls: ['./intervention.component.scss'],
 })
 export class CompletedServicesComponent implements OnInit {
   completedServices: any[] = [];
@@ -29,9 +28,10 @@ export class CompletedServicesComponent implements OnInit {
   constructor(
     private serviceService: ServicesService,
     private authService: AuthService,
-    private appointmentService : AppointmentService,
-    private carService : CarService
-  ){}
+    private appointmentService: AppointmentService,
+    private carService: CarService,
+    private paymentService: PaymentService
+  ) {}
 
   ngOnInit(): void {
     this.filteredServices = [...this.appointments];
@@ -43,13 +43,14 @@ export class CompletedServicesComponent implements OnInit {
       this.filteredServices = [...this.completedServices];
       return;
     }
-    
+
     const term = searchTerm.toLowerCase();
-    this.filteredServices = this.completedServices.filter(service => 
-      service.car.make.toLowerCase().includes(term) ||
-      service.car.model.toLowerCase().includes(term) ||
-      service.serviceType.toLowerCase().includes(term) ||
-      service.description.toLowerCase().includes(term)
+    this.filteredServices = this.completedServices.filter(
+      (service) =>
+        service.car.make.toLowerCase().includes(term) ||
+        service.car.model.toLowerCase().includes(term) ||
+        service.serviceType.toLowerCase().includes(term) ||
+        service.description.toLowerCase().includes(term)
     );
     this.currentPage = 1;
   }
@@ -60,7 +61,7 @@ export class CompletedServicesComponent implements OnInit {
       this.filteredServices = [...this.appointments];
     } else {
       this.filteredServices = this.appointments.filter(
-        service => service.appoStatus.toLowerCase() === status.toLowerCase()
+        (service) => service.appoStatus.toLowerCase() === status.toLowerCase()
       );
     }
     this.currentPage = 1;
@@ -90,70 +91,76 @@ export class CompletedServicesComponent implements OnInit {
     console.log('Downloading invoice for service:', service);
   }
 
-  loadAppointments(): void {
-    this.appointmentService.getAppointments().subscribe(
-      (data: Appointment[]) => {
-        this.appointments = data.filter(dt => dt.customerId == this.user._id);
-  
-        // Fetch service names for each appointment
-        this.appointments.forEach(appointment => {
-          this.serviceService.getById(appointment.serviceId).subscribe(
-            (service) => {
-              appointment.serviceName = service.serviceName; 
-              appointment.serviceDesc = service.serviceDescription;
-              appointment.appoPriceEstimate = service.serviceEstimatedPrice;
-              
-              // i fetch car license plate
-              this.carService.getCarById(appointment.carId).subscribe(
-                (car) => {
-                  appointment.carLicensePlate = car.licensePlate;
-                  appointment.carModel = car.model;
-                },
-                (error) => {
-                  console.log('Error fecthing car for ID in customer appointment view', error);
-                }
-              )
-            },
-            (error) => {
-              console.log(`Error fetching service for ID ${appointment.serviceId}`, error);
-            }
-          );
-        });
+  loadPayments(): void {
+    this.paymentService.getPaymentsByUser(this.user._id).subscribe(
+      (data) => {
+        this.payments = data;
+        this.payments.forEach(
+          (payment) => {
+            this.appointmentService.getAppointment(payment.appointmentId).subscribe(
+              (appo) => {
+                this.appointments.push(appo);
+              },
+              (err) => {
+                console.log('Error fetching appointment', err);
+              }
+            )
+          }
+        )
       },
       (error) => {
-        console.log('Error fetching appointments', error);
+        console.log('Error fetching payments', error);
       }
     );
   }
 
-  loadServices(): void {
-    this.serviceService.getAllServices().subscribe({
-      next: (response) => {
-        this.completedServices = response.filter
+  loadServices(appointment: Appointment): void {
+    this.serviceService.getById(appointment.serviceId).subscribe(
+      (service) => {
+        appointment.serviceName = service.serviceName;
+        appointment.serviceDesc = service.serviceDescription;
+        appointment.appoPriceEstimate = service.serviceEstimatedPrice;
+
+        // i fetch car license plate
+        this.carService.getCarById(appointment.carId).subscribe(
+          (car) => {
+            appointment.carLicensePlate = car.licensePlate;
+            appointment.carModel = car.model;
+          },
+          (error) => {
+            console.log(
+              'Error fecthing car for ID in customer appointment view',
+              error
+            );
+          }
+        );
       },
-      error: (err) => {
-        console.error('error fetching services', err);
+      (error) => {
+        console.log(
+          `Error fetching service for ID ${appointment.serviceId}`,
+          error
+        );
       }
-    })
+    );
   }
 
   private loadUserData(): void {
-    const token =typeof window !== 'undefined' && window.localStorage? localStorage.getItem('token'): null;
-      if (token) {
-        this.authService.getUserData(token).subscribe({
-          next: (response: any) => {
-            this.user = response;
-            this.loadAppointments();
-          },
-          error: (error: any) => {
-            console.error('Error fetching user data', error);
-          },
-        });
-      } else {
-        console.warn('no token found in localstorage');
-      }
+    const token =
+      typeof window !== 'undefined' && window.localStorage
+        ? localStorage.getItem('token')
+        : null;
+    if (token) {
+      this.authService.getUserData(token).subscribe({
+        next: (response: any) => {
+          this.user = response;
+          this.loadPayments();
+        },
+        error: (error: any) => {
+          console.error('Error fetching user data', error);
+        },
+      });
+    } else {
+      console.warn('no token found in localstorage');
+    }
   }
-
-  
-
 }
