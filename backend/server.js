@@ -26,4 +26,4 @@ app.use('/auth', require('./routes/authRoutes'));
 app.use('/notifications', require('./routes/notificationRoutes'));
 app.use('/count', require('./routes/countRoutes'))
 
-app.listen(PORT, () => console.log(`Started server on the port ${PORT}`)) ;
+app.listen(PORT,"0.0.0.0", () => console.log(`Started server on the port ${PORT}`)) ;
