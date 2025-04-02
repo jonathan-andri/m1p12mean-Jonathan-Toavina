@@ -99,30 +99,34 @@ export class AppoMechaComponent implements OnInit {
       next: (response: any) => { 
         console.log('appointment updated') 
         this.customerId = response.customerId;
-        const today = new Date();
-        const newNotif: Notification = {
-          _id:'',
-          isRead: false,
-          userId: this.customerId,
-          title: 'Car is ready',
-          message: 'Your car is ready to be picked up.',
-          type: 'appointment',
-          appointmentId: appoId,
-          createdAt: today
-        };
-    
-        this.notifService.createNotification(newNotif).subscribe({
-          next: response => {
-            console.log('Notification created successfully');
-          },
-          error: err => {
-            console.error('Error creating notification:', err);
-          }
-        })
+        this.sendCustomerNotif(appoId);
       },
       error: (err) => console.error('Error updating appointment', err)
     });
 
+  }
+
+  sendCustomerNotif(appoId: string) {
+    const today = new Date();
+    const newNotif: Notification = {
+      _id:'',
+      isRead: false,
+      userId: this.customerId,
+      title: 'Car is ready',
+      message: 'Your car is ready to be picked up.',
+      type: 'appointment',
+      appointmentId: appoId,
+      createdAt: today
+    };
+
+    this.notifService.createNotification(newNotif).subscribe({
+      next: response => {
+        console.log('Notification created successfully');
+      },
+      error: err => {
+        console.error('Error creating notification:', err);
+      }
+    })
   }
 
 }
