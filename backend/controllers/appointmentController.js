@@ -42,7 +42,7 @@ exports.createAppointment = async (req, res) => {
             }    
         }
 
-        if(!availableMechanic){
+        if(availableMechanic){
             const now = new Date()
             const mechanicAvailability = await Promise.all(
                 mechanics.map(async (mechanic) => {
@@ -104,7 +104,7 @@ exports.createAppointment = async (req, res) => {
             appoPriceEstimate
           });
         
-        await appo.save();
+        /* await appo.save(); */
         res.status(201).json(appo);
     } catch (error) {
         res.status(500).json({ message: error.message })

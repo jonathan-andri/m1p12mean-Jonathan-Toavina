@@ -43,8 +43,8 @@ export class ServicesAddComponent {
       const minutes = this.userForm.get('durationMinutes')?.value
       
       const estimatedDuration = new Date()
-      estimatedDuration.setHours(hours,minutes,0,0);
-      
+      estimatedDuration.setUTCHours(hours,minutes,0,0);
+      console.log(estimatedDuration)
       this.newService.serviceEstimatedDuration = estimatedDuration; 
       this.servicesService.createService(this.newService).subscribe({
         next: () => {

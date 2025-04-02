@@ -8,7 +8,7 @@
   
     <div class="form-group">
         <label for="category">Category</label>
-        <input id="category" formControlName="category" type="text" placeholder="routine/repair/diagnostic" [(ngModel)]="newService.serviceType" required>
+        <input id="category" formControlName="category" type="text" placeholder="Routine Maintenance/Repair/Diagnostic" [(ngModel)]="newService.serviceType" required>
         <div *ngIf="userForm.get('category')?.invalid && userForm.get('category')?.touched" >
             Last Name is required.</div>
     </div>
