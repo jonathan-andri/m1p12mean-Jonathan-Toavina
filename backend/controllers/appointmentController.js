@@ -4,7 +4,7 @@ const Service = require('../models/Service')
 const { findNextAvailableSlot } = require('../controllers/availableTime')
 
 exports.createAppointment = async (req, res) => {
-    const { appoDate, serviceId, customerId, carId, appoPriceEstimate } = req.body
+    const { appoDate, serviceId, customerId, carId, appoPriceEstimate, appoNotes } = req.body
 
     try{
         const mechanics = await Mechanic.find({ role: 'mechanic' })
@@ -101,11 +101,12 @@ exports.createAppointment = async (req, res) => {
             mechanicId: availableMechanic._id,
             appoDate: startTime,
             appoStatus: "Confirmed",
+            appoNotes,
             appoPriceEstimate
           });
         
-       /*  await appo.save();
-        res.status(201).json(appo); */
+        await appo.save();
+        res.status(201).json(appo); 
     } catch (error) {
         res.status(500).json({ message: error.message })
     }

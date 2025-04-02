@@ -38,7 +38,7 @@ const appointmentSchema = new mongoose.Schema({
         type: Number,
         default: null
     },
-    appoNote: {
+    appoNotes: {
         type: String,
         defautl: null
     }

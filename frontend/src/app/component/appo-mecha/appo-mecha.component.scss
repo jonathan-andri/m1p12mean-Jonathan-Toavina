@@ -171,3 +171,16 @@ tr:not(.expanded):hover {
   background-color: #f5f5f5;
   cursor: pointer;
 }
+
+#done {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    color: green;
+    background-color: lightgreen;
+    transition: 0.3s ease;
+    &:hover {
+        background-color: white;
+        transition: 0.3s ease;
+    }
+}

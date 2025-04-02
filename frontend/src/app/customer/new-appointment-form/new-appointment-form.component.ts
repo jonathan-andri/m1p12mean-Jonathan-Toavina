@@ -1,14 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AppointmentService } from '../../services/customer-services/customer-appointment-services/appointment.service';
-import { Appointment } from '../customer-appointment/customer-appointment.model';
+import { Appointment } from '../../models/appointment';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth-services/auth.service';
 import { CarService } from '../../services/car-services/car.service';
 import { Car } from '../../models/Car';
 import { ServicesService } from '../../services/create-services/services.service';
 import { Service } from '../../models/Service';
-import { generate } from 'rxjs';
+
 
 @Component({
   selector: 'app-new-appointment-form',
@@ -43,12 +43,13 @@ export class NewAppointmentFormComponent implements OnInit{
     private appointmentService: AppointmentService,
     private authService: AuthService,
     private carService: CarService,
-    private servicesService: ServicesService
+    private servicesService: ServicesService,
+    private cdr: ChangeDetectorRef
   ) {
     this.appointmentForm = this.fb.group({
       serviceId: ['', Validators.required],
       appoDate: ['', Validators.required],
-      appoNote: ['', Validators.required],
+      appoNotes: ['', Validators.required],
       carId: ['', Validators.required],
     });
 
@@ -79,6 +80,7 @@ export class NewAppointmentFormComponent implements OnInit{
           next: (response) => {
             this.submit.emit(response);
             this.resetForm();
+            this.cdr.detectChanges();
           },
           error: (error) => {
             console.error('Error updating appointment', error);
@@ -90,6 +92,7 @@ export class NewAppointmentFormComponent implements OnInit{
           response => {
             console.log('Appointment created successfully:', response);
             this.appointmentForm.reset();
+            this.cdr.detectChanges();
           },
           error => {
             console.error('Error creating appointement', error);

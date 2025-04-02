@@ -4,6 +4,10 @@ import { AuthService } from '../../services/auth-services/auth.service';
 import { AppointmentService } from '../../services/customer-services/customer-appointment-services/appointment.service';
 import { MechanicService } from '../../services/add-mechanic/mechanic.service';
 import { ServicesService } from '../../services/create-services/services.service';
+import { Notification } from '../../models/Notification';
+import {NotificationComponent } from '../cutomer-notification/notification.component';
+import { NotificationService } from '../../services/notif-services/notification.service';
+import { Appointment } from '../../models/appointment';
 
 @Component({
   selector: 'app-appo-mecha',
@@ -17,12 +21,14 @@ export class AppoMechaComponent implements OnInit {
     private appointmentService: AppointmentService,
     private authService: AuthService,
     private userService: MechanicService,
-    private serviceService: ServicesService
+    private serviceService: ServicesService,
+    private notifService: NotificationService
   ){}
-
+  
   appointments: any[] = [];
   mechanicId: string = '';
   user : any;
+  customerId: any;
 
   ngOnInit(): void {
     if (!this.mechanicId){
@@ -85,6 +91,38 @@ export class AppoMechaComponent implements OnInit {
     const formattedTime = `${hours}h${minutes.toString().padStart(2, '0')}`;
   
     return `${formattedDate}, ${formattedTime}`;
+  }
+
+  appoToDone(appoId: string): void {
+    const appointment: any = { appoStatus: 'done' };
+    this.appointmentService.updateAppointment(appoId, appointment).subscribe({
+      next: (response: any) => { 
+        console.log('appointment updated') 
+        this.customerId = response.customerId;
+        const today = new Date();
+        const newNotif: Notification = {
+          _id:'',
+          isRead: false,
+          userId: this.customerId,
+          title: 'Car is ready',
+          message: 'Your car is ready to be picked up.',
+          type: 'appointment',
+          appointmentId: appoId,
+          createdAt: today
+        };
+    
+        this.notifService.createNotification(newNotif).subscribe({
+          next: response => {
+            console.log('Notification created successfully');
+          },
+          error: err => {
+            console.error('Error creating notification:', err);
+          }
+        })
+      },
+      error: (err) => console.error('Error updating appointment', err)
+    });
+
   }
 
 }
