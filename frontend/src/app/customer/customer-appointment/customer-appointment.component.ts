@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { SearchBarComponent } from "../../component/search-bar/search-bar.component";
 import { NewAppointmentFormComponent } from "../new-appointment-form/new-appointment-form.component";
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Appointment } from './customer-appointment.model';
+import { Appointment } from '../../models/appointment';
 import { AppointmentService } from '../../services/customer-services/customer-appointment-services/appointment.service';
 import { AuthService } from '../../services/auth-services/auth.service';
 import { ServicesService } from '../../services/create-services/services.service';
@@ -22,7 +22,8 @@ export class CustomerAppointmentComponent {
     private appointmentService: AppointmentService,
     private authService: AuthService,
     private serviceService: ServicesService,
-    private carservice: CarService
+    private carservice: CarService,
+    private changeDetect: ChangeDetectorRef
   ) {}
 
   selectedAppo: Appointment | null = null;
@@ -63,6 +64,7 @@ export class CustomerAppointmentComponent {
   onAppoUpdated(updatedAppo: Appointment): void {
     this.selectedAppo = null;
     this.isEditAppoForm = false;
+    this.changeDetect.detectChanges();
     this.loadAppointments();
   }
 
@@ -128,13 +130,15 @@ export class CustomerAppointmentComponent {
   deleteAppointment(id: string): void {
     if (id) {
       this.appointmentService.deleteAppointment(id).subscribe({
-        next: () => console.log('Appointment deleted successfully', id),
+        next: () => {
+          console.log('Appointment deleted successfully', id)
+          this.changeDetect.detectChanges();
+        },
         error: (err) => console.error('Error deleting appointment', err)
       });
       console.log('appo a effacer', id)
     }
-    else console.log('id not received')
-
+    else console.log('id not received in delete appointment')
   }
 
   toggleDeleteModal():void {
@@ -143,7 +147,7 @@ export class CustomerAppointmentComponent {
   
   filterResults(searchText: string): void {
       this.filteredItems = this.appointments.filter(item => {
-      item.appoNote.toLowerCase().includes(searchText.toLowerCase())
+      item.appoNotes.toLowerCase().includes(searchText.toLowerCase())
     })
 
   }

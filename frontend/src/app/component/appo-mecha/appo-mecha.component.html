@@ -7,6 +7,7 @@
         <th>Appointment Date</th>
         <th>Estimated Price</th>
         <th>Final Price</th>
+        <th>...</th>
       </tr>
     </thead>
 
@@ -18,6 +19,9 @@
             <td>{{  formatDate(appointment.appoDate) }}</td>
             <td>{{appointment.appoPriceEstimate}}</td>
             <td> {{appointment.appoActualPrice || 'No price yet'}} </td>
+            <td>
+              <button id="done" (click)="appoToDone(appointment._id)"><i class="fas fa-check-square" ></i>Done</button>
+            </td>
       </tr> 
           
     </tbody>

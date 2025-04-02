@@ -33,8 +33,10 @@
                     id="appo-date" 
                     formControlName="appoDate" 
                     class="form-control"
-                    [min]="minDate"> 
+                    [min]="minDateTime"
                 
+                    (change)='validateDateTime($event)'
+                > 
             </div>
             <div class="line"></div>
         </div>
@@ -42,7 +44,7 @@
         <div class="form-group">
             <label for="appo-note">Note</label>
             <div class="input-group">
-                <textarea id="appo-note" formControlName="appoNote" class="form-control"></textarea>
+                <textarea id="appo-note" formControlName="appoNotes" class="form-control"></textarea>
             </div>
         </div>
 

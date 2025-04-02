@@ -1,13 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AppointmentService } from '../../services/customer-services/customer-appointment-services/appointment.service';
-import { Appointment } from '../customer-appointment/customer-appointment.model';
+import { Appointment } from '../../models/appointment';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth-services/auth.service';
 import { CarService } from '../../services/car-services/car.service';
 import { Car } from '../../models/Car';
 import { ServicesService } from '../../services/create-services/services.service';
 import { Service } from '../../models/Service';
+
 
 @Component({
   selector: 'app-new-appointment-form',
@@ -29,6 +30,8 @@ export class NewAppointmentFormComponent implements OnInit{
   selectedServiceId: string ='';
   newAppoOpen: boolean = false;
   selecteAppo: Appointment | null = null;
+  maxDateTime: string ='';
+  minDateTime: string ='';
 
   @Input() isEditMode: boolean = false;
   @Input() appoData: any = {};
@@ -40,17 +43,18 @@ export class NewAppointmentFormComponent implements OnInit{
     private appointmentService: AppointmentService,
     private authService: AuthService,
     private carService: CarService,
-    private servicesService: ServicesService
+    private servicesService: ServicesService,
+    private cdr: ChangeDetectorRef
   ) {
     this.appointmentForm = this.fb.group({
       serviceId: ['', Validators.required],
       appoDate: ['', Validators.required],
-      appoNote: ['', Validators.required],
+      appoNotes: ['', Validators.required],
       carId: ['', Validators.required],
     });
 
     this.setMinDate();
-  }
+    }
 
   ngOnInit(): void {
     this.loadUserData();
@@ -76,6 +80,7 @@ export class NewAppointmentFormComponent implements OnInit{
           next: (response) => {
             this.submit.emit(response);
             this.resetForm();
+            this.cdr.detectChanges();
           },
           error: (error) => {
             console.error('Error updating appointment', error);
@@ -87,6 +92,7 @@ export class NewAppointmentFormComponent implements OnInit{
           response => {
             console.log('Appointment created successfully:', response);
             this.appointmentForm.reset();
+            this.cdr.detectChanges();
           },
           error => {
             console.error('Error creating appointement', error);
@@ -99,7 +105,24 @@ export class NewAppointmentFormComponent implements OnInit{
   setMinDate(){
     const today = new Date();
     today.setDate(today.getDate() + 1);
+    today.setHours(8, 0, 0, 0);
+
+    const maxDate = new Date(today);
+    maxDate.setHours(17, 0, 0, 0);
+
+    this.maxDateTime= maxDate.toISOString().slice(0, 16);
+    this.minDateTime = today.toISOString().slice(0, 16);
     this.minDate = today.toISOString().slice(0, 16);
+  }
+
+  validateDateTime(event: any): void {
+    const selectedDate = new Date(event.target.value);
+    const hour = selectedDate.getHours();
+
+    if (hour < 8 || hour > 17) {
+      alert("Veuillez sélectionner une heure entre 08:00 et 17:00.");
+      event.target.value = '';
+    }
   }
 
   private resetForm(): void {
@@ -125,17 +148,6 @@ export class NewAppointmentFormComponent implements OnInit{
           this.user = response;
           this.loadCars();
           this.appointmentForm.patchValue({ customerId: this.user._id});
-          // this.appointmentForm = this.fb.group({
-          //   customerId: this.user._id,
-          //   serviceId: ['',Validators.required],
-          //   carId: ['',Validators.required],
-          //   mechanicId: ['',Validators.required],
-          //   appoDate: ['',Validators.required],
-          //   appoNote: ['',Validators.required],
-          //   appoStatus: ['',Validators.required],
-          //   appoPriceEstimate: ['',Validators.required],
-          //   appoActualPrice:['', Validators.required]
-          // })
         },
         error: (error: any) => {
           console.error('Error fetching user data', error);
