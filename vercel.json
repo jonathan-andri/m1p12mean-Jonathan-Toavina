@@ -2,11 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "frontend/dist/frontend/server/main.server.mjs", 
+      "src": "dist/frontend/server/main.server.mjs", 
       "use": "@vercel/node",
       "config": { 
         "includeFiles": [
-          "frontend/dist/frontend/browser/**"   
+          "dist/browser/**"   
         ]
       }
     }
@@ -14,7 +14,7 @@
   "routes": [
     {
       "src": "/.*",
-      "dest": "/frontend/dist/frontend/server/main.server.mjs"  
+      "dest": "dist/frontend/server/main.server.mjs"  
     }
   ]
 }
