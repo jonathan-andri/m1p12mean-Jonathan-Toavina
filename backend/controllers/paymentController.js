@@ -32,7 +32,7 @@ exports.getPaymentById = async (req, res) => {
 
 exports.getPaymentByUserId = async (req, res) => {
     try {
-        const userPayments = await Payment.find({ userId: req.params.userId }) ;
+        const userPayments = await Payment.find({ customerId: req.params.userId }) ;
         res.json(userPayments) ;
     } catch (er) {
         res.status(500).json({ message: er.message}) ;
