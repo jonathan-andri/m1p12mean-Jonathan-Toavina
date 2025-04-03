@@ -24,7 +24,6 @@ export class AppoMechaComponent implements OnInit {
     private serviceService: ServicesService,
     private notifService: NotificationService,
     private paymentService: PaymentService
-    private notifService: NotificationService
 
   ){}
   
