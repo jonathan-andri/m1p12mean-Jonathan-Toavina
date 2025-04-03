@@ -5,9 +5,9 @@ import { AppointmentService } from '../../services/customer-services/customer-ap
 import { MechanicService } from '../../services/add-mechanic/mechanic.service';
 import { ServicesService } from '../../services/create-services/services.service';
 import { Notification } from '../../models/Notification';
-import {NotificationComponent } from '../cutomer-notification/notification.component';
 import { NotificationService } from '../../services/notif-services/notification.service';
-import { Appointment } from '../../models/appointment';
+import { PaymentService } from '../../services/payment-services/payment.service';
+
 
 @Component({
   selector: 'app-appo-mecha',
@@ -22,7 +22,10 @@ export class AppoMechaComponent implements OnInit {
     private authService: AuthService,
     private userService: MechanicService,
     private serviceService: ServicesService,
+    private notifService: NotificationService,
+    private paymentService: PaymentService
     private notifService: NotificationService
+
   ){}
   
   appointments: any[] = [];
@@ -100,6 +103,8 @@ export class AppoMechaComponent implements OnInit {
         console.log('appointment updated') 
         this.customerId = response.customerId;
         this.sendCustomerNotif(appoId);
+        this.createPayment(appoId);
+
       },
       error: (err) => console.error('Error updating appointment', err)
     });
@@ -127,6 +132,26 @@ export class AppoMechaComponent implements OnInit {
         console.error('Error creating notification:', err);
       }
     })
+  }
+
+
+  createPayment(appoId: string): void {
+    this.appointmentService.getAppointment(appoId).subscribe((appointment: any) => {
+      console.log(appointment);
+      const newPayment = {
+        appointmentId: appoId,
+        paymentStatus: 'unpaid',
+        paymentMethod: 'cash',
+        customerId: this.customerId,
+        amount: appointment.appoPriceEstimate,
+      };
+      this.paymentService.createPayment(newPayment).subscribe({
+        next: (response: any) => { 
+          console.log('payment created') 
+        },
+        error: (err: any) => console.error('Error creating payment', err)
+      });
+    });
   }
 
 }

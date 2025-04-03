@@ -17,13 +17,9 @@ export class NotificationService {
     return this.http.post<Notification>(this.apiUrl, notificationData);
   }
 
-  // getUserNotifications(userId: string): Observable<Notification[]> {
-  //   return this.http.get<Notification[]>(`${this.apiUrl}/${userId}`);
-  // }
   getUserNotifications(userId: string): Observable<Notification[]> {
     return this.http.get<{success: boolean, notifications: Notification[]}>(`${this.apiUrl}/${userId}`).pipe(
       map(response => {
-        // Extract the notifications array from the response object
         return response.notifications;
       }),
       catchError(error => {

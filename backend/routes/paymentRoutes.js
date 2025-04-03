@@ -17,4 +17,6 @@ router.put('/:id', paymentController.updatePayment);
 //supprimer utilisateur
 router.delete('/:id', paymentController.deletePayment);
 
+router.get('/userId', paymentController.getPaymentsByUserId);
+
 module.exports = router;

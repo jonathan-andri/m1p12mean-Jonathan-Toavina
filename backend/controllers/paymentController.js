@@ -30,6 +30,15 @@ exports.getPaymentById = async (req, res) => {
     }
 }
 
+exports.getPaymentByUserId = async (req, res) => {
+    try {
+        const userPayments = await Payment.find({ userId: req.params.userId }) ;
+        res.json(userPayments) ;
+    } catch (er) {
+        res.status(500).json({ message: er.message}) ;
+    }
+}
+
 exports.updatePayment = async (req, res) => {
     try {
         const payment = await Payment.findByIdAndUpdate(req.params.id, req.body, {new:true}) ;

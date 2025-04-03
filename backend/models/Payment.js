@@ -22,8 +22,8 @@ const paymentSchema = new mongoose.Schema({
   },
   paymentStatus: {
     type: String,
-    enum: ['waiting for payment', 'paid'],
-    default: 'waiting for payment'
+    enum: ['unpaid', 'paid'],
+    default: 'unpaid'
   }
 }, {
   timestamps: true // Automatically adds createdAt and updatedAt fields

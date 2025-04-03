@@ -15,7 +15,7 @@ export class AppointmentService {
     return this.http.get(this.apiUrl);
   }
 
-  getAppointment(id: number): Observable<any> {
+  getAppointment(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
 
