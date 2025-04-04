@@ -22,31 +22,28 @@ export class HistoryMechaComponent implements OnInit {
     appointments: any[] = [];
     mechanicId: string = '';
     user : any;
-  
+
+
     ngOnInit(): void {
-      if (!this.mechanicId){
-        setTimeout(() => this.initialize(), 1000);
-      }else {
-        this.initialize()
-      }
+      this.initialize()
     }
   
-    getAppoMecha():void{
+    getAppoMecha(){
+      const currentDate = new Date();
       this.appointmentService.getAppointments().subscribe(data =>{
         this.appointments = data;
         this.appointments = this.appointments.filter(appointment => appointment.mechanicId.toString() == this.mechanicId)
-        
+        this.appointments = this.appointments.filter(appointment => new Date(appointment.appoDate) < currentDate)
         console.log(this.appointments);
         for(let appointment of this.appointments){
           this.userService.getById(appointment.customerId).subscribe(customer =>{
             appointment.customerName = customer.firstName + ' ' + customer.lastName
           });
-          
           this.serviceService.getById(appointment.serviceId).subscribe(service =>{
             appointment.serviceName = service.serviceName 
   
-          })
-        }
+          }) 
+        }    
       })
     }
   
@@ -56,18 +53,18 @@ export class HistoryMechaComponent implements OnInit {
         this.authService.getUserData(token).subscribe({
           next: (response: any) => {
             this.mechanicId= response._id;
+            this.getAppoMecha() ;   
+    
           },
           error: (error: any) => {
             console.error('Error fetching user data', error);
+    
           }
         })
       }
       else {
         console.warn('no token found in localstorage');
       }
-      
-      this.getAppoMecha()
-  
     }
   
   
